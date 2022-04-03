@@ -78,7 +78,8 @@ Here are the different tools that I used to create my script and performed my te
 
 Build With and On :
 * [Microsoft Windows 11 Pro](https://www.microsoft.com/en-us/windows/get-windows-11)
-* [Microsoft Windows 10 Pro](https://www.microsoft.com/en-us/d/windows-10-pro/df77x4d43rkt?activetab=pivot:overviewtab)
+* [Windows PowerShell (5.1)](https://microsoft.com/powershell)
+* [Sublime Text](https://www.sublimetext.com/)
 
 Tested On :
 * - [x] [Microsoft Windows 11 Pro](https://www.microsoft.com/en-us/windows/get-windows-11)
@@ -89,21 +90,30 @@ Tested On :
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This document is currently being written.
+This course is not intended to teach you how to use PowerShell. However, I will simply show you (for beginners) how to easily download my script with PowerShell and run it.
+
+I don't think a tutorial would be very useful to teach you how to use the script as it was designed to be naturally intuitive, you should be able to find your way around quite easily.
 
 ### Prerequisites
 
-This document is currently being written.
+This script has been tested on a version of Windows 11 Pro with PowerShell 5.1 but should work with many other versions. If you have any problems, please let me know.
 
-* From PowerShell
+* To download my script directly from PowerShell, follow this command.
 ```sh
 Start-BitsTransfer -Source https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/hyper-v_toolbox.ps1 -Destination C:\
+```
+
+This command downloads the script to the C:\ directory. To customize the destination path, simply change the result of the -Destination parameter.
+
+* For example:
+```sh
+Start-BitsTransfer -Source https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/hyper-v_toolbox.ps1 -Destination .\My_Custom_Dest
 ```
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-To run the script, you just need to use the following command.
+* To launch the script, from a PowerShell terminal (launched with Administrator rights), simply use this command (from the directory where my script is located):
 ```sh
 .\hyper-v_toolbox.ps1
 ```
