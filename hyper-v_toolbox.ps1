@@ -1828,7 +1828,7 @@ function HPV-Show_Virtual_VSwitches
 {
 Clear-Host
 Write-Host "Ongoing action: " -NonewLine
-Write-Host "Display the list of virtual switches."
+Write-Host "Display the list of virtual switches.`n"
 
 Get-VMSwitch|Out-Default;pause;Write-Host ""
 
@@ -1851,17 +1851,82 @@ Write-Host ""
 function HPV-New_VSwitch
 {
 Clear-Host
-Write-Host "Info: " -NoNewLine
-Write-Host "This feature is currently under development." -ForegroundColor red
-Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to main menu.`n" -ForegroundColor darkred;pause;main
+$Switch_Name=Read-Host "What name would you like to choose for your network switch"
+Write-Host "Info: " -NoNewLine;Write-Host "The name chosen for your virtual switch is " -NoNewLine;Write-Host "$Switch_Name" -NoNewLine -ForegroundColor green;Write-Host "."
+
+Write-Host "`nWhat type of virtual switch do you want to create?`n"
+Write-Host "1 - Internal"
+Write-Host "2 - Private`n"
+[int]$userChoice=Read-Host "Your choice"
+	switch($userChoice)
+	{
+		1{[string]$Switch_Type="Internal"}
+		2{[string]$Switch_Type="Private"}
+	}
+
+New-VMSwitch -Name $Switch_Name -SwitchType $Switch_Type|Out-Null
+
+Get-VMSwitch|Select-Object Name,SwitchType|Out-Default
+
+Write-Host "7 - Return to the virtual switch management menu."
+Write-Host "8 - Go back to the main menu." -ForegroundColor red
+Write-Host "9 - Quit the program." -ForegroundColor darkred
+Write-Host ""
+
+[int]$userChoice=Read-Host "Your choice"
+	switch($userChoice)
+	{
+		7{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Return to the virtual switch management menu.`n" -ForegroundColor red;pause;HPV-Virtual_Switches_Management}
+    	8{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
+    	9{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Exit of the program in progress.`n" -ForegroundColor darkred;pause;$host.ui.RawUI.WindowTitle=$DefaultWindowTitle;exit}
+    	default{Write-Host "`nInfo: " -NoNewLine;Write-Host "Sorry, an unexpected error has been caused. In most cases, it is an error made by the user, so take the time to answer the questions correctly." -ForegroundColor red;Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
+	}
+
 }
 
 function HPV-Remove_VSwitch
 {
 Clear-Host
-Write-Host "Info: " -NoNewLine
-Write-Host "This feature is currently under development." -ForegroundColor red
-Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to main menu.`n" -ForegroundColor darkred;pause;main
+Write-Host "Ongoing action: " -NoNewLine
+Write-Host "Displaying the list of virtual switches.`n"
+
+$Get_VSwitches=Get-VMSwitch
+$VSwitchesList=@()
+$Get_VSwitches|ForEach-Object{$VSwitchesList+=$_.Name}
+
+For($i=0;$i -lt $VSwitchesList.Length;$i++){Write-Host "$i - $($VSwitchesList[$i])"}
+
+$userChoice=Read-Host "`nWhich virtual switch do you want to remove"
+$VSwitchChoice=$VSwitchesList[$userChoice]
+$Selected_Switch=$VSwitchChoice
+Write-Host "`nInfo: " -NoNewLine
+Write-Host "The chosen virtual switch is " -NoNewLine
+Write-Host "$Selected_Switch" -NoNewLine -ForegroundColor green
+Write-Host "."
+
+Write-Host "`nOngoing action: " -NoNewLine
+Write-Host "Deletion of the virtual switch." -ForegroundColor green
+Remove-VMSwitch -Name $Selected_Switch -Force
+
+Write-Host ""
+Write-Host "6 - Delete another virtual switch."
+Write-Host ""
+Write-Host "7 - Return to the virtual switch management menu."
+Write-Host "8 - Return to main menu." -ForegroundColor red
+Write-Host "9 - Quit the program." -ForegroundColor darkred
+Write-Host ""
+
+$userChoice=Read-Host "Your choice"
+	switch($userChoice)
+	{
+		6{HPV-Remove_VSwitch}
+
+    	7{HPV-Virtual_Switches_Management}
+    	8{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
+    	9{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Exit of the program in progress.`n" -ForegroundColor darkred;pause;$host.ui.RawUI.WindowTitle=$DefaultWindowTitle;exit}
+    	default{Write-Host "`nInfo: " -NoNewLine;Write-Host "Sorry, an unexpected error has been caused. In most cases, it is an error made by the user, so take the time to answer the questions correctly." -ForegroundColor red;Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
+	}
+
 }
 
 function Resource_Management
