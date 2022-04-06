@@ -5,7 +5,6 @@
 [![Stargazers][stars-shield]](https://github.com/franckferman/hyper-v_toolbox/stargazers)
 [![Issues][issues-shield]](https://github.com/franckferman/hyper-v_toolbox/issues)
 [![MIT License][license-shield]](https://github.com/franckferman/hyper-v_toolbox/blob/main/LICENSE)
-[![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/fferman42)
 
 <br />
 <div align="center">
