@@ -21,8 +21,6 @@
     <a href="https://github.com/franckferman/hyper-v_toolbox"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://asciinema.org/a/C3OT7oVZOARXTUUISkpgdfIDm">View Demo</a>
-    ·
     <a href="https://github.com/franckferman/fix_wsl2_networking/issues">Report Bug</a>
     ·
     <a href="https://github.com/franckferman/fix_wsl2_networking/issues">Request Feature</a>
