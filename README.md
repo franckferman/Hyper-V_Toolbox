@@ -33,7 +33,7 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
-        <li><a href="#built-with">Built With</a></li>
+        <li><a href="#tested-on">Tested on</a></li>
       </ul>
     </li>
     <li>
@@ -52,36 +52,53 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This project was done for many reasons but the main reason was to improve, should I say find a solution to make the process of creating virtual machines in the learning environment much faster.
+I didn't reinvent the wheel with this project however, it can lead to a considerable time saving for people having a regular use of Hyper-V. Whether you are a technician, an administrator, a student, a teacher or even just a computer enthusiast and you need to use Hyper-V, this tool will save you a lot of time.
 
-This script does not stop at simply creating a virtual machine. The goal is to really save time and improve the different processes of creation and preparation of the numerous labs and parameters.
+The principle of this tool is simple, it is a complete interactive script (with choice) allowing the advanced management of Hyper-V.
 
-The script proposes:
+Here is an overview of the available features:
 
-- The creation of "blank" virtual machines. Only the name, RAM, etc. (the essential parameters) are required, and the biggest advantage is that the script automatically fetches the corresponding ISO.
+- Creation of virtual machines.
 
-- The creation of machines from "models". For example, if you need a Windows Server machine, the script will provide you with a pre-installed machine to optimize your time.
+It's very easy and fast, you just have to answer the questions asked by the script.
 
-- Virtual machine management, launch, shutdown, etc.
+Before each machine creation, the script will check if the desired resources are present or not and will make a choice accordingly. If it does not find the resources and the desired tree, it will automatically download the iso corresponding to the selected machine, and create the specific tree for the storage of the resources if, once again, they are not already present.
 
-- Virtual switch management, creation, deletion...
+At the moment, the tool already allows the creation of multiple systems: Microsoft Windows (Microsoft Windows 10 Pro, Enterprise, Server 2012, 2019), GNU/Linux (Debian, pfSense, Parrot Security, Rocky Linux, Kali Linux)...
 
-- A resource management (ISO), you can decide to download all available ISOs to be ready for installation without having any waiting time.
+Being on Github, don't forget that, anyone who wants to participate in the project can join me and add the resources he wants.
+
+- The creation of preconfigured virtual machines.
+
+The idea will be to create a virtual machine with already filled parameters, taking over an already existing hard disk and to summarize, the user will arrive on a machine already ready to use.
+
+How can we do this? Let's take the example of a Windows 10 Enterprise machine: I made a sysprep on the machine to which I linked a response file (autounattend.xml) allowing me to pass all the "long" and "annoying" steps of the Windows OOBE (acceptance of the terms of use, setting of Windows privacy options, creation of a local account ...), in the end the user arrives on a blank Windows desktop, already ready to work.
+
+- Virtual machine management
+
+Classic tasks such as, list machines, turn on one (or more) machine, turn on all machines, turn off one (or more) machine, turn off all machines, delete one (or more) machine, delete all machines...
+
+- Virtual switch management.
+
+List, create, delete virtual switches...
+
+- A resource management system
+
+When you create a machine, the script will check in the files if it finds the corresponding resource, if it doesn't find it, it will go and download it (before that, check the existence of the tree I was talking about and create it if it doesn't exist) and then continue.
+
+So I thought it would be interesting to make a resource management system that downloads the necessary resources in advance.
+
+You can choose to download all the resources, or only those for Windows machines, or only those for Linux, and better still, I made a "customization" function allowing you to choose in detail what you need or not.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-### Built With and Tested On
+### Tested On
 
-Here are the different tools that I used to create my script and performed my tests.
-
-Build With and On :
-* [Microsoft Windows 11 Pro](https://www.microsoft.com/en-us/windows/get-windows-11)
-* [Windows PowerShell (5.1)](https://microsoft.com/powershell)
-* [Sublime Text](https://www.sublimetext.com/)
-
-Tested On :
+The script has been tested and tests have been performed on these system and software versions:
 * - [x] [Microsoft Windows 11 Pro](https://www.microsoft.com/en-us/windows/get-windows-11)
 * - [x] [Microsoft Windows 10 Pro](https://www.microsoft.com/en-us/d/windows-10-pro/df77x4d43rkt?activetab=pivot:overviewtab)
+* - [x] [Microsoft Windows PowerShell 5.1.22000.282](https://microsoft.com/powershell)
+* - [x] [Microsoft Windows PowerShell 7.2.2](https://microsoft.com/powershell)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -94,26 +111,26 @@ I don't think a tutorial would be very useful to teach you how to use the script
 
 ### Prerequisites
 
-This script has been tested on a version of Windows 11 Pro with PowerShell 5.1 but should work with many other versions. If you have any problems, please let me know.
+Please note that my script must be placed where you want your machines to be stored.
 
-* To download my script directly from PowerShell, follow this command.
+* For example, if you want them to be in your C:\ directory, issue the following command from your PowerShell terminal:
 ```sh
-Start-BitsTransfer -Source https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/hyper-v_toolbox.ps1 -Destination C:\
+Start-BitsTransfer -Source https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/hyper-v_toolbox.ps1 -Destination "C:\" -DisplayName "Hyper-V_Toolbox - Downloading function - Franck FERMAN." -Description "Downloading the script."
 ```
 
-This command downloads the script to the C:\ directory. To customize the destination path, simply change the result of the -Destination parameter.
+Of course, you can change the desired destination path. To do this, you just have to change the argument of the -Destination parameter.
 
 * For example:
 ```sh
-Start-BitsTransfer -Source https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/hyper-v_toolbox.ps1 -Destination .\My_Custom_Dest
+Start-BitsTransfer -Source https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/hyper-v_toolbox.ps1 -Destination "D:\Your_Custom_Path" -DisplayName "Hyper-V_Toolbox - Downloading function - Franck FERMAN." -Description "Downloading the script."
 ```
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-* To launch the script, from a PowerShell terminal (launched with Administrator rights), simply use this command (from the directory where my script is located):
+* To run the script, simply go to the script installation path and run the PowerShell script (Administrator rights are required):
 ```sh
-.\hyper-v_toolbox.ps1
+Set-Location "C:\";.\hyper-v_toolbox.ps1
 ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
