@@ -1583,7 +1583,7 @@ $VMsList=@()
 $Get_VM=Get-VM|Where{$_.State -eq 'Off'}
 $Get_VM|ForEach-Object{$VMsList+=$_.Name}
 
-ForEach($VM in $VMsList){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Starting the virtual machine " -NoNewLine;Write-Host "$VM" -ForegroundColor green;Start-VM -Name $VM}
+ForEach($VM in $VMsList){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Starting the virtual machine " -NoNewLine;Write-Host "$VM." -ForegroundColor green;Start-VM -Name $VM}
 
 Write-Host "`nOngoing action: " -NoNewLine
 Write-Host "Display the list of currently running virtual machines."
@@ -1628,10 +1628,10 @@ Write-Host "."
 
 Write-Host "`nOngoing action: " -NoNewLine
 Write-Host "Switching off of the machine." -ForegroundColor green
-Start-VM -Name $Selected_VM -Force
+Stop-VM -Name $Selected_VM -ErrorAction SilentlyContinue -Force
 
 Write-Host "`nOngoing action: " -NoNewLine
-Write-Host "Displays a list of currently powered-off virtual machines."
+Write-Host "Displays a list of currently powered-off virtual machines.`n"
 Get-VM|Where{$_.State -eq 'Off'}|Out-Default;pause
 
 Write-Host ""
@@ -1760,7 +1760,7 @@ ForEach($VM in $VMsList){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "
 
 Write-Host "`nOngoing action: " -NoNewLine
 Write-Host "Displays a list of currently powered-off virtual machines."
-Get-VM|Where{$_.State -eq 'Off'}|Out-Default;Write-Host ""
+Get-VM|Where{$_.State -eq 'Off'}|Out-Default
 
 ForEach($VM in $VMsList){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Removing the virtual machine " -NoNewLine;Write-Host "$VM" -ForegroundColor green;Remove-VM -Name $VM -Force}
 
