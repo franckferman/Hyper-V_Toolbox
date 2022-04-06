@@ -16,7 +16,7 @@
 <h3 align="center">hyper-v_toolbox</h3>
 
   <p align="center">
-    Hyper-V Toolbox is a PowerShell script allowing advanced manipulation of Hyper-V from your Terminal.
+    Hyper-V Toolbox is a PowerShell script allowing advanced manipulation of Hyper-V from your terminal.
     <br />
     <a href="https://github.com/franckferman/hyper-v_toolbox"><strong>Explore the docs »</strong></a>
     <br />
