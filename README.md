@@ -154,8 +154,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Franck FERMAN - [LinkedIn](https://www.linkedin.com/in/fferman42) - fferman@protonmail.ch
-
 Project Link: [https://github.com/franckferman/hyper-v_toolbox](https://github.com/franckferman/hyper-v_toolbox)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
