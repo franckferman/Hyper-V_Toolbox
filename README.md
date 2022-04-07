@@ -129,7 +129,7 @@ Start-BitsTransfer -Source https://raw.githubusercontent.com/franckferman/hyper-
 
 * To run the script, simply go to the script installation path and run the PowerShell script (Administrator rights are required):
 ```sh
-Set-Location "C:\";.\hyper-v_toolbox.ps1
+Set-Location -Path "C:\";Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass;.\hyper-v_toolbox.ps1
 ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
