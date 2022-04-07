@@ -1,4 +1,4 @@
 # These are supported funding model platforms
 
 github: [franckferman]
-custom: [Test 'https://42.fr/en/homepage/', Test2 'https://ecole2600.com/']
+custom: ['https://42.fr/en/homepage/', 'https://ecole2600.com/']
