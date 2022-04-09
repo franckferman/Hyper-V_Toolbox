@@ -51,7 +51,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<br />
+<br /><br />
 <div align="center">
   <a href="https://github.com/franckferman/hyper-v_toolbox">
     <img src="https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/img/Hyper-V_Toolbox-Main_Picture.png" alt="Hyper-V_Toolbox-Main_Picture" width="400" height="400">
@@ -66,7 +66,7 @@ The ultimate interest of this project and of this tool as a whole is to save tim
 
 The principle of Hyper-V Toolbox is simple. It is an interactive script (with multiple choices adapting to the user's answers) strongly user-friendly and allowing (among other things) the management and advanced manipulation of Hyper-V from your terminal.
 
-Here is an overview of the available features:
+  Here is an overview of the available features:
 
 - Creation of (basic) virtual machines.
 
