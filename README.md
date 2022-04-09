@@ -66,7 +66,7 @@ The principle of Hyper-V Toolbox is simple. It is an interactive script (with mu
   
 For more images, please refer to the document.
 
-Here is an overview of the available features:
+<br />Here is an overview of the available features:
 
 - Creation of (basic) virtual machines.
 
