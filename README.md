@@ -76,8 +76,7 @@ It is very simple, fast and effective. You just have to answer the questions ask
 
 Many choices of systems are offered to you for the creation of your virtual machine. In order not to lose the user and to keep a coherent, orderly and harmonious structure, I have grouped the systems by separating them into two distinct categories: Microsoft Windows on one side and GNU/Linux on the other.
 
-<br />
-<div align="center">
+<br /><div align="center">
   <a href="#">
     <img src="https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/img/illustration-os_types.png" alt="illustration-os_types" width="800" height="150">
   </a>
@@ -94,10 +93,9 @@ Once the machine has been created, which is generally extremely fast (a few seco
 
 To take a concrete example, in the context of practical work in class, or even for professional demonstrations or numerous tests for system administration or computer security, we sometimes need to create two machines of the same type such as two Windows Servers, two Windows 10 (clients). This function allows the preparation of these elements in just a few seconds.
 
-<br />
-<div align="center">
+<br /><div align="center">
   <a href="#">
-    <img src="https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/img/illustration-demo_creation_blank.png" alt="illustration-demo_creation_blank.png" width="800" height="800">
+    <img src="https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/img/illustration-demo_creation_blank.png" alt="illustration-demo_creation_blank.png" width="600" height="400">
   </a>
 </div><br />
 
