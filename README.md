@@ -56,6 +56,7 @@
   <a href="#">
     <img src="https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/img/Hyper-V_Toolbox-Main_Picture.png" alt="Hyper-V_Toolbox-Main_Picture" width="350" height="450">
   </a>
+</div>
 <br /><br />
 
 The goal of this project is not to reinvent the wheel. But to my knowledge, no similar tool of this type as complete existed on Github before this one.
