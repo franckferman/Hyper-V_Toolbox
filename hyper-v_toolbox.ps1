@@ -35,6 +35,17 @@ function Ask_YesOrNo
 
 }
 
+function Get_Rand
+{
+	param
+    (
+    	[int]$numMin=0,
+    	[int]$numMax=99
+    )
+
+Get-Random -Minimum $numMin -Maximum $numMax
+}
+
 function main
 {
 
