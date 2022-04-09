@@ -54,7 +54,7 @@
 <br />
 <div align="center">
   <a href="#">
-    <img src="https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/img/Hyper-V_Toolbox-Main_Picture.png" alt="Hyper-V_Toolbox-Main_Picture" width="200" height="400">
+    <img src="https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/img/Hyper-V_Toolbox-Main_Picture.png" alt="Hyper-V_Toolbox-Main_Picture" width="300" height="400">
   </a>
 <br /><br />
   
