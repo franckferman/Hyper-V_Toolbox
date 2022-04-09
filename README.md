@@ -60,7 +60,7 @@
 
 The goal of this project is not to reinvent the wheel. But to my knowledge, no similar tool of this type as complete existed on Github before this one.
 
-The ultimate interest of this project (and of this tool as a whole) is to save time and to improve the comfort of use considerably. Whether you are a technician, an administrator, a student, a teacher or even just a computer enthusiast wishing to use Hyper-V for your various projects, this tool will be an undeniable ally.
+The ultimate interest of this project as a whole is to save time and to improve the comfort of use considerably. Whether you are a technician, an administrator, a student, a teacher or even just a computer enthusiast wishing to use Hyper-V for your various projects, this tool will be an undeniable ally.
 
 The principle of Hyper-V Toolbox is simple. It is an interactive script (with multiple choices adapting to the user's answers) strongly user-friendly and allowing (among other things) the management and advanced manipulation of Hyper-V from your terminal.
 
@@ -83,27 +83,50 @@ Once the machine has been created, which is generally extremely fast (a few seco
 
 To take a concrete example, in the context of practical work in class, or even for professional demonstrations or numerous tests for system administration or computer security, we sometimes need to create two machines of the same type such as two Windows Servers, two Windows 10 (clients). This function allows the preparation of these elements in just a few seconds.
 
-<br />- The creation of preconfigured virtual machines.
+By default, the script optimizes the virtual machine parameters to allow the user to have a machine already ready to use. At least, to allow him to limit as much as possible the actions to perform. 
 
-The idea will be to create a virtual machine with already filled parameters, taking over an already existing hard disk and to summarize, the user will arrive on a machine already ready to use.
+For example, the automatic restore points are disabled and the boot order is also modified so that the user does not have to modify anything.
 
-How can we do this? Let's take the example of a Windows 10 Enterprise machine: I made a sysprep on the machine to which I linked a response file (autounattend.xml) allowing me to pass all the "long" and "annoying" steps of the Windows OOBE (acceptance of the terms of use, setting of Windows privacy options, creation of a local account ...), in the end the user arrives on a blank Windows desktop, already ready to work.
+On Linux, secure boot is disabled and dynamic RAM management is disabled because it is often poorly managed by Hyper-V.
 
-<br />- Virtual machine management
+The tool already handles the creation of many systems such as Microsoft Windows systems including Windows 10 pro, enterprise, server 2012, and 2019 but also many GNU/Linux systems such as pfSense, Debian, Parrot Security, Rocky Linux (with two editions available) and Kali Linux (also with two editions available).
 
-Classic tasks such as, list machines, turn on one (or more) machine, turn on all machines, turn off one (or more) machine, turn off all machines, delete one (or more) machine, delete all machines...
+Most of the ISOs have been retrieved from official repositories. This is not the case for PfSense, since the download from the official repository retrieves a compressed image. 
 
-- Virtual switch management.
+PowerShell handles well the Expand-Archive command which allows extraction of compressed files but does not handle decompression of compressed .gz files.
 
-List, create, delete virtual switches...
+For this reason, I simply hosted on some of my rented servers the PfSense iso. Although, in the long run, I would greatly appreciate help from the school to keep the costs as low as possible.
 
-- A resource management system
+The Microsoft Windows systems ISOs (10 pro, enterprise, server 2012 and 2019) were also hosted on my servers.
 
-When you create a machine, the script will check in the files if it finds the corresponding resource, if it doesn't find it, it will go and download it (before that, check the existence of the tree I was talking about and create it if it doesn't exist) and then continue.
+<br />- Creation of preconfigured virtual machines.
 
-So I thought it would be interesting to make a resource management system that downloads the necessary resources in advance.
+This function is still in preparation.
 
-You can choose to download all the resources, or only those for Windows machines, or only those for Linux, and better still, I made a "customization" function allowing you to choose in detail what you need or not.
+Just like the (basic) virtual machine creation function, the user will be asked some basic questions. With a few notable differences, at first, some choices will allow you to further speed up the creation process as only the name and network card of the desired machine will be asked.
+
+The RAM will be automatically adjusted according to the desired machine, and the hard disk? This is where it gets interesting.
+
+A differentiation disk will be created from the parent disk corresponding to the desired machine. What's the point? What does this famous parent hard disk contain? It all depends on the desired machine. But we will take the example of a Windows 10 client.
+
+After having performed various manipulations on the machine (software installations that could be useful, system settings, etc.), I made a sysprep on the machine, sysprep to which we can link a response file (autounattend.xml). What I did, and what will allow, at the startup of the machine to pass all the "long" and "boring" steps of the Windows OOBE a.k.a. Out-of-box experience (acceptance of the terms of use, setting of the Windows privacy options, creation of a local account etc.) and at the end, the goal for the user will be to arrive on a Windows desktop, connected to a local account, already ready to use.
+
+<br />- Virtual switch management.
+
+This feature is just a plus for management support, it simply allows (non-advanced) management of virtual switches. More precisely, it allows to display, create and delete virtual switches.
+
+- Virtual machines management.
+
+Just like the virtual switch management, these are basic functions (although this time much more useful and offering some additional features) allowing the manipulation of Hyper-V machines. By manipulation I mean all sorts of classic but useful tasks, such as: displaying the list of virtual machines and their status. Starting one, several, or all the machines. Shutting down one, several, or all machines. The deletion of one, several, or all the machines. In short, a relatively classical management of virtual machines.
+
+- An advanced resource management system.
+
+As seen before, before each virtual machine creation, the script checks if the tree structure has been initially created by the script and acts accordingly then checks if the desired resources are present or not and takes care of downloading them if needed.
+
+As a result, this first download might take some time although once it has been downloaded once, it will be present and available for the next times.
+So I thought it would be interesting to set up a resource management system that downloads the desired needed resources in advance. 
+
+There are multiple possibilities: downloading resources for the creation of Microsoft Windows virtual machines only, downloading resources for the creation of GNU/Linux virtual machines only, the possibility to download absolutely all resources, and one last solution that I strongly recommend, I have made a customization function, by customization I mean a certain form of interactivity, which will allow the user to choose precisely and only the resources that he will really need.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
