@@ -81,7 +81,7 @@ Many choices of systems are offered to you for the creation of your virtual mach
   <a href="#">
     <img src="https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/img/illustration-os_types.png" alt="illustration-os_types" width="800" height="150">
   </a>
-</div><br /><br />
+</div><br />
 
 After selecting the desired system, two basic questions are asked by the script, the choice of a name for your machine and the possibility or not to choose a network card.
 Then, in a first step, the script checks if the tree structure initially created by the script is present or not, if not, takes care of it accordingly. 
@@ -93,6 +93,13 @@ Some other basic questions (for the good continuity of the creation of the machi
 Once the machine has been created, which is generally extremely fast (a few seconds at best), several choices are available to you, two of which are particularly interesting. You can quickly create the same type of machine with different characteristics or recreate the same type of machine with the same characteristics.
 
 To take a concrete example, in the context of practical work in class, or even for professional demonstrations or numerous tests for system administration or computer security, we sometimes need to create two machines of the same type such as two Windows Servers, two Windows 10 (clients). This function allows the preparation of these elements in just a few seconds.
+
+<br />
+<div align="center">
+  <a href="#">
+    <img src="https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/img/illustration-demo_creation_blank.png" alt="illustration-demo_creation_blank.png" width="800" height="800">
+  </a>
+</div><br />
 
 By default, the script optimizes the virtual machine parameters to allow the user to have a machine already ready to use. At least, to allow him to limit as much as possible the actions to perform. 
 
