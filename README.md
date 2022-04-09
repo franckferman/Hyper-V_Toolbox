@@ -159,6 +159,12 @@ So I thought it would be interesting to set up a resource management system that
 
 There are multiple possibilities: downloading resources for the creation of Microsoft Windows virtual machines only, downloading resources for the creation of GNU/Linux virtual machines only, the possibility to download absolutely all resources, and one last solution that I strongly recommend, I have made a customization function, by customization I mean a certain form of interactivity, which will allow the user to choose precisely and only the resources that he will really need.
 
+<br /><div align="center">
+  <a href="#">
+    <img src="https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/img/illustration-resource_management.png" alt="illustration-resource_management.png" width="700" height="120">
+  </a>
+</div><br />
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Tested On
