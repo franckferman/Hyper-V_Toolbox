@@ -51,13 +51,12 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<br />
+<br /><br />
 <div align="center">
   <a href="#">
     <img src="https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/img/Hyper-V_Toolbox-Main_Picture.png" alt="Hyper-V_Toolbox-Main_Picture" width="350" height="450">
   </a>
-</div>
-<br /><br />
+</div><br /><br />
 
 The goal of this project is not to reinvent the wheel. But to my knowledge, no similar tool of this type as complete existed on Github before this one.
 
@@ -67,10 +66,8 @@ The principle of Hyper-V Toolbox is simple. It is an interactive script (with mu
   
 For more images, please refer to the document.
 
-<br />
 Here is an overview of the available features:
 
-<br /><br />
 - Creation of (basic) virtual machines.
 
 It is very simple, fast and effective. You just have to answer the questions asked by the script.
@@ -88,24 +85,20 @@ Once the machine has been created, which is generally extremely fast (a few seco
 
 To take a concrete example, in the context of practical work in class, or even for professional demonstrations or numerous tests for system administration or computer security, we sometimes need to create two machines of the same type such as two Windows Servers, two Windows 10 (clients). This function allows the preparation of these elements in just a few seconds.
 
-<br />
 - The creation of preconfigured virtual machines.
 
 The idea will be to create a virtual machine with already filled parameters, taking over an already existing hard disk and to summarize, the user will arrive on a machine already ready to use.
 
 How can we do this? Let's take the example of a Windows 10 Enterprise machine: I made a sysprep on the machine to which I linked a response file (autounattend.xml) allowing me to pass all the "long" and "annoying" steps of the Windows OOBE (acceptance of the terms of use, setting of Windows privacy options, creation of a local account ...), in the end the user arrives on a blank Windows desktop, already ready to work.
 
-<br />
 - Virtual machine management
 
 Classic tasks such as, list machines, turn on one (or more) machine, turn on all machines, turn off one (or more) machine, turn off all machines, delete one (or more) machine, delete all machines...
 
-<br />
 - Virtual switch management.
 
 List, create, delete virtual switches...
 
-<br />
 - A resource management system
 
 When you create a machine, the script will check in the files if it finds the corresponding resource, if it doesn't find it, it will go and download it (before that, check the existence of the tree I was talking about and create it if it doesn't exist) and then continue.
