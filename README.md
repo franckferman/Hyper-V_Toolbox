@@ -142,7 +142,7 @@ There are multiple possibilities: downloading resources for the creation of Micr
 
 ### Tested On
 
-The script has been tested and tests have been performed on these system and software versions:
+The script has been tested on different versions of Microsoft Windows and PowerShell:
 * - [x] [Microsoft Windows 11 Pro](https://www.microsoft.com/en-us/windows/get-windows-11)
 * - [x] [Microsoft Windows 10 Pro](https://www.microsoft.com/en-us/d/windows-10-pro/df77x4d43rkt?activetab=pivot:overviewtab)
 * - [x] [Microsoft Windows PowerShell 5.1.22000.282](https://microsoft.com/powershell)
