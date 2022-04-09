@@ -51,12 +51,12 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<br /><br />
+<br />
 <div align="center">
   <a href="https://github.com/franckferman/hyper-v_toolbox">
     <img src="https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/img/Hyper-V_Toolbox-Main_Picture.png" alt="Hyper-V_Toolbox-Main_Picture" width="400" height="400">
   </a>
-<br /><br />
+<br /><br /><br />
   
 This project was carried out in order to answer a very specific problem and needs that I will take the time to state in this document.
 
