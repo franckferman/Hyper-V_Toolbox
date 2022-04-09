@@ -57,18 +57,19 @@
     <img src="https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/img/Hyper-V_Toolbox-Main_Picture.png" alt="Hyper-V_Toolbox-Main_Picture" width="350" height="450">
   </a>
 <br /><br />
-  
-This project was carried out in order to answer a very specific problem and needs that I will take the time to state in this document.
 
-Of course, I do not claim to have reinvented the wheel with this project, although to my knowledge, no such comprehensive tool existed before this one.
+The goal of this project is not to reinvent the wheel. But to my knowledge, no similar tool of this type as complete existed on Github before this one.
 
-The ultimate interest of this project and of this tool as a whole is to save time and to improve the comfort of use considerably. Whether you are a technician, an administrator, a student, a teacher (or even just a computer enthusiast) wishing to use Hyper-V for your various projects, this tool will be an undeniable ally.
+The ultimate interest of this project (and of this tool as a whole) is to save time and to improve the comfort of use considerably. Whether you are a technician, an administrator, a student, a teacher or even just a computer enthusiast wishing to use Hyper-V for your various projects, this tool will be an undeniable ally.
 
 The principle of Hyper-V Toolbox is simple. It is an interactive script (with multiple choices adapting to the user's answers) strongly user-friendly and allowing (among other things) the management and advanced manipulation of Hyper-V from your terminal.
+  
+For more images, please refer to the document.
 
+<br />
 Here is an overview of the available features:
 
-<br /><br />
+<br />
 - Creation of (basic) virtual machines.
 
 It is very simple, fast and effective. You just have to answer the questions asked by the script.
@@ -86,24 +87,24 @@ Once the machine has been created, which is generally extremely fast (a few seco
 
 To take a concrete example, in the context of practical work in class, or even for professional demonstrations or numerous tests for system administration or computer security, we sometimes need to create two machines of the same type such as two Windows Servers, two Windows 10 (clients). This function allows the preparation of these elements in just a few seconds.
 
-<br /><br />
+<br />
 - The creation of preconfigured virtual machines.
 
 The idea will be to create a virtual machine with already filled parameters, taking over an already existing hard disk and to summarize, the user will arrive on a machine already ready to use.
 
 How can we do this? Let's take the example of a Windows 10 Enterprise machine: I made a sysprep on the machine to which I linked a response file (autounattend.xml) allowing me to pass all the "long" and "annoying" steps of the Windows OOBE (acceptance of the terms of use, setting of Windows privacy options, creation of a local account ...), in the end the user arrives on a blank Windows desktop, already ready to work.
 
-<br /><br />
+<br />
 - Virtual machine management
 
 Classic tasks such as, list machines, turn on one (or more) machine, turn on all machines, turn off one (or more) machine, turn off all machines, delete one (or more) machine, delete all machines...
 
-<br /><br />
+<br />
 - Virtual switch management.
 
 List, create, delete virtual switches...
 
-<br /><br />
+<br />
 - A resource management system
 
 When you create a machine, the script will check in the files if it finds the corresponding resource, if it doesn't find it, it will go and download it (before that, check the existence of the tree I was talking about and create it if it doesn't exist) and then continue.
