@@ -78,7 +78,7 @@ Many choices of systems are offered to you for the creation of your virtual mach
 
 <br /><div align="center">
   <a href="#">
-    <img src="https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/img/illustration-os_types.png" alt="illustration-os_types" width="800" height="150">
+    <img src="https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/img/illustration-os_types.png" alt="illustration-os_types" width="700" height="50">
   </a>
 </div><br />
 
@@ -95,7 +95,7 @@ To take a concrete example, in the context of practical work in class, or even f
 
 <br /><div align="center">
   <a href="#">
-    <img src="https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/img/illustration-demo_creation_blank.png" alt="illustration-demo_creation_blank.png" width="600" height="400">
+    <img src="https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/img/illustration-demo_creation_blank.png" alt="illustration-demo_creation_blank.png" width="600" height="350">
   </a>
 </div><br />
 
