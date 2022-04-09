@@ -70,7 +70,7 @@ For more images, please refer to the document.
 <br />
 Here is an overview of the available features:
 
-<br />
+<br /><br />
 - Creation of (basic) virtual machines.
 
 It is very simple, fast and effective. You just have to answer the questions asked by the script.
