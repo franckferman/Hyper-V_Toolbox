@@ -141,6 +141,13 @@ This feature is just a plus for management support, it simply allows (non-advanc
 
 Just like the virtual switch management, these are basic functions (although this time much more useful and offering some additional features) allowing the manipulation of Hyper-V machines. By manipulation I mean all sorts of classic but useful tasks, such as: displaying the list of virtual machines and their status. Starting one, several, or all the machines. Shutting down one, several, or all machines. The deletion of one, several, or all the machines. In short, a relatively classical management of virtual machines.
 
+
+<br /><div align="center">
+  <a href="#">
+    <img src="https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/img/illustration-virtual_machines_management.png" alt="illustration-virtual_machines_management" width="600" height="120">
+  </a>
+</div><br />
+
 <br />
 
 - An advanced resource management system.
