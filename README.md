@@ -123,6 +123,8 @@ This feature is just a plus for management support, it simply allows (non-advanc
 
 Just like the virtual switch management, these are basic functions (although this time much more useful and offering some additional features) allowing the manipulation of Hyper-V machines. By manipulation I mean all sorts of classic but useful tasks, such as: displaying the list of virtual machines and their status. Starting one, several, or all the machines. Shutting down one, several, or all machines. The deletion of one, several, or all the machines. In short, a relatively classical management of virtual machines.
 
+<br />
+
 - An advanced resource management system.
 
 As seen before, before each virtual machine creation, the script checks if the tree structure has been initially created by the script and acts accordingly then checks if the desired resources are present or not and takes care of downloading them if needed.
