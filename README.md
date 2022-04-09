@@ -67,6 +67,7 @@ The principle of Hyper-V Toolbox is simple. It is an interactive script (with mu
 <br />Here is an overview of the available features:
 
 <br />
+
 - Creation of (basic) virtual machines.
 
 It is very simple, fast and effective. You just have to answer the questions asked by the script.
@@ -101,6 +102,7 @@ For this reason, I simply hosted on some of my rented servers the PfSense iso. A
 The Microsoft Windows systems ISOs (10 pro, enterprise, server 2012 and 2019) were also hosted on my servers.
 
 <br />
+
 - Creation of preconfigured virtual machines.
 
 This function is still in preparation.
@@ -114,11 +116,13 @@ A differentiation disk will be created from the parent disk corresponding to the
 After having performed various manipulations on the machine (software installations that could be useful, system settings, etc.), I made a sysprep on the machine, sysprep to which we can link a response file (autounattend.xml). What I did, and what will allow, at the startup of the machine to pass all the "long" and "boring" steps of the Windows OOBE a.k.a. Out-of-box experience (acceptance of the terms of use, setting of the Windows privacy options, creation of a local account etc.) and at the end, the goal for the user will be to arrive on a Windows desktop, connected to a local account, already ready to use.
 
 <br />
+
 - Virtual switch management.
 
 This feature is just a plus for management support, it simply allows (non-advanced) management of virtual switches. More precisely, it allows to display, create and delete virtual switches.
 
 <br />
+
 - Virtual machines management.
 
 Just like the virtual switch management, these are basic functions (although this time much more useful and offering some additional features) allowing the manipulation of Hyper-V machines. By manipulation I mean all sorts of classic but useful tasks, such as: displaying the list of virtual machines and their status. Starting one, several, or all the machines. Shutting down one, several, or all machines. The deletion of one, several, or all the machines. In short, a relatively classical management of virtual machines.
