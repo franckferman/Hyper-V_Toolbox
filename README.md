@@ -161,7 +161,7 @@ There are multiple possibilities: downloading resources for the creation of Micr
 
 <br /><div align="center">
   <a href="#">
-    <img src="https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/img/illustration-resource_management.png" alt="illustration-resource_management.png" width="700" height="120">
+    <img src="https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/img/illustration-resource_management.png" alt="illustration-resource_management.png" width="700" height="400">
   </a>
 </div><br />
 
