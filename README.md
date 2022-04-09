@@ -63,8 +63,6 @@ The goal of this project is not to reinvent the wheel. But to my knowledge, no s
 The ultimate interest of this project (and of this tool as a whole) is to save time and to improve the comfort of use considerably. Whether you are a technician, an administrator, a student, a teacher or even just a computer enthusiast wishing to use Hyper-V for your various projects, this tool will be an undeniable ally.
 
 The principle of Hyper-V Toolbox is simple. It is an interactive script (with multiple choices adapting to the user's answers) strongly user-friendly and allowing (among other things) the management and advanced manipulation of Hyper-V from your terminal.
-  
-For more images, please refer to the document.
 
 <br />Here is an overview of the available features:
 
