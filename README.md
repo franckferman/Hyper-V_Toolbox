@@ -53,7 +53,7 @@
 
 <br />
 <div align="center">
-  <a href="https://github.com/franckferman/hyper-v_toolbox">
+  <a href="#">
     <img src="https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/img/Hyper-V_Toolbox-Main_Picture.png" alt="Hyper-V_Toolbox-Main_Picture" width="400" height="400">
   </a>
 <br /><br /><br />
