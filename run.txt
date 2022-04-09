@@ -1,0 +1,1 @@
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass;.\hyper-v_toolbox.ps1
