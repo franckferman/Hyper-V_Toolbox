@@ -76,6 +76,13 @@ It is very simple, fast and effective. You just have to answer the questions ask
 
 Many choices of systems are offered to you for the creation of your virtual machine. In order not to lose the user and to keep a coherent, orderly and harmonious structure, I have grouped the systems by separating them into two distinct categories: Microsoft Windows on one side and GNU/Linux on the other.
 
+<br />
+<div align="center">
+  <a href="#">
+    <img src="https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/img/illustration-os_types.png" alt="Hyper-V_Toolbox-Main_Picture" width="350" height="450">
+  </a>
+</div><br /><br />
+
 After selecting the desired system, two basic questions are asked by the script, the choice of a name for your machine and the possibility or not to choose a network card.
 Then, in a first step, the script checks if the tree structure initially created by the script is present or not, if not, takes care of it accordingly. 
 
