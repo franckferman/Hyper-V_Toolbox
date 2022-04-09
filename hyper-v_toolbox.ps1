@@ -77,7 +77,7 @@ Write-Host "1 - Creation of (blank) virtual machine(s)."
 Write-Host "2 - Creation of pre-configured virtual machine(s)."
 Write-Host ""
 Write-Host "3 - Management of virtual machine(s)."
-Write-Host "4 - Management of virtual switche(s)."
+Write-Host "4 - Management of virtual switch(es)."
 Write-Host ""
 Write-Host "5 - Resource management and local downloading."
 Write-Host ""
@@ -88,7 +88,7 @@ Write-Host ""
 	switch($userChoice)
 	{
     	1{HPV-New_VM-Blank}
-    	2{HPV-New_VM-Template}
+    	2{Under_Development}
     	3{HPV-VM_Management}
     	4{HPV-Virtual_Switches_Management}
     	5{Resource_Management}
@@ -97,6 +97,14 @@ Write-Host ""
     	default{Write-Host "`nInfo: " -NoNewLine;Write-Host "Sorry, an unexpected error has been caused. In most cases, it is an error made by the user, so take the time to answer the questions correctly." -ForegroundColor red;Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
 	}
 
+}
+
+function Under_Development
+{
+Clear-Host
+Write-Host "Info: " -NoNewLine
+Write-Host "This feature is currently under development." -ForegroundColor red
+Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to main menu.`n" -ForegroundColor darkred;pause;main
 }
 
 <# List of download links to resources.
@@ -180,7 +188,7 @@ Write-Host ""
     	8{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
     	9{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Exit of the program in progress.`n" -ForegroundColor darkred;pause;$host.ui.RawUI.WindowTitle=$DefaultWindowTitle;exit}
     	default{Write-Host "`nInfo: " -NoNewLine;Write-Host "Sorry, an unexpected error has been caused. In most cases, it is an error made by the user, so take the time to answer the questions correctly." -ForegroundColor red;Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
-}
+	}
 
 }
 
@@ -689,7 +697,7 @@ Write-Host ""
     	8{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
     	9{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Exit of the program in progress.`n" -ForegroundColor darkred;pause;$host.ui.RawUI.WindowTitle=$DefaultWindowTitle;exit}
     	default{Write-Host "`nInfo: " -NoNewLine;Write-Host "Sorry, an unexpected error has been caused. In most cases, it is an error made by the user, so take the time to answer the questions correctly." -ForegroundColor red;Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
-}
+	}
 
 }
 
@@ -1456,9 +1464,279 @@ HPV-New_VM-Blank-GNU_Linux-Kali_Linux-Installer
 function HPV-New_VM-Template
 {
 Clear-Host
+Write-Host "What type of operating system matches the machine(s) you want to generate?"
+Write-Host ""
+Write-Host "1 - Microsoft Windows"
+Write-Host "2 - GNU/Linux"
+Write-Host ""
+Write-Host "8 - Go back to the main menu." -ForegroundColor red
+Write-Host "9 - Quit the program." -ForegroundColor darkred
+Write-Host ""
+
+[int]$userChoice=Read-Host "Your choice"
+	switch($userChoice)
+	{
+    	1{HPV-New_VM-Template-Microsoft_Windows}
+    	2{HPV-New_VM-Template-GNU_Linux}
+    
+    	8{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
+    	9{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Exit of the program in progress.`n" -ForegroundColor darkred;pause;$host.ui.RawUI.WindowTitle=$DefaultWindowTitle;exit}
+    	default{Write-Host "`nInfo: " -NoNewLine;Write-Host "Sorry, an unexpected error has been caused. In most cases, it is an error made by the user, so take the time to answer the questions correctly." -ForegroundColor red;Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
+	}
+
+}
+
+function HPV-New_VM-Template-Model
+{
+Clear-Host
+$script:VMName=Read-Host "Choose a name for the virtual machine"
 Write-Host "Info: " -NoNewLine
-Write-Host "This feature is currently under development." -ForegroundColor red
-Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to main menu.`n" -ForegroundColor darkred;pause;main
+Write-Host "The name chosen for the virtual machine is " -NoNewLine 
+Write-Host "$VMname" -NoNewLine -ForegroundColor green
+Write-Host "."
+
+Ask_YesOrNo "Hyper-V Toolbox - MessageBox function - Franck FERMAN." "Would you like to add a network card to your virtual machine?"
+
+	switch($Ask_YesOrNo_Result)
+	{
+	1{[bool]$script:UseNetworkCard=$False}
+	
+	0{
+	[bool]$script:UseNetworkCard=$True
+	$VMsList=@()
+	Get-VMSwitch|ForEach-Object{$VMsList+=$_.Name}
+	
+	Write-Host "`nOngoing action: " -NoNewLine
+	Write-Host "Display the list of virtual switches.`n"
+	For($i=0;$i -lt $VMsList.Length;$i++){Write-Host "$i - $($VMsList[$i])"}
+	
+	[int]$userChoice=Read-Host "`nWhich virtual switch do you want to set up on your virtual machine"
+	$VMchoice=$VMsList[$userChoice]
+	$script:SwitchName=$VMchoice
+	Write-Host "Info: " -NoNewLine
+	Write-Host "The chosen virtual switch is " -NoNewLine 
+	Write-Host "$SwitchName" -NoNewLine -ForegroundColor green
+	Write-Host "."
+	}
+
+	default{Write-Host "`nInfo: " -NoNewLine;Write-Host "Sorry, an unexpected error has been caused. In most cases, it is an error made by the user, so take the time to answer the questions correctly." -ForegroundColor red;Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
+	}
+
+Write-Host "`nOngoing action: " -NoNewLine
+Write-Host "Verification of required resources (and automatic decision making)."
+	if(Test-Path $isoOrBasePath)
+	{
+		Write-Host "Info: " -NoNewLine
+		Write-Host "The resource corresponding to your request has been identified." -ForegroundColor green
+	}else{
+		Write-Host "Info: " -NoNewLine
+		Write-Host "The corresponding resource could not be identified or an unexpected error was caused during the identification phase." -ForegroundColor darkred
+		Write-Host "`nOngoing action: " -NoNewLine
+		Write-Host "Automated launch of the download of the corresponding resources.`n" -NoNewLine
+
+			if(Test-Path $isoOrVHDBaseDest){$null}else{[void](New-Item -Path $isoOrVHDBaseFolderPath -ItemType Directory -Force)}
+
+	Start-BitsTransfer -Source $isoOrBaseSrc -Destination $isoOrVHDBaseDest -DisplayName "Hyper-V_Toolbox - Downloading function - Franck FERMAN." -Description "Download of the corresponding resource in progress."
+
+	if(Test-Path $isoOrBasePath){Write-Host "`nInfo: " -NoNewLine;Write-Host "Download successfully completed." -ForegroundColor green}else{Write-Host "`nInfo:" -NoNewLine;Write-Host "An unexpected error was caused." -ForegroundColor darkred;Write-Host "`nOngoing action:" -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor darkred;pause;main}
+	}
+
+$script:RAMgbSize=$RAMgbSizeUserChoice
+$script:VHDgbSize=$VHDgbSizeUserChoice
+
+	if(Test-Path $VHDSPath){$null}else{[void](New-Item -Path $VHDSPath -ItemType Directory -Force)}
+	if(Test-Path $vmsPath){$null}else{[void](New-Item -Path $vmsPath -ItemType Directory -Force)}
+}
+
+function HPV-New_VM-Template-Microsoft_Windows
+{
+Clear-Host
+Write-Host "1 - Microsoft Windows 10 Entreprise (LTSC): Sysprep & autounattend.xml."
+Write-Host ""
+Write-Host "2 - Microsoft Windows 10 Pro/Home/Education: Sysprep & autounattend.xml."
+Write-Host ""
+Write-Host "3 - Microsoft Windows Server 2012: Sysprep."
+Write-Host "4 - Microsoft Windows Server 2019: Sysprep."
+Write-Host ""
+Write-Host "8 - Return to main menu." -ForegroundColor red
+Write-Host "9 - Quit the program." -ForegroundColor darkred
+Write-Host ""
+
+[int]$userChoice=Read-Host "Your choice"
+	switch($userChoice)
+	{
+    	1{HPV-New_VM-Template-Client-Microsoft_Windows_10-Entreprise_LTSC-sysprep_autounattend}
+
+    	2{Under_Development}
+
+    	3{Under_Development}
+    	4{Under_Development}
+
+    	8{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
+    	9{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Exit of the program in progress.`n" -ForegroundColor darkred;pause;$host.ui.RawUI.WindowTitle=$DefaultWindowTitle;exit}
+    	default{Write-Host "`nInfo: " -NoNewLine;Write-Host "Sorry, an unexpected error has been caused. In most cases, it is an error made by the user, so take the time to answer the questions correctly." -ForegroundColor red;Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
+	}
+
+}
+
+function HPV-New_VM-Template-Client-Microsoft_Windows_10-Entreprise_LTSC-sysprep_autounattend
+{
+[string]$script:isoOrBasePath=".\src\Microsoft_Windows\clients\vhds\base\base-client-windows10-entreprise-ltsc-sysprep-autounattend.vhdx"
+[string]$script:isoOrVHDBaseDest=".\src\Microsoft_Windows\clients\vhds\base"
+[string]$script:isoOrVHDBaseFolderPath=".\src\Microsoft_Windows\clients\vhds\base"
+[string]$script:isoOrBaseSrc=".\tmp\base-client-windows10-entreprise-ltsc-sysprep-autounattend.vhdx"
+
+[string]$script:VHDSPath=".\src\Microsoft_Windows\clients\vhds\"
+[string]$script:vmsPath=".\src\Microsoft_Windows\clients\vms\"
+
+$script:RAMgbSizeUserChoice=2GB
+$script:VHDgbSizeUserChoice="$null"
+
+HPV-New_VM-Template-Model
+
+New-VHD -ParentPath $isoOrBasePath -Path $VHDSPath\$VMName.vhdx -Differencing|Out-Null
+
+	if($UseNetworkCard -eq $True){New-VM -Name $VMName -MemoryStartupBytes $RAMgbSize -Generation 2 -BootDevice VHD -VHDPath $VHDSPath\$VMName.vhdx -Path "$vmsPath" -SwitchName $SwitchName}else{New-VM -Name $VMName -MemoryStartupBytes $RAMgbSize -Generation 2 -BootDevice VHD -VHDPath "$VHDSPath\$VMName.vhdx" -Path "$vmsPath"}
+
+Set-VM -Name $VMName -AutomaticCheckpointsEnabled $False
+
+Write-Host "1 - Recreate the same virtual machine (with the same characteristics)."
+Write-Host "2 - Recreate the same virtual machine (with different characteristics)."
+Write-Host ""
+Write-Host "8 - Return to main menu." -ForegroundColor red
+Write-Host "9 - Quit the program." -ForegroundColor darkred
+Write-Host ""
+
+[int]$userChoice=Read-Host "Your choice"
+	switch ($userChoice)
+	{
+    	1{HPV-Copy_VM-Same-Template-Client-Microsoft_Windows_10-Entreprise_LTSC}
+    	2{HPV-Copy_VM-Different-Template-Client-Microsoft_Windows_10-Entreprise_LTSC}
+
+    	8{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
+    	9{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Exit of the program in progress.`n" -ForegroundColor darkred;Write-Host "Info: " -NoNewLine;Write-Host "A summary of the last machine created will be displayed after this program is exited.";Write-Host "";pause;$host.ui.RawUI.WindowTitle=$DefaultWindowTitle;Write-Host "";exit}
+    	default{Write-Host "`nInfo: " -NoNewLine;Write-Host "Sorry, an unexpected error has been caused. In most cases, it is an error made by the user, so take the time to answer the questions correctly." -ForegroundColor red;Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
+	}
+
+}
+
+function HPV-Copy_VM-Same-Template-Client-Microsoft_Windows_10-Entreprise_LTSC
+{
+Clear-Host
+$script:VMName=Read-Host "Choose a name for the virtual machine"
+Write-Host "Info: " -NoNewLine
+Write-Host "The name chosen for the virtual machine is " -NoNewLine 
+Write-Host "$VMname" -NoNewLine -ForegroundColor green
+Write-Host "."
+
+	if($UseNetworkCard -eq $True){New-VM -Name $VMName -MemoryStartupBytes $RAMgbSize -Generation 2 -BootDevice VHD -VHDPath $VHDSPath\$VMName.vhdx -Path "$vmsPath" -SwitchName $SwitchName}else{New-VM -Name $VMName -MemoryStartupBytes $RAMgbSize -Generation 2 -BootDevice VHD -VHDPath "$VHDSPath\$VMName.vhdx" -Path "$vmsPath"}
+
+Add-VMDvdDrive -VMName $VMName -Path "$isoPath"
+
+Set-VM -Name $VMName -AutomaticCheckpointsEnabled $False
+
+Write-Host ""
+Write-Host "1 - Recreate the same virtual machine (with the same characteristics)."
+Write-Host "2 - Recreate the same virtual machine (with different characteristics)."
+Write-Host ""
+Write-Host "8 - Return to main menu." -ForegroundColor red
+Write-Host "9 - Quit the program." -ForegroundColor darkred
+Write-Host ""
+
+[int]$userChoice=Read-Host "Your choice"
+	switch ($userChoice)
+	{
+    	1{HPV-Copy_VM-Same-Template-Client-Microsoft_Windows_10-Entreprise_LTSC}
+    	2{HPV-Copy_VM-Different-Template-Client-Microsoft_Windows_10-Entreprise_LTSC}
+
+    	8{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
+    	9{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Exit of the program in progress.`n" -ForegroundColor darkred;Write-Host "Info: " -NoNewLine;Write-Host "A summary of the last machine created will be displayed after this program is exited.";Write-Host "";pause;$host.ui.RawUI.WindowTitle=$DefaultWindowTitle;Write-Host "";exit}
+    	default{Write-Host "`nInfo: " -NoNewLine;Write-Host "Sorry, an unexpected error has been caused. In most cases, it is an error made by the user, so take the time to answer the questions correctly." -ForegroundColor red;Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
+	}
+
+}
+
+function HPV-Copy_VM-Different-Blank-Client-Microsoft_Windows_10-Entreprise_LTSC
+{
+HPV-New_VM-Template-Client-Microsoft_Windows_10-Entreprise_LTSC
+}
+
+function HPV-New_VM-Template-GNU_Linux
+{
+Clear-Host
+Write-Host "0 - pfSense (CE, 2.5.1): Only the preconfiguration performed."
+Write-Host ""
+Write-Host "1 - Debian (11.3.0): Only the preconfiguration performed."
+Write-Host "2 - Ubuntu, Jammy Jellyfish (LTS, 22.04): Only the preconfiguration performed."
+Write-Host ""
+Write-Host "3 - Rocky Linux (Full, 8.5): Only the preconfiguration performed."
+Write-Host "4 - Rocky Linux (Minimal, 8.5): Only the preconfiguration performed."
+Write-Host ""
+Write-Host "5 - Parrot Security (5.0): Only the preconfiguration performed."
+Write-Host "6 - Kali (Live, 2022.1): Only the preconfiguration performed."
+Write-Host "7 - Kali (Installer, 2022.1): Only the preconfiguration performed."
+Write-Host ""
+Write-Host "8 - Return to main menu." -ForegroundColor red
+Write-Host "9 - Quit the program." -ForegroundColor darkred
+Write-Host ""
+
+[int]$userChoice=Read-Host "Your choice"
+	switch($userChoice)
+	{
+		0{HPV-New_VM-Template-GNU_Linux-pfSense-preconfiguration}
+    	1{HPV-New_VM-Template-GNU_Linux-Debian-preconfiguration}
+    	2{HPV-New_VM-Template-GNU_Linux-Ubuntu-preconfiguration}
+    	3{HPV-New_VM-Template-GNU_Linux-Rocky_Linux-Full-preconfiguration}
+    	4{HPV-New_VM-Template-GNU_Linux-Rocky_Linux-Minimal-preconfiguration}
+    	5{HPV-New_VM-Template-GNU_Linux-Parrot_Security-preconfiguration}
+    	6{HPV-New_VM-Template-GNU_Linux-Kali_Linux-Live-preconfiguration}
+    	7{HPV-New_VM-Template-GNU_Linux-Kali_Linux-Installer-preconfiguration}
+
+    	8{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
+    	9{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Exit of the program in progress.`n" -ForegroundColor darkred;pause;$host.ui.RawUI.WindowTitle=$DefaultWindowTitle;exit}
+    	default{Write-Host "`nInfo: " -NoNewLine;Write-Host "Sorry, an unexpected error has been caused. In most cases, it is an error made by the user, so take the time to answer the questions correctly." -ForegroundColor red;Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
+	}
+
+}
+
+function HPV-New_VM-Template-GNU_Linux-pfSense-preconfiguration
+{
+Under_Development
+}
+
+function HPV-New_VM-Template-GNU_Linux-Debian-preconfiguration
+{
+Under_Development
+}
+
+function HPV-New_VM-Template-GNU_Linux-Ubuntu-preconfiguration
+{
+Under_Development
+}
+
+function HPV-New_VM-Template-GNU_Linux-Rocky_Linux-Full-preconfiguration
+{
+Under_Development
+}
+
+function PV-New_VM-Template-GNU_Linux-Rocky_Linux-Minimal-preconfiguration
+{
+Under_Development
+}
+
+function HPV-New_VM-Template-GNU_Linux-Parrot_Security-preconfiguration
+{
+Under_Development
+}
+
+function HPV-New_VM-Template-GNU_Linux-Kali_Linux-Live-preconfiguration
+{
+Under_Development
+}
+
+function HPV-New_VM-Template-GNU_Linux-Kali_Linux-Installer-preconfiguration
+{
+Under_Development
 }
 
 function HPV-VM_Management
@@ -1750,11 +2028,13 @@ function HPV-Remove_All_VMs
 {
 Clear-Host
 Write-Host "Ongoing action: " -NoNewLine
-Write-Host "Start the process of deleting virtual machines.`n"
+Write-Host "Start the process of deleting virtual machines."
 
 $VMsList=@{}
 $Get_VM=Get-VM|Where{$_.State -eq 'Off'}
 $VMsList=($Get_VM).Name
+
+Write-Host ""
 
 ForEach($VM in $VMsList){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Switching off of the machine " -NoNewLine;Write-Host "$VM" -ForegroundColor green;Stop-VM -Name $VM -Force -WarningAction SilentlyContinue}
 
@@ -1765,7 +2045,7 @@ Get-VM|Where{$_.State -eq 'Off'}|Out-Default
 ForEach($VM in $VMsList){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Removing the virtual machine " -NoNewLine;Write-Host "$VM" -ForegroundColor green;Remove-VM -Name $VM -Force}
 
 $VHDXList=@()
-$VHDXPath=Get-ChildItem -Path . -Filter *.vhdx -Recurse|%{$_.FullName}
+$VHDXPath=Get-ChildItem -Path . -Filter *.vhdx -Recurse -Exclude base-*|%{$_.FullName}
 $VHDXList=$VHDXPath
 ForEach($VHDX in $VHDXList){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Deletion of the virtual hard disk " -NoNewLine;Write-Host "$VHDX" -ForegroundColor green;[void](Remove-Item -Path $VHDX -Force -Recurse)}
 
@@ -1777,8 +2057,6 @@ ForEach($VHDX in $VHDXList){Write-Host "`nOngoing action: " -NoNewLine;Write-Hos
 [void](Remove-Item -Path ".\src\GNU_Linux\vms\*" -Force -Recurse -ErrorAction SilentlyContinue -WarningAction SilentlyContinue -InformationAction SilentlyContinue)
 
 Write-Host ""
-Write-Host "6 - Delete another machine."
-Write-Host ""
 Write-Host "7 - Return to the virtual machine(s) management menu."
 Write-Host "8 - Return to main menu." -ForegroundColor red
 Write-Host "9 - Quit the program." -ForegroundColor darkred
@@ -1787,8 +2065,6 @@ Write-Host ""
 $userChoice=Read-Host "Your choice"
 	switch($userChoice)
 	{
-		6{HPV-Remove_VMs}
-
     	7{HPV-VM_Management}
     	8{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
     	9{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Exit of the program in progress.`n" -ForegroundColor darkred;pause;$host.ui.RawUI.WindowTitle=$DefaultWindowTitle;exit}
