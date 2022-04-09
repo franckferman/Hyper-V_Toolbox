@@ -144,7 +144,7 @@ Just like the virtual switch management, these are basic functions (although thi
 
 <br /><div align="center">
   <a href="#">
-    <img src="https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/img/illustration-virtual_machines_management.png" alt="illustration-virtual_machines_management" width="700" height="180">
+    <img src="https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/img/illustration-resource_management.png" alt="illustration-resource_management" width="700" height="180">
   </a>
 </div><br />
 
