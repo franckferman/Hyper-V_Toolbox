@@ -51,21 +51,38 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-I didn't reinvent the wheel with this project however, it can lead to a considerable time saving for people having a regular use of Hyper-V. Whether you are a technician, an administrator, a student, a teacher or even just a computer enthusiast and you need to use Hyper-V, this tool will save you a lot of time.
+<br />
+<div align="center">
+  <a href="https://github.com/franckferman/hyper-v_toolbox">
+    <img src="https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/img/Hyper-V_Toolbox-Main_Picture.png" alt="Hyper-V_Toolbox-Main_Picture">
+  </a>
 
-The principle of this tool is simple, it is a complete interactive script (with choice) allowing the advanced management of Hyper-V.
+This project was carried out in order to answer a very specific problem and needs that I will take the time to state in this document.
+
+Of course, I do not claim to have reinvented the wheel with this project, although to my knowledge, no such comprehensive tool existed before this one.
+
+The ultimate interest of this project and of this tool as a whole is to save time and to improve the comfort of use considerably. Whether you are a technician, an administrator, a student, a teacher (or even just a computer enthusiast) wishing to use Hyper-V for your various projects, this tool will be an undeniable ally.
+
+The principle of Hyper-V Toolbox is simple. It is an interactive script (with multiple choices adapting to the user's answers) strongly user-friendly and allowing (among other things) the management and advanced manipulation of Hyper-V from your terminal.
 
 Here is an overview of the available features:
 
-- Creation of virtual machines.
+- Creation of (basic) virtual machines.
 
-It's very easy and fast, you just have to answer the questions asked by the script.
+It is very simple, fast and effective. You just have to answer the questions asked by the script.
 
-Before each machine creation, the script will check if the desired resources are present or not and will make a choice accordingly. If it does not find the resources and the desired tree, it will automatically download the iso corresponding to the selected machine, and create the specific tree for the storage of the resources if, once again, they are not already present.
+Many choices of systems are offered to you for the creation of your virtual machine. In order not to lose the user and to keep a coherent, orderly and harmonious structure, I have grouped the systems by separating them into two distinct categories: Microsoft Windows on one side and GNU/Linux on the other.
 
-At the moment, the tool already allows the creation of multiple systems: Microsoft Windows (Microsoft Windows 10 Pro, Enterprise, Server 2012, 2019), GNU/Linux (Debian, pfSense, Parrot Security, Rocky Linux, Kali Linux)...
+After selecting the desired system, two basic questions are asked by the script, the choice of a name for your machine and the possibility or not to choose a network card.
+Then, in a first step, the script checks if the tree structure initially created by the script is present or not, if not, takes care of it accordingly. 
 
-Being on Github, don't forget that, anyone who wants to participate in the project can join me and add the resources he wants.
+In a second step, the script checks if the desired resources are present or not. By resources, I mean everything that the machine will need to be correctly created and used. In this case, when creating simple virtual machines, it will most often just be an ISO image. If the resource(s) are not identified in the tree, the download will run by itself to complete the creation of the machine.
+
+Some other basic questions (for the good continuity of the creation of the machine) are asked such as the choice of the quantity of RAM or the size of the hard disk desired for the machine.
+
+Once the machine has been created, which is generally extremely fast (a few seconds at best), several choices are available to you, two of which are particularly interesting. You can quickly create the same type of machine with different characteristics or recreate the same type of machine with the same characteristics.
+
+To take a concrete example, in the context of practical work in class, or even for professional demonstrations or numerous tests for system administration or computer security, we sometimes need to create two machines of the same type such as two Windows Servers, two Windows 10 (clients). This function allows the preparation of these elements in just a few seconds.
 
 - The creation of preconfigured virtual machines.
 
