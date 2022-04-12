@@ -140,17 +140,9 @@ https://cdimage.kali.org/kali-images/current/kali-linux-2022.1-live-amd64.iso
 https://cdimage.kali.org/kali-images/current/kali-linux-2022.1-installer-amd64.iso
 #>
 
-### * ### * ### * ### * ### * ### * ### * ### * ###
-
-### * ### * ### * ### * ### * ###
-
-<### ### ### ### ### ### ### ### ### ### ### ### ###
+<### ### ### ### ### ### ### ### ### ### ### ###
 ### 1 - Creation of (blank) virtual machine(s). ###
-### ### ### ### ### ### ### ### ### ### ### ###> ###
-
-### * ### * ### * ### * ### * ###
-
-### * ### * ### * ### * ### * ### * ### * ### * ###
+### ### ### ### ### ### ### ### ### ### ### ###>
 
 function HPV-New_VM-Blank
 {
@@ -255,7 +247,7 @@ Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Display the list of choic
 For($i=0;$i -lt $RAMgbSizeList.Length;$i++){Write-Host "$i - $($RAMgbSizeList[$i])"}
 
 [int]$userChoice=Read-Host "`nWhat quantity do you want to choose for your virtual machine"
-$RAMgbSizeUserChoice=$RAMgbSizeList[[int]$userChoice]
+$RAMgbSizeUserChoice=$RAMgbSizeList[$userChoice]
 $RAMgbSize=$RAMgbSizeUserChoice
 Write-Host "Info: " -NoNewLine;Write-Host "The chosen memory startup bytes is " -NoNewLine;Write-Host "$RAMgbSize" -NoNewLine -ForegroundColor green;Write-Host "."
 
@@ -271,8 +263,8 @@ $VHDgbSizeList=@('16GB','20GB','32GB','48GB','64GB','80GB','120GB')
 Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Display of the list of choices regarding the desired hard disk size for your virtual machine.`n"
 For($i=0;$i -lt $VHDgbSizeList.Length;$i++){Write-Host "$i - $($VHDgbSizeList[$i])"}
 
-$userChoice=Read-Host "`nWhat size hard drive do you want for your virtual machine"
-$VHDgbSizeUserChoice=$VHDgbSizeList[[int]$userChoice]
+[int]$userChoice=Read-Host "`nWhat size hard drive do you want for your virtual machine"
+$VHDgbSizeUserChoice=$VHDgbSizeList[$userChoice]
 $VHDgbSize=$VHDgbSizeUserChoice
 Write-Host "`nInfo: " -NoNewLine;Write-Host "The chosen hard disk size is " -NoNewLine;Write-Host "$VHDgbSize" -NoNewLine -ForegroundColor green;Write-Host "."
 
@@ -1159,17 +1151,9 @@ function HPV-Copy_VM-Different-Blank-GNU_Linux-Kali_Linux-Installer
 HPV-New_VM-Blank-GNU_Linux-Kali_Linux-Installer
 }
 
-### * ### * ### * ### * ### * ### * ### * ### * ###
-
-### * ### * ### * ### * ### * ###
-
 <### ### ### ### ### ### ### ### ### ### ### ### ### ###
 ### 2 - Creation of pre-configured virtual machine(s). ###
 ### ### ### ### ### ### ### ### ### ### ### ### ###> ###
-
-### * ### * ### * ### * ### * ###
-
-### * ### * ### * ### * ### * ### * ### * ### * ###
 
 function HPV-New_VM-Template
 {
@@ -1435,17 +1419,9 @@ function HPV-New_VM-Template-GNU_Linux-Kali_Linux-Installer-preconfiguration
 Under_Development
 }
 
-### * ### * ### * ### * ### * ### * ### * ### * ###
-
-### * ### * ### * ### * ### * ###
-
 <### ### ### ### ### ### ### ### ### ### ### ### ### ###
 ### 3 - Management of virtual machine(s). ###
 ### ### ### ### ### ### ### ### ### ### ### ### ###> ###
-
-### * ### * ### * ### * ### * ###
-
-### * ### * ### * ### * ### * ### * ### * ### * ###
 
 function HPV-VM_Management
 {
@@ -1499,7 +1475,7 @@ Write-Host "8 - Return to main menu." -ForegroundColor red
 Write-Host "9 - Quit the program." -ForegroundColor darkred
 Write-Host ""
 
-$userChoice=Read-Host "Your choice"
+[int]$userChoice=Read-Host "Your choice"
 	switch($userChoice)
 	{   
     	7{HPV-VM_Management}
@@ -1521,7 +1497,7 @@ $Get_VM|ForEach-Object{$VMsList+=$_.Name}
 
 For($i=0;$i -lt $VMsList.Length;$i++){Write-Host "$i - $($VMsList[$i])"}
 
-$userChoice=Read-Host "`nWhich machine do you want to start"
+[int]$userChoice=Read-Host "`nWhich machine do you want to start"
 $VMuserChoice=$VMsList[$userChoice]
 $Selected_VM=$VMuserChoice
 Write-Host "`nInfo: " -NoNewLine;Write-Host "The selected virtual machine is " -NoNewLine;Write-Host "$Selected_VM" -NoNewLine -ForegroundColor green;Write-Host "."
@@ -1540,7 +1516,7 @@ Write-Host "8 - Return to main menu." -ForegroundColor red
 Write-Host "9 - Quit the program." -ForegroundColor darkred
 Write-Host ""
 
-$userChoice=Read-Host "Your choice"
+[int]$userChoice=Read-Host "Your choice"
 	switch($userChoice)
 	{
 		6{HPV-Start_VM}
@@ -1556,17 +1532,18 @@ $userChoice=Read-Host "Your choice"
 function HPV-Start_All_VMs
 {
 Clear-Host
-Write-Host "Ongoing action: " -NoNewLine
-Write-Host "Displays a list of currently powered-off virtual machines.`n"
-
-$VMsList=@()
-
+[array]$VMsList=@()
 $Get_VM=Get-VM|Where{$_.State -eq 'Off'}
 $Get_VM|ForEach-Object{$VMsList+=$_.Name}
 
-ForEach($VM in $VMsList){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Starting the virtual machine " -NoNewLine;Write-Host "$VM." -ForegroundColor green;Start-VM -Name $VM}
+	if($VMsList -ne $null)
+	{
+		Write-Host "Ongoing action: " -NoNewLine;Write-Host "Displays a list of currently powered-off virtual machines.`n"
+		ForEach($VM in $VMsList){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Starting the virtual machine " -NoNewLine;Write-Host "$VM." -ForegroundColor green;Start-VM -Name $VM}
+		Write-Host ""
+	}else{Write-Host "Info: " -NoNewLine;Write-Host "No machines are available or currently down." -ForegroundColor darkred;Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
 
-Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Display the list of currently running virtual machines."
+Write-Host "Ongoing action: " -NoNewLine;Write-Host "Display the list of currently running virtual machines."
 Get-VM|Where{$_.State -eq 'Running'}|Out-Default;pause
 
 Write-Host ""
@@ -1575,7 +1552,7 @@ Write-Host "8 - Return to main menu." -ForegroundColor red
 Write-Host "9 - Quit the program." -ForegroundColor darkred
 Write-Host ""
 
-$userChoice=Read-Host "Your choice"
+[int]$userChoice=Read-Host "Your choice"
 	switch($userChoice)
 	{
     	7{HPV-VM_Management}
@@ -1589,24 +1566,26 @@ $userChoice=Read-Host "Your choice"
 function HPV-Shut_Down_VMs
 {
 Clear-Host
-Write-Host "Ongoing action: " -NoNewLine;Write-Host "Display the list of currently running virtual machines.`n"
-
-$Get_VM=Get-VM|Where{$_.State -eq 'Running'}
 [array]$VMsList=@()
+$Get_VM=Get-VM|Where{$_.State -eq 'Running'}
 $Get_VM|ForEach-Object{$VMsList+=$_.Name}
 
-For($i=0;$i -lt $VMsList.Length;$i++){Write-Host "$i - $($VMsList[$i])"}
+	if($VMsList -ne $null)
+	{
+		Write-Host "Ongoing action: " -NoNewLine;Write-Host "Display the list of currently running virtual machines.`n"
+		For($i=0;$i -lt $VMsList.Length;$i++){Write-Host "$i - $($VMsList[$i])"}
 
-$userChoice=Read-Host "`nWhich machine do you want to switch off"
-$VMuserChoice=$VMsList[$userChoice]
-$Selected_VM=$VMuserChoice
-Write-Host "`nInfo: " -NoNewLine;Write-Host "The selected virtual machine is " -NoNewLine;Write-Host "$Selected_VM" -NoNewLine -ForegroundColor green;Write-Host "."
-
-Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Switching off of the machine." -ForegroundColor green
-Stop-VM -Name $Selected_VM -ErrorAction SilentlyContinue -Force
-
-Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Displays a list of currently powered-off virtual machines.`n"
-Get-VM|Where{$_.State -eq 'Off'}|Out-Default;pause
+		$userChoice=Read-Host "`nWhich machine do you want to switch off"
+		$VMuserChoice=$VMsList[$userChoice]
+		$Selected_VM=$VMuserChoice
+		Write-Host "`nInfo: " -NoNewLine;Write-Host "The selected virtual machine is " -NoNewLine;Write-Host "$Selected_VM" -NoNewLine -ForegroundColor green;Write-Host "."
+		
+		Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Switching off of the machine." -ForegroundColor green
+		Stop-VM -Name $Selected_VM -ErrorAction SilentlyContinue -TurnOff -Force
+		
+		Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Displays a list of currently powered-off virtual machines.`n"
+		Get-VM|Where{$_.State -eq 'Off'}|Out-Default;pause
+	}else{Write-Host "Info: " -NoNewLine;Write-Host "No machines are available or currently up." -ForegroundColor darkred;Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
 
 Write-Host ""
 Write-Host "6 - Shut down another virtual machine."
@@ -1632,18 +1611,18 @@ $userChoice=Read-Host "Your choice"
 function HPV-Shut_Down_All_VMs
 {
 Clear-Host
-Write-Host "Ongoing action: " -NoNewLine
-Write-Host "Display the list of currently running virtual machines.`n"
-
 [array]$VMsList=@()
-
 $Get_VM=Get-VM|Where{$_.State -eq 'Running'}
 $Get_VM|ForEach-Object{$VMsList+=$_.Name}
 
-ForEach($VM in $VMsList){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Switching off of the machine " -NoNewLine;Write-Host "$VM" -ForegroundColor green;Stop-VM -Name $VM -Force}
+	if($VMsList -ne $null)
+	{
+		Write-Host "Ongoing action: " -NoNewLine;Write-Host "Display the list of currently running virtual machines.`n"
+		ForEach($VM in $VMsList){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Switching off of the machine " -NoNewLine;Write-Host "$VM" -ForegroundColor green;Stop-VM -Name $VM -TurnOff -Force -ErrorAction SilentlyContinue}
 
-Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Displays a list of currently powered-off virtual machines."
-Get-VM|Where{$_.State -eq 'Off'}|Out-Default;pause
+		Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Displays a list of currently powered-off virtual machines."
+		Get-VM|Where{$_.State -eq 'Off'}|Out-Default;pause
+	}else{Write-Host "Info: " -NoNewLine;Write-Host "No machines are available or currently up." -ForegroundColor darkred;Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
 
 Write-Host ""
 Write-Host "7 - Return to the virtual machine(s) management menu." -ForegroundColor gray
@@ -1667,8 +1646,8 @@ function HPV-Remove_VMs
 Clear-Host
 Write-Host "Ongoing action: " -NoNewLine;Write-Host "Display the list of virtual machines.`n"
 
-$Get_VM=Get-VM
 [array]$VMsList=@()
+$Get_VM=Get-VM
 $Get_VM|ForEach-Object{$VMsList+=$_.Name}
 
 For($i=0;$i -lt $VMsList.Length;$i++){Write-Host "$i - $($VMsList[$i])"}
@@ -1679,12 +1658,7 @@ $Selected_VM=$VMuserChoice
 Write-Host "`nInfo: " -NoNewLine;Write-Host "The selected virtual machine is " -NoNewLine;Write-Host "$Selected_VM" -NoNewLine -ForegroundColor green;Write-Host "."
 
 $Is_On=Get-VM -Name $Selected_VM|Where{$_.State -eq 'Running'}
-if($Is_On -eq $null){$null}else{Write-Host "`nInfo" -NoNewLine;Write-Host "The machine is obviously currently switched on." -ForegroundColor darkred;Write-Host "`nOngoing action:" -NoNewLine;Write-Host "Switching off of the machine." -ForegroundColor green;Stop-VM -Name $Selected_VM -Force}
-
-<#
-Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Displays a list of currently powered-off virtual machines."
-Get-VM|Where{$_.State -eq 'Off'}|Out-Default;pause
-#>
+if($Is_On -eq $null){$null}else{Write-Host "`nInfo" -NoNewLine;Write-Host "The machine is obviously currently switched on." -ForegroundColor darkred;Write-Host "`nOngoing action:" -NoNewLine;Write-Host "Switching off of the machine." -ForegroundColor green;Stop-VM -Name $Selected_VM -TurnOff -Force -ErrorAction SilentlyContinue}
 
 Remove-VM -Name $Selected_VM -Force
 
@@ -1719,14 +1693,16 @@ $userChoice=Read-Host "Your choice"
 function HPV-Remove_All_VMs
 {
 Clear-Host
-Write-Host "Ongoing action: " -NoNewLine
-Write-Host "Start the process of deleting virtual machines."
+Write-Host "Ongoing action: " -NoNewLine;Write-Host "Start the process of deleting virtual machines."
 
 [array]$VMsList=@{}
 $Get_VM=Get-VM|Where{$_.State -eq 'Off'}
 $VMsList=($Get_VM).Name
 
-ForEach($VM in $VMsList){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Switching off of the machine " -NoNewLine;Write-Host "$VM" -ForegroundColor green;Stop-VM -Name $VM -Force -WarningAction SilentlyContinue}
+	if($VMsList -eq $null)
+	{
+		ForEach($VM in $VMsList){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Switching off of the machine " -NoNewLine;Write-Host "$VM" -ForegroundColor green;Stop-VM -Name $VM -Force -TurnOff -WarningAction SilentlyContinue -ErrorAction SilentlyContinue}
+	}
 
 ForEach($VM in $VMsList){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Removing the virtual machine " -NoNewLine;Write-Host "$VM" -ForegroundColor green;Remove-VM -Name $VM -Force}
 
@@ -1735,11 +1711,15 @@ $VHDXPath=Get-ChildItem -Path . -Filter *.vhdx -Recurse -Exclude base-*|%{$_.Ful
 $VHDXList=$VHDXPath
 ForEach($VHDX in $VHDXList){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Deletion of the virtual hard disk " -NoNewLine;Write-Host "$VHDX" -ForegroundColor green;[void](Remove-Item -Path $VHDX -Force -Recurse)}
 
-### TODO - Improve the logic. ###
+<### ### ### ### ### ### ### ### ### ###
+### TODO: Improve the algorithm/logic. ###
+### ### ### ### ### ### ### ### ### ###>
+
 [void](Remove-Item -Path ".\src\Microsoft_Windows\clients\vms\*" -Force -Recurse -ErrorAction SilentlyContinue -WarningAction SilentlyContinue -InformationAction SilentlyContinue)
 [void](Remove-Item -Path ".\src\Microsoft_Windows\servers\vms\*" -Force -Recurse -ErrorAction SilentlyContinue -WarningAction SilentlyContinue -InformationAction SilentlyContinue)
 [void](Remove-Item -Path ".\src\GNU_Linux\vms\*" -Force -Recurse -ErrorAction SilentlyContinue -WarningAction SilentlyContinue -InformationAction SilentlyContinue)
-### END TODO ###
+
+### END TODO
 
 Write-Host ""
 Write-Host "7 - Return to the virtual machine(s) management menu." -ForegroundColor gray
@@ -1758,17 +1738,9 @@ $userChoice=Read-Host "Your choice"
 
 }
 
-### * ### * ### * ### * ### * ### * ### * ### * ###
-
-### * ### * ### * ### * ### * ###
-
-<### ### ### ### ### ### ### ### ### ### ### ### ### ###
+<### ### ### ### ### ### ### ### ### ### ###
 ### 4 - Management of virtual switch(es). ###
-### ### ### ### ### ### ### ### ### ### ### ### ###> ###
-
-### * ### * ### * ### * ### * ###
-
-### * ### * ### * ### * ### * ### * ### * ### * ###
+### ### ### ### ### ### ### ### ### ### ###>
 
 function HPV-Virtual_Switches_Management
 {
@@ -1899,27 +1871,19 @@ $userChoice=Read-Host "Your choice"
 
 }
 
-### * ### * ### * ### * ### * ### * ### * ### * ###
-
-### * ### * ### * ### * ### * ###
-
-<### ### ### ### ### ### ### ### ### ### ### ### ### ###
+<### ### ### ### ### ### ### ### ### ### ### ### ###
 ### 5 - Resource management and local downloading. ###
-### ### ### ### ### ### ### ### ### ### ### ### ###> ###
-
-### * ### * ### * ### * ### * ###
-
-### * ### * ### * ### * ### * ### * ### * ### * ###
+### ### ### ### ### ### ### ### ### ### ### ### ###>
 
 function Resource_Management
 {
 Clear-Host
-Write-Host "1 - Download all the resources (the advantage is that you will significantly optimize your time when creating new machines because all the resources will already be present and available, there will not be a single second of waiting, the disadvantage is that this downloading step may take a considerable amount of time)."
+Write-Host "1 - Download all the resources (potential long waiting time)."
 Write-Host ""
 Write-Host "2 - Download resources for creating Windows virtual machines only."
 Write-Host "3 - Download resources for creating Linux virtual machines only."
 Write-Host ""
-Write-Host "4 - Fully customized download program (the founder of Hyper-V Toolbox recommends this solution)."
+Write-Host "4 - Fully customized download program (recommended)."
 Write-Host ""
 Write-Host "8 - Return to main menu." -ForegroundColor red
 Write-Host "9 - Quit the program." -ForegroundColor darkred
@@ -1970,76 +1934,46 @@ Write-Host "Ongoing action: " -NoNewLine;Write-Host "Verification of required re
 function HPV-Download_All_Resources
 {
 Clear-Host
-Write-Host "Ongoing action: " -NoNewLine
-Write-Host "Start the general download process."
-Write-Host ""
+Write-Host "Ongoing action: " -NoNewLine;Write-Host "Start the general download process.";Write-Host ""
 
-Write-Host "Ongoing action: " -NoNewLine
-Write-Host "Start the Linux resource download process."
-Write-Host ""
+Write-Host "Ongoing action: " -NoNewLine;Write-Host "Start the Linux resource download process.";Write-Host ""
 
-Write-Host "Ongoing action: " -NoNewLine
-Write-Host "Launching the pfSense ISO download process."
-Write-Host ""
+Write-Host "Ongoing action: " -NoNewLine;Write-Host "Launching the pfSense ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\GNU_Linux\iso\pfSense-CE-2.5.1-RELEASE-amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://images-data.fra1.digitaloceanspaces.com/pfSense-CE-2.5.1-RELEASE-amd64.iso"
 
-Write-Host "`nOngoing action: " -NoNewLine
-Write-Host "Launching the Debian ISO download process."
-Write-Host ""
+Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Debian ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\GNU_Linux\iso\debian-11.3.0-amd64-netinst.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-11.3.0-amd64-netinst.iso"
 
-Write-Host "`nOngoing action: " -NoNewLine
-Write-Host "Launching the Ubuntu ISO download process."
-Write-Host ""
+Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Ubuntu ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\GNU_Linux\iso\ubuntu-22.04-beta-desktop-amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://ubuntu.univ-nantes.fr/ubuntu-cd/22.04/ubuntu-22.04-beta-desktop-amd64.iso"
 
-Write-Host "`nOngoing action: " -NoNewLine
-Write-Host "Launching the Rocky Linux (Full) ISO download process."
-Write-Host ""
+Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Rocky Linux (Full) ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\GNU_Linux\iso\Rocky-8.5-x86_64-dvd1.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.5-x86_64-dvd1.iso"
 
-Write-Host "`nOngoing action: " -NoNewLine
-Write-Host "Launching the Rocky Linux (Minimal) ISO download process."
-Write-Host ""
+Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Rocky Linux (Minimal) ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\GNU_Linux\iso\Rocky-8.5-x86_64-minimal.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.5-x86_64-minimal.iso"
 
-Write-Host "`nOngoing action: " -NoNewLine
-Write-Host "Launching the Parrot Security ISO download process."
-Write-Host ""
+Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Parrot Security ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\GNU_Linux\iso\Parrot-security-5.0_amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://bunny.deb.parrot.sh/parrot/iso/5.0/Parrot-security-5.0_amd64.iso"
 
-Write-Host "`nOngoing action: " -NoNewLine
-Write-Host "Launching the Kali Linux Live ISO download process."
-Write-Host ""
+Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Kali Linux Live ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\GNU_Linux\iso\kali-linux-2022.1-live-amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://cdimage.kali.org/kali-images/current/kali-linux-2022.1-live-amd64.iso"
 
-Write-Host "`nOngoing action: " -NoNewLine
-Write-Host "Launching the Kali Linux Installer ISO download process."
-Write-Host ""
+Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Kali Linux Installer ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\GNU_Linux\iso\kali-linux-2022.1-installer-amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://cdimage.kali.org/kali-images/current/kali-linux-2022.1-installer-amd64.iso"
 
-Write-Host "`nOngoing action: " -NoNewLine
-Write-Host "Start the Windows resource download process."
-Write-Host ""
+Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Start the Windows resource download process.";Write-Host ""
 
-Write-Host "`nOngoing action: " -NoNewLine
-Write-Host "Launching the Windows 10 Enterprise ISO download process."
-Write-Host ""
+Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Windows 10 Enterprise ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\Microsoft_Windows\clients\iso\client-windows10-entreprise-ltsc.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "https://images-data.fra1.digitaloceanspaces.com/client-windows10-entreprise-ltsc.iso"
 
-Write-Host "`nOngoing action: " -NoNewLine
-Write-Host "Launching the Windows 10 Pro/Home/Education ISO download process."
-Write-Host ""
+Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Windows 10 Pro/Home/Education ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\Microsoft_Windows\clients\iso\client-windows10.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "https://images-data.fra1.digitaloceanspaces.com/client-windows10.iso"
 
-Write-Host "`nOngoing action: " -NoNewLine
-Write-Host "Launching the Windows Server 2012 ISO download process."
-Write-Host ""
+Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Windows Server 2012 ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\Microsoft_Windows\servers\iso\win_srv-2012.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "https://images-data.fra1.digitaloceanspaces.com/win_srv-2012.iso"
 
-Write-Host "`nOngoing action: " -NoNewLine
-Write-Host "Launching the Windows Server 2012 ISO download process."
-Write-Host ""
+Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Windows Server 2012 ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\Microsoft_Windows\servers\iso\win_srv-2019.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "https://images-data.fra1.digitaloceanspaces.com/win_srv-2019.iso"
 
 Write-Host ""
@@ -2062,25 +1996,18 @@ Write-Host ""
 function HPV-Download_All_Windows_Resources
 {
 Clear-Host
-Write-Host "Ongoing action: " -NoNewLine;Write-Host "Start the Windows resource download process."
-Write-Host ""
+Write-Host "Ongoing action: " -NoNewLine;Write-Host "Start the Windows resource download process.";Write-Host ""
 
-Write-Host "Ongoing action: " -NoNewLine;Write-Host "Launching the Windows 10 Enterprise ISO download process."
-Write-Host ""
+Write-Host "Ongoing action: " -NoNewLine;Write-Host "Launching the Windows 10 Enterprise ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\Microsoft_Windows\clients\iso\client-windows10-entreprise-ltsc.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "https://images-data.fra1.digitaloceanspaces.com/client-windows10-entreprise-ltsc.iso"
 
-Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Windows 10 Pro/Home/Education ISO download process."
-Write-Host ""
+Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Windows 10 Pro/Home/Education ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\Microsoft_Windows\clients\iso\client-windows10.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "https://images-data.fra1.digitaloceanspaces.com/client-windows10.iso"
 
-Write-Host "`nOngoing action: " -NoNewLine
-Write-Host "Launching the Windows Server 2012 ISO download process."
-Write-Host ""
+Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Windows Server 2012 ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\Microsoft_Windows\servers\iso\win_srv-2012.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "https://images-data.fra1.digitaloceanspaces.com/win_srv-2012.iso"
 
-Write-Host "`nOngoing action: " -NoNewLine
-Write-Host "Launching the Windows Server 2012 ISO download process."
-Write-Host ""
+Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Windows Server 2012 ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\Microsoft_Windows\servers\iso\win_srv-2019.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "https://images-data.fra1.digitaloceanspaces.com/win_srv-2019.iso"
 
 Write-Host ""
@@ -2103,48 +2030,30 @@ Write-Host ""
 function HPV-Download_All_Linux_Resources
 {
 Clear-Host
-Write-Host "Ongoing action: " -NoNewLine
-Write-Host "Start the Linux resource download process."
-Write-Host ""
+Write-Host "Ongoing action: " -NoNewLine;Write-Host "Start the Linux resource download process.";Write-Host ""
 
-Write-Host "Ongoing action: " -NoNewLine
-Write-Host "Launching the pfSense ISO download process."
-Write-Host ""
+Write-Host "Ongoing action: " -NoNewLine;Write-Host "Launching the pfSense ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\GNU_Linux\iso\pfSense-CE-2.5.1-RELEASE-amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://images-data.fra1.digitaloceanspaces.com/pfSense-CE-2.5.1-RELEASE-amd64.iso"
 
-Write-Host "`nOngoing action: " -NoNewLine
-Write-Host "Launching the Debian ISO download process."
-Write-Host ""
+Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Debian ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\GNU_Linux\iso\debian-11.3.0-amd64-netinst.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-11.3.0-amd64-netinst.iso"
 
-Write-Host "`nOngoing action: " -NoNewLine
-Write-Host "Launching the Ubuntu ISO download process."
-Write-Host ""
+Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Ubuntu ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\GNU_Linux\iso\ubuntu-22.04-beta-desktop-amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://ubuntu.univ-nantes.fr/ubuntu-cd/22.04/ubuntu-22.04-beta-desktop-amd64.iso"
 
-Write-Host "`nOngoing action: " -NoNewLine
-Write-Host "Launching the Rocky Linux (Full) ISO download process."
-Write-Host ""
+Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Rocky Linux (Full) ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\GNU_Linux\iso\Rocky-8.5-x86_64-dvd1.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.5-x86_64-dvd1.iso"
 
-Write-Host "`nOngoing action: " -NoNewLine
-Write-Host "Launching the Rocky Linux (Minimal) ISO download process."
-Write-Host ""
+Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Rocky Linux (Minimal) ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\GNU_Linux\iso\Rocky-8.5-x86_64-minimal.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.5-x86_64-minimal.iso"
 
-Write-Host "`nOngoing action: " -NoNewLine
-Write-Host "Launching the Parrot Security ISO download process."
-Write-Host ""
+Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Parrot Security ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\GNU_Linux\iso\Parrot-security-5.0_amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://bunny.deb.parrot.sh/parrot/iso/5.0/Parrot-security-5.0_amd64.iso"
 
-Write-Host "`nOngoing action: " -NoNewLine
-Write-Host "Launching the Kali Linux Live ISO download process."
-Write-Host ""
+Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Kali Linux Live ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\GNU_Linux\iso\kali-linux-2022.1-live-amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://cdimage.kali.org/kali-images/current/kali-linux-2022.1-live-amd64.iso"
 
-Write-Host "`nOngoing action: " -NoNewLine
-Write-Host "Launching the Kali Linux Installer ISO download process."
-Write-Host ""
+Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Kali Linux Installer ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\GNU_Linux\iso\kali-linux-2022.1-installer-amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://cdimage.kali.org/kali-images/current/kali-linux-2022.1-installer-amd64.iso"
 
 Write-Host ""
@@ -2167,21 +2076,18 @@ Write-Host ""
 function HPV-Download_Custom_Resources
 {
 Clear-Host
-Write-Host "Ongoing action: " -NoNewLine
-Write-Host "Launching the customization process."
+Write-Host "Ongoing action: " -NoNewLine;Write-Host "Launching the customization process."
 
 Ask_YesOrNo "Question" "Would you like to install one or more Microsoft Windows machine(s)?"
 	switch($Ask_YesOrNo_Result)
 	{
-		1{[bool]$DoIuse_Microsoft_Windows=$false}
-	
+		1{[bool]$DoIuse_Microsoft_Windows=$false}	
 		0{[bool]$DoIuse_Microsoft_Windows=$true
 
 Ask_YesOrNo "Question" "Would you like to install Microsoft Windows Entreprise?"
 	switch($Ask_YesOrNo_Result)
 	{
 		1{[bool]$DoIuse_Microsoft_Windows_Entreprise=$false}
-
 		0{[bool]$DoIuse_Microsoft_Windows_Entreprise=$true}
 	}
 
@@ -2189,7 +2095,6 @@ Ask_YesOrNo "Question" "Would you like to install Microsoft Windows Entreprise?"
 	switch($Ask_YesOrNo_Result)
 	{
 		1{[bool]$DoIuse_Microsoft_Windows_Pro=$false}
-
 		0{[bool]$DoIuse_Microsoft_Windows_Pro=$true}
 	}
 
@@ -2197,7 +2102,6 @@ Ask_YesOrNo "Question" "Would you like to install Microsoft Windows Entreprise?"
 	switch($Ask_YesOrNo_Result)
 	{
 		1{[bool]$DoIuse_Microsoft_Windows_Server_2012=$false}
-
 		0{[bool]$DoIuse_Microsoft_Windows_Server_2012=$true}
 	}
 
@@ -2205,7 +2109,6 @@ Ask_YesOrNo "Question" "Would you like to install Microsoft Windows Entreprise?"
 	switch($Ask_YesOrNo_Result)
 	{
 		1{[bool]$DoIuse_Microsoft_Windows_Server_2019=$false}
-
 		0{[bool]$DoIuse_Microsoft_Windows_Server_2019=$true}
 	}
 	
@@ -2218,15 +2121,13 @@ Ask_YesOrNo "Question" "Would you like to install Microsoft Windows Entreprise?"
 	Ask_YesOrNo "Question" "Would you like to install one or more GNU/Linux machine(s)?"
 	switch($Ask_YesOrNo_Result)
 	{
-		1{[bool]$DoIuse_GNU_Linux=$false}
-	
+		1{[bool]$DoIuse_GNU_Linux=$false}	
 		0{[bool]$DoIuse_GNU_Linux=$true
 
 	Ask_YesOrNo "Question" "Would you like to install pfSense?"
 	switch($Ask_YesOrNo_Result)
 	{
 		1{[bool]$DoIuse_GNU_Linux_pfSense=$false}
-
 		0{[bool]$DoIuse_GNU_Linux_pfSense=$true}
 	}
 
@@ -2234,7 +2135,6 @@ Ask_YesOrNo "Question" "Would you like to install Microsoft Windows Entreprise?"
 	switch($Ask_YesOrNo_Result)
 	{
 		1{[bool]$DoIuse_GNU_Linux_Debian=$false}
-
 		0{[bool]$DoIuse_GNU_Linux_Debian=$true}
 	}
 
@@ -2242,7 +2142,6 @@ Ask_YesOrNo "Question" "Would you like to install Microsoft Windows Entreprise?"
 	switch($Ask_YesOrNo_Result)
 	{
 		1{[bool]$DoIuse_GNU_Linux_Ubuntu=$false}
-
 		0{[bool]$DoIuse_GNU_Linux_Ubuntu=$true}
 	}
 
@@ -2250,7 +2149,6 @@ Ask_YesOrNo "Question" "Would you like to install Microsoft Windows Entreprise?"
 	switch($Ask_YesOrNo_Result)
 	{
 		1{[bool]$DoIuse_GNU_Linux_Rocky_Linux_Full=$false}
-
 		0{[bool]$DoIuse_GNU_Linux_Rocky_Linux_Full=$true}
 	}
 
@@ -2258,7 +2156,6 @@ Ask_YesOrNo "Question" "Would you like to install Microsoft Windows Entreprise?"
 	switch($Ask_YesOrNo_Result)
 	{
 		1{[bool]$DoIuse_GNU_Linux_Rocky_Linux_Minimal=$false}
-
 		0{[bool]$DoIuse_GNU_Linux_Rocky_Linux_Minimal=$true}
 	}
 
@@ -2266,7 +2163,6 @@ Ask_YesOrNo "Question" "Would you like to install Microsoft Windows Entreprise?"
 	switch($Ask_YesOrNo_Result)
 	{
 		1{[bool]$DoIuse_GNU_Linux_Parrot_Security=$false}
-
 		0{[bool]$DoIuse_GNU_Linux_Parrot_Security=$true}
 	}
 
@@ -2274,7 +2170,6 @@ Ask_YesOrNo "Question" "Would you like to install Microsoft Windows Entreprise?"
 	switch($Ask_YesOrNo_Result)
 	{
 		1{[bool]$DoIuse_GNU_Linux_Kali_Linux_Live=$false}
-
 		0{[bool]$DoIuse_GNU_Linux_Kali_Linux_Live=$true}
 	}
 
@@ -2282,7 +2177,6 @@ Ask_YesOrNo "Question" "Would you like to install Microsoft Windows Entreprise?"
 	switch($Ask_YesOrNo_Result)
 	{
 		1{[bool]$DoIuse_GNU_Linux_Kali_Linux_Installer=$false}
-
 		0{[bool]$DoIuse_GNU_Linux_Kali_Linux_Installer=$true}
 	}
 	
