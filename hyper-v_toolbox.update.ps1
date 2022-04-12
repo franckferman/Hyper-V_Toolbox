@@ -1712,14 +1712,14 @@ $VHDXList=$VHDXPath
 ForEach($VHDX in $VHDXList){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Deletion of the virtual hard disk " -NoNewLine;Write-Host "$VHDX" -ForegroundColor green;[void](Remove-Item -Path $VHDX -Force -Recurse)}
 
 <### ### ### ### ### ### ### ### ### ###
-### TODO: Improve the algorithm/logic. ###
+### BEGIN TODO: Improve the algorithm/logic. ###
 ### ### ### ### ### ### ### ### ### ###>
 
 [void](Remove-Item -Path ".\src\Microsoft_Windows\clients\vms\*" -Force -Recurse -ErrorAction SilentlyContinue -WarningAction SilentlyContinue -InformationAction SilentlyContinue)
 [void](Remove-Item -Path ".\src\Microsoft_Windows\servers\vms\*" -Force -Recurse -ErrorAction SilentlyContinue -WarningAction SilentlyContinue -InformationAction SilentlyContinue)
 [void](Remove-Item -Path ".\src\GNU_Linux\vms\*" -Force -Recurse -ErrorAction SilentlyContinue -WarningAction SilentlyContinue -InformationAction SilentlyContinue)
 
-### END TODO
+### END: TODO
 
 Write-Host ""
 Write-Host "7 - Return to the virtual machine(s) management menu." -ForegroundColor gray
@@ -2080,13 +2080,16 @@ Write-Host ""
 function HPV-Download_Custom_Resources
 {
 Clear-Host
+
+### BEGIN: Customization/choice process.
+
 Write-Host "Ongoing action: " -NoNewLine;Write-Host "Launching the customization process."
 
 Ask_YesOrNo "Question" "Would you like to install one or more Microsoft Windows machine(s)?"
-	switch($Ask_YesOrNo_Result)
+	switch($Ask_YesOrNo_Result) 	### BEGIN: Switch Microsoft Windows.
 	{
 		1{[bool]$DoIuse_Microsoft_Windows=$false}	
-		0{[bool]$DoIuse_Microsoft_Windows=$true
+		0{[bool]$DoIuse_Microsoft_Windows=$true 	### BEGIN: If Microsoft Windows is to be used.
 
 Ask_YesOrNo "Question" "Would you like to install Microsoft Windows Entreprise?"
 	switch($Ask_YesOrNo_Result)
@@ -2115,18 +2118,18 @@ Ask_YesOrNo "Question" "Would you like to install Microsoft Windows Entreprise?"
 		1{[bool]$DoIuse_Microsoft_Windows_Server_2019=$false}
 		0{[bool]$DoIuse_Microsoft_Windows_Server_2019=$true}
 	}
-	
-	}
+
+	} 		### END: If Microsoft Windows is to be used.
 
 	default{Write-Host "`nInfo: " -NoNewLine;Write-Host "An unexpected error was caused. In most cases, it is an error made by the user, so take the time to answer the questions correctly." -ForegroundColor red;Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
 
-	}
+	}		### END: Switch Microsoft Windows.
 
 	Ask_YesOrNo "Question" "Would you like to install one or more GNU/Linux machine(s)?"
 	switch($Ask_YesOrNo_Result)
-	{
+	{		### BEGIN: Switch GNU/Linux.
 		1{[bool]$DoIuse_GNU_Linux=$false}	
-		0{[bool]$DoIuse_GNU_Linux=$true
+		0{[bool]$DoIuse_GNU_Linux=$true 	### BEGIN: If GNU/Linux is to be used.
 
 	Ask_YesOrNo "Question" "Would you like to install pfSense?"
 	switch($Ask_YesOrNo_Result)
@@ -2184,11 +2187,15 @@ Ask_YesOrNo "Question" "Would you like to install Microsoft Windows Entreprise?"
 		0{[bool]$DoIuse_GNU_Linux_Kali_Linux_Installer=$true}
 	}
 	
-	}
+	}		### BEGIN: If GNU/Linux is to be used.
 
 	default{Write-Host "`nInfo: " -NoNewLine;Write-Host "An unexpected error was caused. In most cases, it is an error made by the user, so take the time to answer the questions correctly." -ForegroundColor red;Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
 
-	}
+	}		### END: Switch GNU/Linux.
+
+		### END: Customization/choice process.
+
+		### BEGIN: Resource download process.
 
 if($DoIuse_Microsoft_Windows_Entreprise -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Microsoft Windows Entreprise ISO download process.";Write-Host "";HPV-Download_Base ".\src\Microsoft_Windows\clients\iso\client-windows10-entreprise-ltsc.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "https://images-data.fra1.digitaloceanspaces.com/client-windows10-entreprise-ltsc.iso"}else{$null}
 
@@ -2213,6 +2220,8 @@ if($DoIuse_GNU_Linux_Parrot_Security -eq $true){Write-Host "`nOngoing action: " 
 if($DoIuse_GNU_Linux_Kali_Linux_Live -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Kali Linux Live ISO download process.";Write-Host "";HPV-Download_Base ".\src\GNU_Linux\iso\kali-linux-2022.1-live-amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://cdimage.kali.org/kali-images/current/kali-linux-2022.1-live-amd64.iso"}else{$null}
 
 if($DoIuse_GNU_Linux_Kali_Linux_Installer -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Kali Linux Installer ISO download process.";Write-Host "";HPV-Download_Base ".\src\GNU_Linux\iso\kali-linux-2022.1-installer-amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://cdimage.kali.org/kali-images/current/kali-linux-2022.1-installer-amd64.iso"}else{$null}
+
+		### END: Resource download process.
 
 Write-Host ""
 pause
