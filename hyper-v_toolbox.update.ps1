@@ -140,9 +140,9 @@ https://cdimage.kali.org/kali-images/current/kali-linux-2022.1-live-amd64.iso
 https://cdimage.kali.org/kali-images/current/kali-linux-2022.1-installer-amd64.iso
 #>
 
-<### ### ### ### ### ### ### ### ### ### ### ###
-### 1 - Creation of (blank) virtual machine(s). ###
-### ### ### ### ### ### ### ### ### ### ### ###>
+<### ### ### ### ### ### ### ### ### ### ###
+### Creation of (blank) virtual machine(s). ###
+### ### ### ### ### ### ### ### ### ### ###>
 
 function HPV-New_VM-Blank
 {
@@ -1151,9 +1151,9 @@ function HPV-Copy_VM-Different-Blank-GNU_Linux-Kali_Linux-Installer
 HPV-New_VM-Blank-GNU_Linux-Kali_Linux-Installer
 }
 
-<### ### ### ### ### ### ### ### ### ### ### ### ### ###
-### 2 - Creation of pre-configured virtual machine(s). ###
-### ### ### ### ### ### ### ### ### ### ### ### ###> ###
+<### ### ### ### ### ### ### ### ### ### ### ### ###
+### Creation of pre-configured virtual machine(s). ###
+### ### ### ### ### ### ### ### ### ### ### ### ###>
 
 function HPV-New_VM-Template
 {
@@ -1419,9 +1419,9 @@ function HPV-New_VM-Template-GNU_Linux-Kali_Linux-Installer-preconfiguration
 Under_Development
 }
 
-<### ### ### ### ### ### ### ### ### ### ### ### ### ###
-### 3 - Management of virtual machine(s). ###
-### ### ### ### ### ### ### ### ### ### ### ### ###> ###
+<### ### ### ### ### ### ### ### ### ###
+### Management of virtual machine(s). ###
+### ### ### ### ### ### ### ### ### ###>
 
 function HPV-VM_Management
 {
@@ -1738,9 +1738,9 @@ $userChoice=Read-Host "Your choice"
 
 }
 
-<### ### ### ### ### ### ### ### ### ### ###
-### 4 - Management of virtual switch(es). ###
-### ### ### ### ### ### ### ### ### ### ###>
+<### ### ### ### ### ### ### ### ### ###
+### Management of virtual switch(es). ###
+### ### ### ### ### ### ### ### ### ###>
 
 function HPV-Virtual_Switches_Management
 {
@@ -1799,7 +1799,9 @@ Clear-Host
 $Switch_Name=Read-Host "What name would you like to choose for your network switch"
 Write-Host "Info: " -NoNewLine;Write-Host "The name chosen for your virtual switch is " -NoNewLine;Write-Host "$Switch_Name" -NoNewLine -ForegroundColor green;Write-Host "."
 
-Write-Host "";Write-Host "What type of virtual switch do you want to create?";Write-Host ""
+Write-Host ""
+Write-Host "What type of virtual switch do you want to create?"
+Write-Host ""
 Write-Host "1 - Internal"
 Write-Host "2 - Private"
 Write-Host ""
@@ -1813,6 +1815,8 @@ Write-Host ""
 	}
 
 New-VMSwitch -Name $Switch_Name -SwitchType $Switch_Type|Out-Null
+
+Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Display the list of virtual switches."
 Get-VMSwitch|Select-Object Name,SwitchType|Out-Default
 
 Write-Host "7 - Return to the virtual switch management menu." -ForegroundColor gray
@@ -1836,8 +1840,8 @@ function HPV-Remove_VSwitch
 Clear-Host
 Write-Host "Ongoing action: " -NoNewLine;Write-Host "Displaying the list of virtual switches.`n"
 
-$Get_VSwitches=Get-VMSwitch
 [array]$VSwitchesList=@()
+$Get_VSwitches=Get-VMSwitch
 $Get_VSwitches|ForEach-Object{$VSwitchesList+=$_.Name}
 
 For($i=0;$i -lt $VSwitchesList.Length;$i++){Write-Host "$i - $($VSwitchesList[$i])"}
@@ -1847,7 +1851,7 @@ $VSwitchChoice=$VSwitchesList[$userChoice]
 $Selected_Switch=$VSwitchChoice
 Write-Host "`nInfo: " -NoNewLine;Write-Host "The chosen virtual switch is " -NoNewLine;Write-Host "$Selected_Switch" -NoNewLine -ForegroundColor green;Write-Host "."
 
-Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Deletion of the virtual switch." -ForegroundColor green
+Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Deletion of the virtual switch " -NoNewLine;Write-Host "$Selected_Switch" -NoNewLine -ForegroundColor green;Write-Host "."
 Remove-VMSwitch -Name $Selected_Switch -Force
 
 Write-Host ""
@@ -1871,19 +1875,19 @@ $userChoice=Read-Host "Your choice"
 
 }
 
-<### ### ### ### ### ### ### ### ### ### ### ### ###
-### 5 - Resource management and local downloading. ###
-### ### ### ### ### ### ### ### ### ### ### ### ###>
+<### ### ### ### ### ### ### ### ### ### ### ###
+### Resource management and local downloading. ###
+### ### ### ### ### ### ### ### ### ### ### ###>
 
 function Resource_Management
 {
 Clear-Host
-Write-Host "1 - Download all the resources (potential long waiting time)."
+Write-Host "1 - Download all the resources (" -NoNewLine;Write-Host "potential long waiting time" -NoNewLine -ForegroundColor red;Write-Host ")."
 Write-Host ""
 Write-Host "2 - Download resources for creating Windows virtual machines only."
 Write-Host "3 - Download resources for creating Linux virtual machines only."
 Write-Host ""
-Write-Host "4 - Fully customized download program (recommended)."
+Write-Host "4 - Fully customized download program (" -NoNewLine;Write-Host "recommended" -NoNewLine -ForegroundColor green;Write-Host ")."
 Write-Host ""
 Write-Host "8 - Return to main menu." -ForegroundColor red
 Write-Host "9 - Quit the program." -ForegroundColor darkred
