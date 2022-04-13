@@ -12,7 +12,7 @@
     <img src="https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/img/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">hyper-v_toolbox</h3>
+<h3 align="center">Hyper-V_Toolbox</h3>
 
   <p align="center">
     Hyper-V Toolbox is a PowerShell script allowing advanced manipulation of Hyper-V from your terminal.
