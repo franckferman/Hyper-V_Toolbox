@@ -5,6 +5,7 @@
 [![Stargazers][stars-shield]](https://github.com/franckferman/hyper-v_toolbox/stargazers)
 [![Issues][issues-shield]](https://github.com/franckferman/hyper-v_toolbox/issues)
 [![MIT License][license-shield]](https://github.com/franckferman/hyper-v_toolbox/blob/main/LICENSE)
+[![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/fferman42)
 
 <br />
 <div align="center">
@@ -229,6 +230,8 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 <!-- CONTACT -->
 ## Contact
+
+Franck FERMAN - [LinkedIn](https://www.linkedin.com/in/fferman42) - fferman@protonmail.ch
 
 Project Link: [https://github.com/franckferman/hyper-v_toolbox](https://github.com/franckferman/hyper-v_toolbox)
 
