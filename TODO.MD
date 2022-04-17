@@ -8,4 +8,4 @@ At the moment, the resource management function (Resource_Management) calls a fu
 
 With this addition, instead of having to change the download link everywhere in the code, it will be enough to update the corresponding download link variable.
 
-- [-] Improvement of the code logic.
+- [x] Improvement of the code logic (in progress).
