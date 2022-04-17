@@ -108,7 +108,6 @@ Write-Host ""
 
 }
 
-## OLD
 <# Download links to the different resources.
 ## Microsoft Windows
 # Windows 10 Entreprise
