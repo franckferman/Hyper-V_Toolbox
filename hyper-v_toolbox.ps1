@@ -108,20 +108,23 @@ Write-Host ""
 
 }
 
+## OLD
 <# Download links to the different resources.
 ## Microsoft Windows
 # Windows 10 Entreprise
-http://cloud.resources.ams3.digitaloceanspaces.com/ISO_images/Microsoft_Windows/client-windows10-entreprise-ltsc.iso
+https://images-data.fra1.digitaloceanspaces.com/client-windows10-entreprise-ltsc.iso
 # Windows 10 Pro/Home/Education
-http://cloud.resources.ams3.digitaloceanspaces.com/ISO_images/Microsoft_Windows/client-windows10.iso
+https://images-data.fra1.digitaloceanspaces.com/client-windows10.iso
 # Windows Server 2012
-http://cloud.resources.ams3.digitaloceanspaces.com/ISO_images/Microsoft_Windows/win_srv-2012.iso
+https://images-data.fra1.digitaloceanspaces.com/win_srv-2012.iso
+# Windows Server 2016
+https://images-data.fra1.digitaloceanspaces.com/win_srv-2016.iso
 # Windows Server 2019
-http://cloud.resources.ams3.digitaloceanspaces.com/ISO_images/Microsoft_Windows/win_srv-2019.iso
+https://images-data.fra1.digitaloceanspaces.com/win_srv-2019.iso
 
 ## GNU_Linux
 # pfSense
-http://cloud.resources.ams3.digitaloceanspaces.com/ISO_images/GNU_Linux/pfSense-CE-2.5.1-RELEASE-amd64.iso
+https://images-data.fra1.digitaloceanspaces.com/pfSense-CE-2.5.1-RELEASE-amd64.iso
 # Debian
 https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-11.3.0-amd64-netinst.iso
 # Rocky Linux
@@ -304,7 +307,7 @@ function HPV-New_VM-Blank-Client-Microsoft_Windows_10-Entreprise_LTSC
 [string]$script:isoPath=".\src\Microsoft_Windows\clients\iso\client-windows10-entreprise-ltsc.iso"
 [string]$script:isoDest=".\src\Microsoft_Windows\clients\iso"
 [string]$script:isoFolderPath=".\src\Microsoft_Windows\clients\iso"
-[string]$script:isoSrc="http://cloud.resources.ams3.digitaloceanspaces.com/ISO_images/Microsoft_Windows/client-windows10-entreprise-ltsc.iso"
+[string]$script:isoSrc="https://images-data.fra1.digitaloceanspaces.com/client-windows10-entreprise-ltsc.iso"
 
 [string]$script:VHDSPath=".\src\Microsoft_Windows\clients\vhds\"
 [string]$script:vmsPath=".\src\Microsoft_Windows\clients\vms\"
@@ -371,7 +374,7 @@ function HPV-New_VM-Blank-Client-Microsoft_Windows_10-Multi
 [string]$script:isoPath=".\src\Microsoft_Windows\clients\iso\client-windows10.iso"
 [string]$script:isoDest=".\src\Microsoft_Windows\clients\iso"
 [string]$script:isoFolderPath=".\src\Microsoft_Windows\clients\iso"
-[string]$script:isoSrc="http://cloud.resources.ams3.digitaloceanspaces.com/ISO_images/Microsoft_Windows/client-windows10.iso"
+[string]$script:isoSrc="https://images-data.fra1.digitaloceanspaces.com/client-windows10.iso"
 
 [string]$script:VHDSPath=".\src\Microsoft_Windows\clients\vhds\"
 [string]$script:vmsPath=".\src\Microsoft_Windows\clients\vms\"
@@ -438,7 +441,7 @@ function HPV-New_VM-Blank-Server-Microsoft_Windows_Server-2012
 [string]$script:isoPath=".\src\Microsoft_Windows\servers\iso\win_srv-2012.iso"
 [string]$script:isoDest=".\src\Microsoft_Windows\servers\iso"
 [string]$script:isoFolderPath=".\src\Microsoft_Windows\servers\iso"
-[string]$script:isoSrc="http://cloud.resources.ams3.digitaloceanspaces.com/ISO_images/Microsoft_Windows/win_srv-2012.iso"
+[string]$script:isoSrc="https://images-data.fra1.digitaloceanspaces.com/win_srv-2012.iso"
 
 [string]$script:VHDSPath=".\src\Microsoft_Windows\servers\vhds\"
 [string]$script:vmsPath=".\src\Microsoft_Windows\servers\vms\"
@@ -498,7 +501,7 @@ function HPV-New_VM-Blank-Server-Microsoft_Windows_Server-2019
 [string]$script:isoPath=".\src\Microsoft_Windows\servers\iso\win_srv-2019.iso"
 [string]$script:isoDest=".\src\Microsoft_Windows\servers\iso"
 [string]$script:isoFolderPath=".\src\Microsoft_Windows\servers\iso"
-[string]$script:isoSrc="http://cloud.resources.ams3.digitaloceanspaces.com/ISO_images/Microsoft_Windows/win_srv-2019.iso"
+[string]$script:isoSrc="https://images-data.fra1.digitaloceanspaces.com/win_srv-2019.iso"
 
 [string]$script:VHDSPath=".\src\Microsoft_Windows\servers\vhds\"
 [string]$script:vmsPath=".\src\Microsoft_Windows\servers\vms\"
@@ -620,7 +623,7 @@ function HPV-New_VM-Blank-GNU_Linux-pfSense
 [string]$script:isoPath=".\src\GNU_Linux\iso\pfSense-CE-2.5.1-RELEASE-amd64.iso"
 [string]$script:isoDest=".\src\GNU_Linux\iso"
 [string]$script:isoFolderPath=".\src\GNU_Linux\iso"
-[string]$script:isoSrc="http://cloud.resources.ams3.digitaloceanspaces.com/ISO_images/GNU_Linux/pfSense-CE-2.5.1-RELEASE-amd64.iso"
+[string]$script:isoSrc="https://images-data.fra1.digitaloceanspaces.com/pfSense-CE-2.5.1-RELEASE-amd64.iso"
 
 [string]$script:VHDSPath=".\src\GNU_Linux\vhds\"
 [string]$script:vmsPath=".\src\GNU_Linux\vms\"
@@ -754,7 +757,7 @@ function HPV-New_VM-Blank-GNU_Linux-Ubuntu
 [string]$script:isoPath=".\src\GNU_Linux\iso\ubuntu-22.04-beta-desktop-amd64.iso"
 [string]$script:isoDest=".\src\GNU_Linux\iso"
 [string]$script:isoFolderPath=".\src\GNU_Linux\iso"
-[string]$script:isoSrc="https://ubuntu.univ-nantes.fr/ubuntu-cd/22.04/ubuntu-22.04-beta-desktop-amd64.iso"
+[string]$script:isoSrc="http://ubuntu.univ-nantes.fr/ubuntu-cd/22.04/ubuntu-22.04-beta-desktop-amd64.iso"
 
 [string]$script:VHDSPath=".\src\GNU_Linux\vhds\"
 [string]$script:vmsPath=".\src\GNU_Linux\vms\"
@@ -821,7 +824,7 @@ function HPV-New_VM-Blank-GNU_Linux-Rocky_Linux-Full
 [string]$script:isoPath=".\src\GNU_Linux\iso\Rocky-8.5-x86_64-dvd1.iso"
 [string]$script:isoDest=".\src\GNU_Linux\iso"
 [string]$script:isoFolderPath=".\src\GNU_Linux\iso"
-[string]$script:isoSrc="https://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.5-x86_64-dvd1.iso"
+[string]$script:isoSrc="http://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.5-x86_64-dvd1.iso"
 
 [string]$script:VHDSPath=".\src\GNU_Linux\vhds\"
 [string]$script:vmsPath=".\src\GNU_Linux\vms\"
@@ -888,7 +891,7 @@ function HPV-New_VM-Blank-GNU_Linux-Rocky_Linux-Minimal
 [string]$script:isoPath=".\src\GNU_Linux\iso\Rocky-8.5-x86_64-minimal.iso"
 [string]$script:isoDest=".\src\GNU_Linux\iso"
 [string]$script:isoFolderPath=".\src\GNU_Linux\iso"
-[string]$script:isoSrc="https://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.5-x86_64-minimal.iso"
+[string]$script:isoSrc="http://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.5-x86_64-minimal.iso"
 
 [string]$script:VHDSPath=".\src\GNU_Linux\vhds\"
 [string]$script:vmsPath=".\src\GNU_Linux\vms\"
@@ -955,7 +958,7 @@ function HPV-New_VM-Blank-GNU_Linux-Parrot_Security
 [string]$script:isoPath=".\src\GNU_Linux\iso\Parrot-security-5.0_amd64.iso"
 [string]$script:isoDest=".\src\GNU_Linux\iso"
 [string]$script:isoFolderPath=".\src\GNU_Linux\iso"
-[string]$script:isoSrc="https://bunny.deb.parrot.sh/parrot/iso/5.0/Parrot-security-5.0_amd64.iso"
+[string]$script:isoSrc="http://bunny.deb.parrot.sh/parrot/iso/5.0/Parrot-security-5.0_amd64.iso"
 
 [string]$script:VHDSPath=".\src\GNU_Linux\vhds\"
 [string]$script:vmsPath=".\src\GNU_Linux\vms\"
@@ -1022,7 +1025,7 @@ function HPV-New_VM-Blank-GNU_Linux-Kali_Linux-Live
 [string]$script:isoPath=".\src\GNU_Linux\iso\kali-linux-2022.1-live-amd64.iso"
 [string]$script:isoDest=".\src\GNU_Linux\iso"
 [string]$script:isoFolderPath=".\src\GNU_Linux\iso"
-[string]$script:isoSrc="https://cdimage.kali.org/kali-images/current/kali-linux-2022.1-live-amd64.iso"
+[string]$script:isoSrc="http://cdimage.kali.org/kali-images/current/kali-linux-2022.1-live-amd64.iso"
 
 [string]$script:VHDSPath=".\src\GNU_Linux\vhds\"
 [string]$script:vmsPath=".\src\GNU_Linux\vms\"
@@ -1089,7 +1092,7 @@ function HPV-New_VM-Blank-GNU_Linux-Kali_Linux-Installer
 [string]$script:isoPath=".\src\GNU_Linux\iso\kali-linux-2022.1-installer-amd64.iso"
 [string]$script:isoDest=".\src\GNU_Linux\iso"
 [string]$script:isoFolderPath=".\src\GNU_Linux\iso"
-[string]$script:isoSrc="https://cdimage.kali.org/kali-images/current/kali-linux-2022.1-installer-amd64.iso"
+[string]$script:isoSrc="http://cdimage.kali.org/kali-images/current/kali-linux-2022.1-installer-amd64.iso"
 
 [string]$script:VHDSPath=".\src\GNU_Linux\vhds\"
 [string]$script:vmsPath=".\src\GNU_Linux\vms\"
@@ -1943,7 +1946,7 @@ Write-Host "Ongoing action: " -NoNewLine;Write-Host "Start the general download 
 Write-Host "Ongoing action: " -NoNewLine;Write-Host "Start the Linux resource download process.";Write-Host ""
 
 Write-Host "Ongoing action: " -NoNewLine;Write-Host "Launching the pfSense ISO download process.";Write-Host ""
-HPV-Download_Base ".\src\GNU_Linux\iso\pfSense-CE-2.5.1-RELEASE-amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "http://cloud.resources.ams3.digitaloceanspaces.com/ISO_images/GNU_Linux/pfSense-CE-2.5.1-RELEASE-amd64.iso"
+HPV-Download_Base ".\src\GNU_Linux\iso\pfSense-CE-2.5.1-RELEASE-amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://images-data.fra1.digitaloceanspaces.com/pfSense-CE-2.5.1-RELEASE-amd64.iso"
 
 Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Debian ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\GNU_Linux\iso\debian-11.3.0-amd64-netinst.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-11.3.0-amd64-netinst.iso"
@@ -1969,16 +1972,16 @@ HPV-Download_Base ".\src\GNU_Linux\iso\kali-linux-2022.1-installer-amd64.iso" ".
 Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Start the Windows resource download process.";Write-Host ""
 
 Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Windows 10 Enterprise ISO download process.";Write-Host ""
-HPV-Download_Base ".\src\Microsoft_Windows\clients\iso\client-windows10-entreprise-ltsc.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "http://cloud.resources.ams3.digitaloceanspaces.com/ISO_images/Microsoft_Windows/client-windows10-entreprise-ltsc.iso"
+HPV-Download_Base ".\src\Microsoft_Windows\clients\iso\client-windows10-entreprise-ltsc.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "https://images-data.fra1.digitaloceanspaces.com/client-windows10-entreprise-ltsc.iso"
 
 Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Windows 10 Pro/Home/Education ISO download process.";Write-Host ""
-HPV-Download_Base ".\src\Microsoft_Windows\clients\iso\client-windows10.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "http://cloud.resources.ams3.digitaloceanspaces.com/ISO_images/Microsoft_Windows/client-windows10.iso"
+HPV-Download_Base ".\src\Microsoft_Windows\clients\iso\client-windows10.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "https://images-data.fra1.digitaloceanspaces.com/client-windows10.iso"
 
 Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Windows Server 2012 ISO download process.";Write-Host ""
-HPV-Download_Base ".\src\Microsoft_Windows\servers\iso\win_srv-2012.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "http://cloud.resources.ams3.digitaloceanspaces.com/ISO_images/Microsoft_Windows/win_srv-2012.iso"
+HPV-Download_Base ".\src\Microsoft_Windows\servers\iso\win_srv-2012.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "https://images-data.fra1.digitaloceanspaces.com/win_srv-2012.iso"
 
 Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Windows Server 2012 ISO download process.";Write-Host ""
-HPV-Download_Base ".\src\Microsoft_Windows\servers\iso\win_srv-2019.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "http://cloud.resources.ams3.digitaloceanspaces.com/ISO_images/Microsoft_Windows/win_srv-2019.iso"
+HPV-Download_Base ".\src\Microsoft_Windows\servers\iso\win_srv-2019.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "https://images-data.fra1.digitaloceanspaces.com/win_srv-2019.iso"
 
 Write-Host ""
 Write-Host "7 - Return to the resource management menu."
@@ -2003,16 +2006,16 @@ Clear-Host
 Write-Host "Ongoing action: " -NoNewLine;Write-Host "Start the Windows resource download process.";Write-Host ""
 
 Write-Host "Ongoing action: " -NoNewLine;Write-Host "Launching the Windows 10 Enterprise ISO download process.";Write-Host ""
-HPV-Download_Base ".\src\Microsoft_Windows\clients\iso\client-windows10-entreprise-ltsc.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "http://cloud.resources.ams3.digitaloceanspaces.com/ISO_images/Microsoft_Windows/client-windows10-entreprise-ltsc.iso"
+HPV-Download_Base ".\src\Microsoft_Windows\clients\iso\client-windows10-entreprise-ltsc.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "https://images-data.fra1.digitaloceanspaces.com/client-windows10-entreprise-ltsc.iso"
 
 Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Windows 10 Pro/Home/Education ISO download process.";Write-Host ""
-HPV-Download_Base ".\src\Microsoft_Windows\clients\iso\client-windows10.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "http://cloud.resources.ams3.digitaloceanspaces.com/ISO_images/Microsoft_Windows/client-windows10.iso"
+HPV-Download_Base ".\src\Microsoft_Windows\clients\iso\client-windows10.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "https://images-data.fra1.digitaloceanspaces.com/client-windows10.iso"
 
 Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Windows Server 2012 ISO download process.";Write-Host ""
-HPV-Download_Base ".\src\Microsoft_Windows\servers\iso\win_srv-2012.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "http://cloud.resources.ams3.digitaloceanspaces.com/ISO_images/Microsoft_Windows/win_srv-2012.iso"
+HPV-Download_Base ".\src\Microsoft_Windows\servers\iso\win_srv-2012.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "https://images-data.fra1.digitaloceanspaces.com/win_srv-2012.iso"
 
 Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Windows Server 2012 ISO download process.";Write-Host ""
-HPV-Download_Base ".\src\Microsoft_Windows\servers\iso\win_srv-2019.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "http://cloud.resources.ams3.digitaloceanspaces.com/ISO_images/Microsoft_Windows/win_srv-2019.iso"
+HPV-Download_Base ".\src\Microsoft_Windows\servers\iso\win_srv-2019.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "https://images-data.fra1.digitaloceanspaces.com/win_srv-2019.iso"
 
 Write-Host ""
 Write-Host "7 - Return to the resource management menu."
@@ -2037,7 +2040,7 @@ Clear-Host
 Write-Host "Ongoing action: " -NoNewLine;Write-Host "Start the Linux resource download process.";Write-Host ""
 
 Write-Host "Ongoing action: " -NoNewLine;Write-Host "Launching the pfSense ISO download process.";Write-Host ""
-HPV-Download_Base ".\src\GNU_Linux\iso\pfSense-CE-2.5.1-RELEASE-amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "http://cloud.resources.ams3.digitaloceanspaces.com/ISO_images/GNU_Linux/pfSense-CE-2.5.1-RELEASE-amd64.iso"
+HPV-Download_Base ".\src\GNU_Linux\iso\pfSense-CE-2.5.1-RELEASE-amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://images-data.fra1.digitaloceanspaces.com/pfSense-CE-2.5.1-RELEASE-amd64.iso"
 
 Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Debian ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\GNU_Linux\iso\debian-11.3.0-amd64-netinst.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-11.3.0-amd64-netinst.iso"
@@ -2197,15 +2200,15 @@ Ask_YesOrNo "Question" "Would you like to install Microsoft Windows Entreprise?"
 
 		### BEGIN: Resource download process.
 
-if($DoIuse_Microsoft_Windows_Entreprise -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Microsoft Windows Entreprise ISO download process.";Write-Host "";HPV-Download_Base ".\src\Microsoft_Windows\clients\iso\client-windows10-entreprise-ltsc.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "http://cloud.resources.ams3.digitaloceanspaces.com/ISO_images/Microsoft_Windows/client-windows10-entreprise-ltsc.iso"}else{$null}
+if($DoIuse_Microsoft_Windows_Entreprise -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Microsoft Windows Entreprise ISO download process.";Write-Host "";HPV-Download_Base ".\src\Microsoft_Windows\clients\iso\client-windows10-entreprise-ltsc.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "https://images-data.fra1.digitaloceanspaces.com/client-windows10-entreprise-ltsc.iso"}else{$null}
 
-if($DoIuse_Microsoft_Windows_Pro -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Microsoft Windows Pro ISO download process.";Write-Host "";HPV-Download_Base ".\src\Microsoft_Windows\clients\iso\client-windows10.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "http://cloud.resources.ams3.digitaloceanspaces.com/ISO_images/Microsoft_Windows/client-windows10.iso"}else{$null}
+if($DoIuse_Microsoft_Windows_Pro -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Microsoft Windows Pro ISO download process.";Write-Host "";HPV-Download_Base ".\src\Microsoft_Windows\clients\iso\client-windows10.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "https://images-data.fra1.digitaloceanspaces.com/client-windows10.iso"}else{$null}
 
-if($DoIuse_Microsoft_Windows_Server_2012 -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Microsoft Windows Server 2012 ISO download process.";Write-Host "";HPV-Download_Base ".\src\Microsoft_Windows\servers\iso\win_srv-2012.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "http://cloud.resources.ams3.digitaloceanspaces.com/ISO_images/Microsoft_Windows/win_srv-2012.iso"}else{$null}
+if($DoIuse_Microsoft_Windows_Server_2012 -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Microsoft Windows Server 2012 ISO download process.";Write-Host "";HPV-Download_Base ".\src\Microsoft_Windows\servers\iso\win_srv-2012.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "https://images-data.fra1.digitaloceanspaces.com/win_srv-2012.iso"}else{$null}
 
-if($DoIuse_Microsoft_Windows_Server_2019 -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Microsoft Windows Server 2019 ISO download process.";Write-Host "";HPV-Download_Base ".\src\Microsoft_Windows\servers\iso\win_srv-2019.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "http://cloud.resources.ams3.digitaloceanspaces.com/ISO_images/Microsoft_Windows/win_srv-2019.iso"}else{$null}
+if($DoIuse_Microsoft_Windows_Server_2019 -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Microsoft Windows Server 2019 ISO download process.";Write-Host "";HPV-Download_Base ".\src\Microsoft_Windows\servers\iso\win_srv-2019.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "https://images-data.fra1.digitaloceanspaces.com/win_srv-2019.iso"}else{$null}
 
-if($DoIuse_GNU_Linux_pfSense -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the pfSense ISO download process.";Write-Host "";HPV-Download_Base ".\src\GNU_Linux\iso\pfSense-CE-2.5.1-RELEASE-amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "http://cloud.resources.ams3.digitaloceanspaces.com/ISO_images/GNU_Linux/pfSense-CE-2.5.1-RELEASE-amd64.iso"}else{$null}
+if($DoIuse_GNU_Linux_pfSense -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the pfSense ISO download process.";Write-Host "";HPV-Download_Base ".\src\GNU_Linux\iso\pfSense-CE-2.5.1-RELEASE-amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://images-data.fra1.digitaloceanspaces.com/pfSense-CE-2.5.1-RELEASE-amd64.iso"}else{$null}
 
 if($DoIuse_GNU_Linux_Debian -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Debian ISO download process.";Write-Host "";HPV-Download_Base ".\src\GNU_Linux\iso\debian-11.3.0-amd64-netinst.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-11.3.0-amd64-netinst.iso"}else{$null}
 
