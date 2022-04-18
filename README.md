@@ -124,7 +124,7 @@ The Microsoft Windows systems ISOs (10 pro, enterprise, server 2012 and 2019) we
 
 - Creation of preconfigured virtual machines.
 
-Function not completed but in progress.
+[Function not completed but in progress.]
 
 Just like the (basic) virtual machine creation function, the user will be asked some basic questions. With a few notable differences, at first, some choices will allow you to further speed up the creation process as only the name and network card of the desired machine will be asked.
 
