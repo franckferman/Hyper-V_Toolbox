@@ -109,34 +109,62 @@ Write-Host ""
 }
 
 <# Download links to the different resources.
+
 ## Microsoft Windows
+
 # Windows 10 Entreprise
 https://depository.fra1.digitaloceanspaces.com/ISO_images/Microsoft_Windows/client-windows10-entreprise-ltsc.iso
+
 # Windows 10 Pro/Home/Education
 https://depository.fra1.digitaloceanspaces.com/ISO_images/Microsoft_Windows/client-windows10.iso
+
 # Windows Server 2012
 https://depository.fra1.digitaloceanspaces.com/ISO_images/Microsoft_Windows/win_srv-2012.iso
+
 # Windows Server 2016
 https://depository.fra1.digitaloceanspaces.com/ISO_images/Microsoft_Windows/win_srv-2016.iso
+
 # Windows Server 2019
 https://depository.fra1.digitaloceanspaces.com/ISO_images/Microsoft_Windows/win_srv-2019.iso
 
 ## GNU_Linux
+
 # pfSense
 https://depository.fra1.digitaloceanspaces.com/ISO_images/GNU_Linux/pfSense-CE-2.5.1-RELEASE-amd64.iso
+
 # Debian
 https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-11.3.0-amd64-netinst.iso
+
 # Rocky Linux
 https://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.5-x86_64-dvd1.iso
 https://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.5-x86_64-minimal.iso
+
+https://repo.ialab.dsu.edu/rocky-linux/8.5/isos/x86_64/Rocky-8.5-x86_64-dvd1.iso
+https://repo.ialab.dsu.edu/rocky-linux/8.5/isos/x86_64/Rocky-8.5-x86_64-minimal.iso
+
+https://mirror.chpc.utah.edu/pub/rocky/8.5/isos/x86_64/Rocky-8.5-x86_64-dvd1.iso
+https://mirror.chpc.utah.edu/pub/rocky/8.5/isos/x86_64/Rocky-8.5-x86_64-minimal.iso
+
 # Arch Linux
-https://ftp.u-strasbg.fr/linux/distributions/archlinux/iso/2022.04.01/archlinux-2022.04.01-x86_64.iso
+https://ftp.u-strasbg.fr/linux/distributions/archlinux/iso/2022.04.05/archlinux-2022.04.05-x86_64.iso
+
+http://archlinux.mirrors.ovh.net/archlinux/iso/2022.04.05/archlinux-2022.04.05-x86_64.iso
+https://mir.archlinux.fr/iso/2022.04.05/archlinux-2022.04.05-x86_64.iso
+https://mirroir.labhouse.fr/arch/iso/2022.04.05/archlinux-2022.04.05-x86_64.iso
+
+https://mirror.arizona.edu/archlinux/iso/2022.04.05/archlinux-2022.04.05-x86_64.iso
+https://mirror.arizona.edu/archlinux/iso/2022.04.05/archlinux-2022.04.05-x86_64.iso
+https://mirror.clarkson.edu/archlinux/iso/2022.04.05/archlinux-2022.04.05-x86_64.iso
+https://mirror.clarkson.edu/archlinux/iso/2022.04.05/archlinux-2022.04.05-x86_64.iso
+
 # Ubuntu
-https://ubuntu.univ-nantes.fr/ubuntu-cd/22.04/ubuntu-22.04-beta-desktop-amd64.iso
-https://ubuntu.univ-nantes.fr/ubuntu-cd/20.04.4/ubuntu-20.04.4-desktop-amd64.iso
-https://ubuntu.univ-nantes.fr/ubuntu-cd/18.04.6/ubuntu-18.04.6-desktop-amd64.iso
+https://ubuntu.univ-nantes.fr/ubuntu-cd/jammy/ubuntu-22.04-beta-desktop-amd64.iso
+https://ubuntu.univ-nantes.fr/ubuntu-cd/focal/ubuntu-20.04.4-desktop-amd64.iso
+https://ubuntu.univ-nantes.fr/ubuntu-cd/bionic/ubuntu-18.04.6-desktop-amd64.iso
+
 # Parrot Security
 https://bunny.deb.parrot.sh/parrot/iso/5.0/Parrot-security-5.0_amd64.iso
+
 # Kali Linux
 https://cdimage.kali.org/kali-images/current/kali-linux-2022.1-live-amd64.iso
 https://cdimage.kali.org/kali-images/current/kali-linux-2022.1-installer-amd64.iso
