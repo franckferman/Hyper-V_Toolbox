@@ -97,7 +97,7 @@ Write-Host ""
 	switch($userChoice)
 	{
     	1{HPV-New_VM-Blank}
-    	2{Under_Development}
+    	2{HPV-New_VM-Template}
     	3{HPV-VM_Management}
     	4{HPV-Virtual_Switches_Management}
     	5{Resource_Management}
@@ -1201,7 +1201,7 @@ Write-Host ""
 	switch($userChoice)
 	{
     	1{HPV-New_VM-Template-Microsoft_Windows}
-    	2{HPV-New_VM-Template-GNU_Linux}
+    	2{Under_Development}
     
     	8{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
     	9{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Exit of the program in progress.`n" -ForegroundColor darkred;pause;$host.ui.RawUI.WindowTitle=$DefaultWindowTitle;exit}
@@ -1266,10 +1266,7 @@ function HPV-New_VM-Template-Microsoft_Windows
 Clear-Host
 Write-Host "1 - Microsoft Windows 10 Entreprise (LTSC): Sysprep & autounattend.xml."
 Write-Host ""
-Write-Host "2 - Microsoft Windows 10 Pro/Home/Education: Sysprep & autounattend.xml."
-Write-Host ""
-Write-Host "3 - Microsoft Windows Server 2012: Sysprep."
-Write-Host "4 - Microsoft Windows Server 2019: Sysprep."
+Write-Host "2 - Microsoft Windows Server 2019: Sysprep."
 Write-Host ""
 Write-Host "8 - Return to main menu." -ForegroundColor red
 Write-Host "9 - Quit the program." -ForegroundColor darkred
@@ -1280,10 +1277,7 @@ Write-Host ""
 	{
     	1{HPV-New_VM-Template-Client-Microsoft_Windows_10-Entreprise_LTSC-sysprep_autounattend}
 
-    	2{Under_Development}
-
-    	3{Under_Development}
-    	4{Under_Development}
+    	2{HPV-New_VM-Template-Server-Microsoft_Windows_Server_2019-sysprep}
 
     	8{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
     	9{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Exit of the program in progress.`n" -ForegroundColor darkred;pause;$host.ui.RawUI.WindowTitle=$DefaultWindowTitle;exit}
@@ -1306,7 +1300,7 @@ function HPV-New_VM-Template-Client-Microsoft_Windows_10-Entreprise_LTSC-sysprep
 [string]$script:isoOrBasePath=".\src\Microsoft_Windows\clients\vhds\base\base-client-windows10-entreprise-ltsc-sysprep-autounattend.vhdx"
 [string]$script:isoOrVHDBaseDest=".\src\Microsoft_Windows\clients\vhds\base"
 [string]$script:isoOrVHDBaseFolderPath=".\src\Microsoft_Windows\clients\vhds\base"
-[string]$script:isoOrBaseSrc=".\tmp\base-client-windows10-entreprise-ltsc-sysprep-autounattend.vhdx"
+[string]$script:isoOrBaseSrc="https://depository.fra1.digitaloceanspaces.com/bases/Microsoft_Windows/base-client-windows10-entreprise-ltsc-sysprep-autounattend.vhdx"
 
 [string]$script:VHDSPath=".\src\Microsoft_Windows\clients\vhds\"
 [string]$script:vmsPath=".\src\Microsoft_Windows\clients\vms\"
@@ -1369,6 +1363,76 @@ Write-Host ""
 function HPV-Copy_VM-Different-Template-Client-Microsoft_Windows_10-Entreprise_LTSC
 {
 HPV-New_VM-Template-Client-Microsoft_Windows_10-Entreprise_LTSC
+}
+
+function HPV-New_VM-Template-Server-Microsoft_Windows_Server_2019-sysprep
+{
+[string]$script:isoOrBasePath=".\src\Microsoft_Windows\servers\vhds\base\base-windows_server_2019-sysprep.vhdx"
+[string]$script:isoOrVHDBaseDest=".\src\Microsoft_Windows\servers\vhds\base"
+[string]$script:isoOrVHDBaseFolderPath=".\src\Microsoft_Windows\servers\vhds\base"
+[string]$script:isoOrBaseSrc="https://depository.fra1.digitaloceanspaces.com/bases/Microsoft_Windows/base-windows_server_2019-sysprep.vhdx"
+
+[string]$script:VHDSPath=".\src\Microsoft_Windows\servers\vhds\"
+[string]$script:vmsPath=".\src\Microsoft_Windows\servers\vms\"
+
+$script:RAMgbSizeUserChoice=2GB
+$script:VHDgbSizeUserChoice="$null"
+
+HPV-New_VM-Template-Model
+HPV-Use_New-VM-Template-Microsoft_Windows
+
+Write-Host "1 - Recreate the same virtual machine (with the same characteristics)."
+Write-Host "2 - Recreate the same virtual machine (with different characteristics)."
+Write-Host ""
+Write-Host "8 - Return to main menu." -ForegroundColor red
+Write-Host "9 - Quit the program." -ForegroundColor darkred
+Write-Host ""
+
+[int]$userChoice=Read-Host "Your choice"
+	switch($userChoice)
+	{
+    	1{HPV-Copy_VM-Same-Template-Server-Microsoft_Windows_Server_2019-sysprep}
+    	2{HPV-Copy_VM-Different-Template-Server-Microsoft_Windows_Server_2019-sysprep}
+
+    	8{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
+    	9{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Exit of the program in progress.`n" -ForegroundColor darkred;Write-Host "Info: " -NoNewLine;Write-Host "A summary of the last machine created will be displayed after this program is exited.";Write-Host "";pause;$host.ui.RawUI.WindowTitle=$DefaultWindowTitle;Write-Host "";exit}
+    	default{Write-Host "`nInfo: " -NoNewLine;Write-Host "An unexpected error was caused. In most cases, it is an error made by the user, so take the time to answer the questions correctly." -ForegroundColor red;Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
+	}
+
+}
+
+function HPV-Copy_VM-Same-Template-Server-Microsoft_Windows_Server_2019-sysprep
+{
+Clear-Host
+$script:VMName=Read-Host "Choose a name for the virtual machine"
+Write-Host "Info: " -NoNewLine;Write-Host "The name chosen for the virtual machine is " -NoNewLine ;Write-Host "$VMname" -NoNewLine -ForegroundColor green;Write-Host "."
+
+HPV-Use_New-VM-Template-Microsoft_Windows
+
+Write-Host ""
+Write-Host "1 - Recreate the same virtual machine (with the same characteristics)."
+Write-Host "2 - Recreate the same virtual machine (with different characteristics)."
+Write-Host ""
+Write-Host "8 - Return to main menu." -ForegroundColor red
+Write-Host "9 - Quit the program." -ForegroundColor darkred
+Write-Host ""
+
+[int]$userChoice=Read-Host "Your choice"
+	switch($userChoice)
+	{
+    	1{HPV-Copy_VM-Same-Template-Server-Microsoft_Windows_Server_2019-sysprep}
+    	2{HPV-Copy_VM-Different-Template-Server-Microsoft_Windows_Server_2019-sysprep}
+
+    	8{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
+    	9{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Exit of the program in progress.`n" -ForegroundColor darkred;Write-Host "Info: " -NoNewLine;Write-Host "A summary of the last machine created will be displayed after this program is exited.";Write-Host "";pause;$host.ui.RawUI.WindowTitle=$DefaultWindowTitle;Write-Host "";exit}
+    	default{Write-Host "`nInfo: " -NoNewLine;Write-Host "An unexpected error was caused. In most cases, it is an error made by the user, so take the time to answer the questions correctly." -ForegroundColor red;Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
+	}
+
+}
+
+function HPV-Copy_VM-Different-Template-Server-Microsoft_Windows_Server_2019-sysprep
+{
+HPV-New_VM-Template-Server-Microsoft_Windows_Server_2019-sysprep
 }
 
 function HPV-New_VM-Template-GNU_Linux
