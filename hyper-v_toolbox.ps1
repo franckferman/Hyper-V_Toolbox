@@ -2074,6 +2074,12 @@ HPV-Download_Base ".\src\Microsoft_Windows\servers\iso\win_srv-2012.iso" ".\src\
 Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Windows Server 2012 ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\Microsoft_Windows\servers\iso\win_srv-2019.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "https://depository.fra1.digitaloceanspaces.com/ISO_images/Microsoft_Windows/win_srv-2019.iso"
 
+Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Windows Server 2019 Base download process.";Write-Host ""
+HPV-Download_Base ".\src\Microsoft_Windows\servers\vhds\base\base-windows_server_2019-sysprep.vhdx" ".\src\Microsoft_Windows\servers\vhds\base" ".\src\Microsoft_Windows\servers\vhds\base" "https://depository.fra1.digitaloceanspaces.com/bases/Microsoft_Windows/base-windows_server_2019-sysprep.vhdx"
+
+Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Windows Entreprise Base download process.";Write-Host ""
+HPV-Download_Base ".\src\Microsoft_Windows\clients\vhds\base\base-client-windows10-entreprise-ltsc-sysprep-autounattend.vhdx" ".\src\Microsoft_Windows\clients\vhds\base" ".\src\Microsoft_Windows\clients\vhds\base" "https://depository.fra1.digitaloceanspaces.com/bases/Microsoft_Windows/base-client-windows10-entreprise-ltsc-sysprep-autounattend.vhdx"
+
 Write-Host ""
 Write-Host "7 - Return to the resource management menu."
 Write-Host "8 - Return to main menu." -ForegroundColor red
@@ -2107,6 +2113,12 @@ HPV-Download_Base ".\src\Microsoft_Windows\servers\iso\win_srv-2012.iso" ".\src\
 
 Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Windows Server 2012 ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\Microsoft_Windows\servers\iso\win_srv-2019.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "https://depository.fra1.digitaloceanspaces.com/ISO_images/Microsoft_Windows/win_srv-2019.iso"
+
+Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Windows Server 2019 Base download process.";Write-Host ""
+HPV-Download_Base ".\src\Microsoft_Windows\servers\vhds\base\base-windows_server_2019-sysprep.vhdx" ".\src\Microsoft_Windows\servers\vhds\base" ".\src\Microsoft_Windows\servers\vhds\base" "https://depository.fra1.digitaloceanspaces.com/bases/Microsoft_Windows/base-windows_server_2019-sysprep.vhdx"
+
+Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Windows Entreprise Base download process.";Write-Host ""
+HPV-Download_Base ".\src\Microsoft_Windows\clients\vhds\base\base-client-windows10-entreprise-ltsc-sysprep-autounattend.vhdx" ".\src\Microsoft_Windows\clients\vhds\base" ".\src\Microsoft_Windows\clients\vhds\base" "https://depository.fra1.digitaloceanspaces.com/bases/Microsoft_Windows/base-client-windows10-entreprise-ltsc-sysprep-autounattend.vhdx"
 
 Write-Host ""
 Write-Host "7 - Return to the resource management menu."
@@ -2213,6 +2225,20 @@ Ask_YesOrNo "Question" "Would you like to install Microsoft Windows Entreprise?"
 		0{[bool]$DoIuse_Microsoft_Windows_Server_2019=$true}
 	}
 
+	Ask_YesOrNo "Question" "Would you like to install Base for Microsoft Windows Server 2019?"
+	switch($Ask_YesOrNo_Result)
+	{
+		1{[bool]$DoIuse_Microsoft_Windows_Server_2019_Base=$false}
+		0{[bool]$DoIuse_Microsoft_Windows_Server_2019_Base=$true}
+	}
+
+	Ask_YesOrNo "Question" "Would you like to install Base for Microsoft Windows Entreprise?"
+	switch($Ask_YesOrNo_Result)
+	{
+		1{[bool]$DoIuse_Microsoft_Windows_Entreprise_Base=$false}
+		0{[bool]$DoIuse_Microsoft_Windows_Entreprise_Base=$true}
+	}
+
 	} 		### END: If Microsoft Windows is to be used.
 
 	default{Write-Host "`nInfo: " -NoNewLine;Write-Host "An unexpected error was caused. In most cases, it is an error made by the user, so take the time to answer the questions correctly." -ForegroundColor red;Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
@@ -2298,6 +2324,10 @@ if($DoIuse_Microsoft_Windows_Pro -eq $true){Write-Host "`nOngoing action: " -NoN
 if($DoIuse_Microsoft_Windows_Server_2012 -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Microsoft Windows Server 2012 ISO download process.";Write-Host "";HPV-Download_Base ".\src\Microsoft_Windows\servers\iso\win_srv-2012.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "https://depository.fra1.digitaloceanspaces.com/ISO_images/Microsoft_Windows/win_srv-2012.iso"}else{$null}
 
 if($DoIuse_Microsoft_Windows_Server_2019 -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Microsoft Windows Server 2019 ISO download process.";Write-Host "";HPV-Download_Base ".\src\Microsoft_Windows\servers\iso\win_srv-2019.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "https://depository.fra1.digitaloceanspaces.com/ISO_images/Microsoft_Windows/win_srv-2019.iso"}else{$null}
+
+if($DoIuse_Microsoft_Windows_Server_2019_Base -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Base for Microsoft Windows Server 2019 download process.";Write-Host "";HPV-Download_Base ".\src\Microsoft_Windows\servers\vhds\base\base-windows_server_2019-sysprep.vhdx" ".\src\Microsoft_Windows\servers\vhds\base" ".\src\Microsoft_Windows\servers\vhds\base" "https://depository.fra1.digitaloceanspaces.com/bases/Microsoft_Windows/base-windows_server_2019-sysprep.vhdx"}else{$null}
+
+if($DoIuse_Microsoft_Windows_Entreprise_Base -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Base for Microsoft Windows Server 2019 download process.";Write-Host "";HPV-Download_Base ".\src\Microsoft_Windows\clients\vhds\base\base-client-windows10-entreprise-ltsc-sysprep-autounattend.vhdx" ".\src\Microsoft_Windows\clients\vhds\base" ".\src\Microsoft_Windows\clients\vhds\base" "https://depository.fra1.digitaloceanspaces.com/bases/Microsoft_Windows/base-client-windows10-entreprise-ltsc-sysprep-autounattend.vhdx"}else{$null}
 
 if($DoIuse_GNU_Linux_pfSense -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the pfSense ISO download process.";Write-Host "";HPV-Download_Base ".\src\GNU_Linux\iso\pfSense-CE-2.5.1-RELEASE-amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://depository.fra1.digitaloceanspaces.com/ISO_images/GNU_Linux/pfSense-CE-2.5.1-RELEASE-amd64.iso"}else{$null}
 
