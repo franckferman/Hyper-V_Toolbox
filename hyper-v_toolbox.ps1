@@ -784,7 +784,7 @@ function HPV-New_VM-Blank-GNU_Linux-Ubuntu
 [string]$script:isoPath=".\src\GNU_Linux\iso\ubuntu-22.04-beta-desktop-amd64.iso"
 [string]$script:isoDest=".\src\GNU_Linux\iso"
 [string]$script:isoFolderPath=".\src\GNU_Linux\iso"
-[string]$script:isoSrc="http://ubuntu.univ-nantes.fr/ubuntu-cd/22.04/ubuntu-22.04-beta-desktop-amd64.iso"
+[string]$script:isoSrc="https://releases.ubuntu.com/22.04/ubuntu-22.04-desktop-amd64.iso"
 
 [string]$script:VHDSPath=".\src\GNU_Linux\vhds\"
 [string]$script:vmsPath=".\src\GNU_Linux\vms\"
@@ -2043,7 +2043,7 @@ Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Debian ISO 
 HPV-Download_Base ".\src\GNU_Linux\iso\debian-11.3.0-amd64-netinst.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-11.3.0-amd64-netinst.iso"
 
 Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Ubuntu ISO download process.";Write-Host ""
-HPV-Download_Base ".\src\GNU_Linux\iso\ubuntu-22.04-beta-desktop-amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://ubuntu.univ-nantes.fr/ubuntu-cd/22.04/ubuntu-22.04-beta-desktop-amd64.iso"
+HPV-Download_Base ".\src\GNU_Linux\iso\ubuntu-22.04-beta-desktop-amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://releases.ubuntu.com/22.04/ubuntu-22.04-desktop-amd64.iso"
 
 Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Rocky Linux (Full) ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\GNU_Linux\iso\Rocky-8.5-x86_64-dvd1.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.5-x86_64-dvd1.iso"
@@ -2149,7 +2149,7 @@ Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Debian ISO 
 HPV-Download_Base ".\src\GNU_Linux\iso\debian-11.3.0-amd64-netinst.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-11.3.0-amd64-netinst.iso"
 
 Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Ubuntu ISO download process.";Write-Host ""
-HPV-Download_Base ".\src\GNU_Linux\iso\ubuntu-22.04-beta-desktop-amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://ubuntu.univ-nantes.fr/ubuntu-cd/22.04/ubuntu-22.04-beta-desktop-amd64.iso"
+HPV-Download_Base ".\src\GNU_Linux\iso\ubuntu-22.04-beta-desktop-amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://releases.ubuntu.com/22.04/ubuntu-22.04-desktop-amd64.iso"
 
 Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Rocky Linux (Full) ISO download process.";Write-Host ""
 HPV-Download_Base ".\src\GNU_Linux\iso\Rocky-8.5-x86_64-dvd1.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.5-x86_64-dvd1.iso"
@@ -2333,7 +2333,7 @@ if($DoIuse_GNU_Linux_pfSense -eq $true){Write-Host "`nOngoing action: " -NoNewLi
 
 if($DoIuse_GNU_Linux_Debian -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Debian ISO download process.";Write-Host "";HPV-Download_Base ".\src\GNU_Linux\iso\debian-11.3.0-amd64-netinst.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-11.3.0-amd64-netinst.iso"}else{$null}
 
-if($DoIuse_GNU_Linux_Ubuntu -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Ubuntu ISO download process.";Write-Host "";HPV-Download_Base ".\src\GNU_Linux\iso\ubuntu-22.04-beta-desktop-amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://ubuntu.univ-nantes.fr/ubuntu-cd/22.04/ubuntu-22.04-beta-desktop-amd64.iso"}else{$null}
+if($DoIuse_GNU_Linux_Ubuntu -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Ubuntu ISO download process.";Write-Host "";HPV-Download_Base ".\src\GNU_Linux\iso\ubuntu-22.04-beta-desktop-amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://releases.ubuntu.com/22.04/ubuntu-22.04-desktop-amd64.iso"}else{$null}
 
 if($DoIuse_GNU_Linux_Rocky_Linux_Full -eq $true){HWrite-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Rocky Linux (Full) ISO download process.";Write-Host "";PV-Download_Base ".\src\GNU_Linux\iso\Rocky-8.5-x86_64-dvd1.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.5-x86_64-dvd1.iso"}else{$null}
 
