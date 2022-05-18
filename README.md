@@ -254,5 +254,5 @@ Project Link: [https://github.com/franckferman/hyper-v_toolbox](https://github.c
 [license-shield]: https://img.shields.io/github/license/franckferman/hyper-v_toolbox.svg?style=for-the-badge
 [license-url]: https://github.com/franckferman/hyper-v_toolbox/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/fferman42
+[linkedin-url]: https://linkedin.com/in/franckferman
 [product-screenshot]: images/screenshot.png
