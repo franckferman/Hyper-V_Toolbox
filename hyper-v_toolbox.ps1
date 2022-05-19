@@ -1,4 +1,4 @@
-<#hyper-v_toolbox
+<#hyper-v_toolbox.ps1
 Author: Franck FERMAN - fferman@protonmail.ch
 Description: Hyper-V Toolbox is a PowerShell script allowing (among other things) the complete (and advanced) management of virtual machines (with Hyper V). 
 Version: 2.0
