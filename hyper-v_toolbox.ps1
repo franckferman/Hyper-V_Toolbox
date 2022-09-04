@@ -31,18 +31,18 @@ Beginning of the Microsoft Windows iso download links block
 [string]$script:isoSrc_Microsoft_Windows_Server_2019="https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/ISO_images/Microsoft_Windows/Microsoft_Windows_Server_2019.iso"
 [string]$script:isoSrc_Microsoft_Windows_Server_2022="https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/ISO_images/Microsoft_Windows/Microsoft_Windows_Server_2022.iso"
 
-[string]$script:isoSrc_Base_Microsoft_Windows_10_Entreprise_LTSC="https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/images/Microsoft_Windows/Base_Microsoft_Windows_10_Entreprise_LTSC.iso"
-[string]$script:isoSrc_Base_Microsoft_Windows_10_Pro="https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/images/Microsoft_Windows/Base_Microsoft_Windows_10_Pro.iso"
+[string]$script:isoSrc_Base_Microsoft_Windows_10_Entreprise_LTSC="https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/images/Microsoft_Windows/Base_Microsoft_Windows_10_Entreprise_LTSC.vhdx"
+[string]$script:isoSrc_Base_Microsoft_Windows_10_Pro="https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/images/Microsoft_Windows/Base_Microsoft_Windows_10_Pro.vhdx"
 
-[string]$script:isoSrc_Base_Microsoft_Windows_Server_2016="https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/images/Microsoft_Windows/Base_Microsoft_Windows_Server_2016.iso"
-[string]$script:isoSrc_Base_Microsoft_Windows_Server_2019="https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/images/Microsoft_Windows/Base_Microsoft_Windows_Server_2019.iso"
-[string]$script:isoSrc_Base_Microsoft_Windows_Server_2022="https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/images/Microsoft_Windows/Base_Microsoft_Windows_Server_2022.iso"
+[string]$script:isoSrc_Base_Microsoft_Windows_Server_2016="https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/images/Microsoft_Windows/Base_Microsoft_Windows_Server_2016.vhdx"
+[string]$script:isoSrc_Base_Microsoft_Windows_Server_2019="https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/images/Microsoft_Windows/Base_Microsoft_Windows_Server_2019.vhdx"
+[string]$script:isoSrc_Base_Microsoft_Windows_Server_2022="https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/images/Microsoft_Windows/Base_Microsoft_Windows_Server_2022.vhdx"
 
-[string]$script:isoSrc_Base_GNU_Linux_Base_Debian="https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/images/GNU_Linux/Base_Debian.iso"
-[string]$script:isoSrc_Base_GNU_Linux_Base_Rocky_Linux="https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/images/GNU_Linux/Base_Rocky_Linux.iso"
-[string]$script:isoSrc_Base_GNU_Linux_Base_Ubuntu="https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/images/GNU_Linux/Base_Ubuntu.iso"
+[string]$script:isoSrc_Base_GNU_Linux_Base_Debian="https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/images/GNU_Linux/Base_Debian.vhdx"
+[string]$script:isoSrc_Base_GNU_Linux_Base_Rocky_Linux="https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/images/GNU_Linux/Base_Rocky_Linux.vhdx"
+[string]$script:isoSrc_Base_GNU_Linux_Base_Ubuntu="https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/images/GNU_Linux/Base_Ubuntu.vhdx"
 
-[string]$script:isoSrc_Base_GNU_Linux_Base_Parrot_Security="https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/images/GNU_Linux/Base_Parrot_Security.iso"
+[string]$script:isoSrc_Base_GNU_Linux_Base_Parrot_Security="https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/images/GNU_Linux/Base_Parrot_Security.vhdx"
 
 <# - - - - # - - - - # - - - - # - - - - #
 End of the Microsoft Windows iso download links block
@@ -188,13 +188,13 @@ Write-Host "`nStart downloading the "-NoNewLine;Write-Host "Base for Microsoft W
 Download_Image ".\src\Microsoft_Windows\clients\iso\Microsoft_Windows_10_Pro.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "isoSrc_base_Microsoft_Windows_10_Pro"
 
 Write-Host "`nStart downloading the "-NoNewLine;Write-Host "Base for Microsoft Windows Server 2016 "-ForegroundColor green -NoNewLine;Write-Host "image.`n"
-Download_Image ".\src\Microsoft_Windows\clients\iso\Microsoft_Windows_Server_2016.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "isoSrc_base_Microsoft_Windows_Server_2016"
+Download_Image ".\src\Microsoft_Windows\servers\iso\Microsoft_Windows_Server_2016.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "isoSrc_base_Microsoft_Windows_Server_2016"
 
 Write-Host "`nStart downloading the "-NoNewLine;Write-Host "Base for Microsoft Windows Server 2019 "-ForegroundColor green -NoNewLine;Write-Host "image.`n"
-Download_Image ".\src\Microsoft_Windows\clients\iso\Microsoft_Windows_Server_2019.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "isoSrc_base_Microsoft_Windows_Server_2019"
+Download_Image ".\src\Microsoft_Windows\servers\iso\Microsoft_Windows_Server_2019.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "isoSrc_base_Microsoft_Windows_Server_2019"
 
 Write-Host "`nStart downloading the "-NoNewLine;Write-Host "Base for Microsoft Windows Server 2022 "-ForegroundColor green -NoNewLine;Write-Host "image.`n"
-Download_Image ".\src\Microsoft_Windows\clients\iso\Microsoft_Windows_Server_2022.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "isoSrc_base_Microsoft_Windows_Server_2022"
+Download_Image ".\src\Microsoft_Windows\servers\iso\Microsoft_Windows_Server_2022.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "isoSrc_base_Microsoft_Windows_Server_2022"
 
 Write-Host "`nLaunching the GNU/Linux resource download."
 
@@ -237,28 +237,43 @@ Write-Host "0 - Back to the main menu`n"-ForegroundColor darkred
 function LocalRessources_management_DL_Microsoft_Windows
 {
 Clear-Host
-Write-Host "Launching the Microsoft Windows resource download."
+Write-Host "Launching the resource download."
 
 Write-Host "`nStart downloading the "-NoNewLine;Write-Host "Microsoft Windows 11 multiple editions "-ForegroundColor green -NoNewLine;Write-Host "image.`n"
-Download_Image ".\src\Microsoft_Windows\clients\iso\Microsoft_Windows_11_multiple_editions.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/ISO_images/Microsoft_Windows/Microsoft_Windows_11_multiple_editions.iso"
+Download_Image ".\src\Microsoft_Windows\clients\iso\Microsoft_Windows_11_multiple_editions.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "isoSrc_Microsoft_Windows_11_multiple_editions"
 
 Write-Host "`nStart downloading the "-NoNewLine;Write-Host "Microsoft Windows 10 Entreprise LTSC "-ForegroundColor green -NoNewLine;Write-Host "image.`n"
-Download_Image ".\src\Microsoft_Windows\clients\iso\Microsoft_Windows_10_Entreprise_LTSC.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/ISO_images/Microsoft_Windows/Microsoft_Windows_10_Entreprise_LTSC.iso"
+Download_Image ".\src\Microsoft_Windows\clients\iso\Microsoft_Windows_10_Entreprise_LTSC.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "isoSrc_Microsoft_Windows_10_Entreprise_LTSC"
 
 Write-Host "`nStart downloading the "-NoNewLine;Write-Host "Microsoft Windows 10 multiple editions "-ForegroundColor green -NoNewLine;Write-Host "image.`n"
-Download_Image ".\src\Microsoft_Windows\clients\iso\Microsoft_Windows_10_multiple_editions.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/ISO_images/Microsoft_Windows/Microsoft_Windows_10_multiple_editions.iso"
+Download_Image ".\src\Microsoft_Windows\clients\iso\Microsoft_Windows_10_multiple_editions.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "isoSrc_Microsoft_Windows_10_multiple_editions"
 
 Write-Host "`nStart downloading the "-NoNewLine;Write-Host "Microsoft Windows Server 2012 "-ForegroundColor green -NoNewLine;Write-Host "image.`n"
-Download_Image ".\src\Microsoft_Windows\servers\iso\Microsoft_Windows_Server_2012.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/ISO_images/Microsoft_Windows/Microsoft_Windows_Server_2012.iso"
+Download_Image ".\src\Microsoft_Windows\servers\iso\Microsoft_Windows_Server_2012.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "isoSrc_Microsoft_Windows_Server_2012"
 
 Write-Host "`nStart downloading the "-NoNewLine;Write-Host "Microsoft Windows Server 2016 "-ForegroundColor green -NoNewLine;Write-Host "image.`n"
-Download_Image ".\src\Microsoft_Windows\servers\iso\Microsoft_Windows_Server_2016.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/ISO_images/Microsoft_Windows/Microsoft_Windows_Server_2016.iso"
+Download_Image ".\src\Microsoft_Windows\servers\iso\Microsoft_Windows_Server_2016.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "isoSrc_Microsoft_Windows_Server_2016"
 
 Write-Host "`nStart downloading the "-NoNewLine;Write-Host "Microsoft Windows Server 2019 "-ForegroundColor green -NoNewLine;Write-Host "image.`n"
-Download_Image ".\src\Microsoft_Windows\servers\iso\Microsoft_Windows_Server_2019.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/ISO_images/Microsoft_Windows/Microsoft_Windows_Server_2019.iso"
+Download_Image ".\src\Microsoft_Windows\servers\iso\Microsoft_Windows_Server_2019.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "isoSrc_Microsoft_Windows_Server_2019"
 
 Write-Host "`nStart downloading the "-NoNewLine;Write-Host "Microsoft Windows Server 2022 "-ForegroundColor green -NoNewLine;Write-Host "image.`n"
-Download_Image ".\src\Microsoft_Windows\servers\iso\Microsoft_Windows_Server_2022.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/ISO_images/Microsoft_Windows/Microsoft_Windows_Server_2022.iso"
+Download_Image ".\src\Microsoft_Windows\servers\iso\Microsoft_Windows_Server_2022.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "isoSrc_Microsoft_Windows_Server_2022"
+
+Write-Host "`nStart downloading the "-NoNewLine;Write-Host "Base for Microsoft Windows 10 Entreprise LTSC "-ForegroundColor green -NoNewLine;Write-Host "image.`n"
+Download_Image ".\src\Microsoft_Windows\clients\iso\Microsoft_Windows_10_Entreprise_LTSC.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "isoSrc_base_Microsoft_Windows_10_Entreprise_LTSC"
+
+Write-Host "`nStart downloading the "-NoNewLine;Write-Host "Base for Microsoft Windows 10 Pro "-ForegroundColor green -NoNewLine;Write-Host "image.`n"
+Download_Image ".\src\Microsoft_Windows\clients\iso\Microsoft_Windows_10_Pro.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "isoSrc_base_Microsoft_Windows_10_Pro"
+
+Write-Host "`nStart downloading the "-NoNewLine;Write-Host "Base for Microsoft Windows Server 2016 "-ForegroundColor green -NoNewLine;Write-Host "image.`n"
+Download_Image ".\src\Microsoft_Windows\servers\iso\Microsoft_Windows_Server_2016.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "isoSrc_base_Microsoft_Windows_Server_2016"
+
+Write-Host "`nStart downloading the "-NoNewLine;Write-Host "Base for Microsoft Windows Server 2019 "-ForegroundColor green -NoNewLine;Write-Host "image.`n"
+Download_Image ".\src\Microsoft_Windows\servers\iso\Microsoft_Windows_Server_2019.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "isoSrc_base_Microsoft_Windows_Server_2019"
+
+Write-Host "`nStart downloading the "-NoNewLine;Write-Host "Base for Microsoft Windows Server 2022 "-ForegroundColor green -NoNewLine;Write-Host "image.`n"
+Download_Image ".\src\Microsoft_Windows\servers\iso\Microsoft_Windows_Server_2022.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "isoSrc_base_Microsoft_Windows_Server_2022"
 
 Write-Host "`n9 - Back to the management of local resources menu"-ForegroundColor red
 Write-Host "0 - Back to the main menu`n"-ForegroundColor darkred
@@ -278,28 +293,28 @@ Clear-Host
 Write-Host "Launching the GNU/Linux resource download."
 
 Write-Host "`nStart downloading the "-NoNewLine;Write-Host "GNU/Linux pfSense "-ForegroundColor green -NoNewLine;Write-Host "image.`n"
-Download_Image ".\src\GNU_Linux\iso\GNU_Linux_pfSense.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/ISO_images/GNU_Linux/GNU_Linux_pfSense.iso"
+Download_Image ".\src\GNU_Linux\iso\GNU_Linux_pfSense.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "isoSrc_GNU_Linux_pfSense"
 
 Write-Host "`nStart downloading the "-NoNewLine;Write-Host "GNU/Linux Debian "-ForegroundColor green -NoNewLine;Write-Host "image.`n"
-Download_Image ".\src\GNU_Linux\iso\GNU_Linux_Debian.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/ISO_images/GNU_Linux/GNU_Linux_Debian.iso"
+Download_Image ".\src\GNU_Linux\iso\GNU_Linux_Debian.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "isoSrc_GNU_Linux_Debian"
 
 Write-Host "`nStart downloading the "-NoNewLine;Write-Host "GNU/Linux CentOS "-ForegroundColor green -NoNewLine;Write-Host "image.`n"
-Download_Image ".\src\GNU_Linux\iso\GNU_Linux_CentOS.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/ISO_images/GNU_Linux/GNU_Linux_CentOS.iso"
+Download_Image ".\src\GNU_Linux\iso\GNU_Linux_CentOS.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "isoSrc_GNU_Linux_CentOS"
 
 Write-Host "`nStart downloading the "-NoNewLine;Write-Host "GNU/Linux Rocky Linux "-ForegroundColor green -NoNewLine;Write-Host "image.`n"
-Download_Image ".\src\GNU_Linux\iso\GNU_Linux_Rocky_Linux.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/ISO_images/GNU_Linux/GNU_Linux_Rocky_Linux.iso"
+Download_Image ".\src\GNU_Linux\iso\GNU_Linux_Rocky_Linux.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "isoSrc_GNU_Linux_Rocky_Linux"
 
 Write-Host "`nStart downloading the "-NoNewLine;Write-Host "GNU/Linux Ubuntu "-ForegroundColor green -NoNewLine;Write-Host "image.`n"
-Download_Image ".\src\GNU_Linux\iso\GNU_Linux_Ubuntu.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/ISO_images/GNU_Linux/GNU_Linux_Ubuntu.iso"
+Download_Image ".\src\GNU_Linux\iso\GNU_Linux_Ubuntu.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "isoSrc_GNU_Linux_Ubuntu"
 
 Write-Host "`nStart downloading the "-NoNewLine;Write-Host "GNU/Linux Parrot Security "-ForegroundColor green -NoNewLine;Write-Host "image.`n"
-Download_Image ".\src\GNU_Linux\iso\GNU_Linux_Parrot_Security.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/ISO_images/GNU_Linux/GNU_Linux_Parrot_Security.iso"
+Download_Image ".\src\GNU_Linux\iso\GNU_Linux_Parrot_Security.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "isoSrc_GNU_Linux_Parrot_Security"
 
 Write-Host "`nStart downloading the "-NoNewLine;Write-Host "GNU/Linux Kali Linux "-ForegroundColor green -NoNewLine;Write-Host "image.`n"
-Download_Image ".\src\GNU_Linux\iso\GNU_Linux_Kali_Linux.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/ISO_images/GNU_Linux/GNU_Linux_Kali_Linux.iso"
+Download_Image ".\src\GNU_Linux\iso\GNU_Linux_Kali_Linux.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "isoSrc_GNU_Linux_Kali_Linux"
 
 Write-Host "`nStart downloading the "-NoNewLine;Write-Host "GNU/Linux Tails "-ForegroundColor green -NoNewLine;Write-Host "image.`n"
-Download_Image ".\src\GNU_Linux\iso\GNU_Linux_Tails.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://depository.fra1.digitaloceanspaces.com/Hyper-V_Toolbox/ISO_images/GNU_Linux/GNU_Linux_Tails.iso"
+Download_Image ".\src\GNU_Linux\iso\GNU_Linux_Tails.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "isoSrc_GNU_Linux_Tails"
 
 Write-Host "`n9 - Back to the management of local resources menu"-ForegroundColor red
 Write-Host "0 - Back to the main menu`n"-ForegroundColor darkred
@@ -476,29 +491,29 @@ Ask_YesOrNo "Question" "Would you like to install GNU/Linux Tails?"
 Ask_YesOrNo "Question" "Would you like to install Base for GNU/Linux Debian?"
 	switch($Ask_YesOrNo_Result)
 	{
-		1{[bool]$Use_GNU_Linux_Debian=$false}
-		0{[bool]$Use_GNU_Linux_Debian=$true}
+		1{[bool]$Use_Base_GNU_Linux_Debian=$false}
+		0{[bool]$Use_Base_GNU_Linux_Debian=$true}
 	}
 
 Ask_YesOrNo "Question" "Would you like to install Base for GNU/Linux Rocky Linux?"
 	switch($Ask_YesOrNo_Result)
 	{
-		1{[bool]$Use_GNU_Linux_Rocky_Linux=$false}
-		0{[bool]$Use_GNU_Linux_Rocky_Linux=$true}
+		1{[bool]$Use_Base_GNU_Linux_Rocky_Linux=$false}
+		0{[bool]$Use_Base_GNU_Linux_Rocky_Linux=$true}
 	}
 
 Ask_YesOrNo "Question" "Would you like to install Base for GNU/Linux Ubuntu?"
 	switch($Ask_YesOrNo_Result)
 	{
-		1{[bool]$Use_GNU_Linux_Ubuntu=$false}
-		0{[bool]$Use_GNU_Linux_Ubuntu=$true}
+		1{[bool]$Use_Base_GNU_Linux_Ubuntu=$false}
+		0{[bool]$Use_Base_GNU_Linux_Ubuntu=$true}
 	}
 
 Ask_YesOrNo "Question" "Would you like to install Base for GNU/Linux Parrot Security?"
 	switch($Ask_YesOrNo_Result)
 	{
-		1{[bool]$Use_GNU_Linux_Parrot_Security=$false}
-		0{[bool]$Use_GNU_Linux_Parrot_Security=$true}
+		1{[bool]$Use_Base_GNU_Linux_Parrot_Security=$false}
+		0{[bool]$Use_Base_GNU_Linux_Parrot_Security=$true}
 	}
 }		## End if GNU/Linux is True
 	default{Write-Host "`nInfo: " -NoNewLine;Write-Host "An unexpected error was caused."-ForegroundColor red;Write-Host "Ongoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
