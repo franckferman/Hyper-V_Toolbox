@@ -285,185 +285,236 @@ Write-Host "0 - Back to the main menu`n"-ForegroundColor darkred
 	}
 }
 
-function HPV-Download_Custom_Resources
+function LocalRessources_management_DL_custom
 {
 Clear-Host
+Write-Host "Launching the custom download program."
 
-### BEGIN: Customization/choice process.
-
-Write-Host "Ongoing action: " -NoNewLine;Write-Host "Launching the customization process."
-
-Ask_YesOrNo "Question" "Would you like to install one or more Microsoft Windows machine(s)?"
-	switch($Ask_YesOrNo_Result) 	### BEGIN: Switch Microsoft Windows.
+Ask_YesOrNo "Question" "Would you like to install one or more Microsoft Windows machines?"
+	switch($Ask_YesOrNo_Result)		## Begin Microsoft Windows block
 	{
-		1{[bool]$DoIuse_Microsoft_Windows=$false}	
-		0{[bool]$DoIuse_Microsoft_Windows=$true 	### BEGIN: If Microsoft Windows is to be used.
+		1{[bool]$Use_Microsoft_Windows=$false}	
+		0{[bool]$Use_Microsoft_Windows=$true		## Begin if Microsoft Windows is True
 
-Ask_YesOrNo "Question" "Would you like to install Microsoft Windows Entreprise?"
+Ask_YesOrNo "Question" "Would you like to install Microsoft Windows 11 multiple editions?"
 	switch($Ask_YesOrNo_Result)
 	{
-		1{[bool]$DoIuse_Microsoft_Windows_Entreprise=$false}
-		0{[bool]$DoIuse_Microsoft_Windows_Entreprise=$true}
+		1{[bool]$Use_Microsoft_Windows_11_multiple_editions=$false}
+		0{[bool]$Use_Microsoft_Windows_11_multiple_editions=$true}
 	}
 
-	Ask_YesOrNo "Question" "Would you like to install Microsoft Windows 10 Pro/Home/Education?"
+Ask_YesOrNo "Question" "Would you like to install Microsoft Windows 10 Entreprise LTSC?"
 	switch($Ask_YesOrNo_Result)
 	{
-		1{[bool]$DoIuse_Microsoft_Windows_Pro=$false}
-		0{[bool]$DoIuse_Microsoft_Windows_Pro=$true}
+		1{[bool]$Use_Microsoft_Windows_10_Entreprise_LTSC=$false}
+		0{[bool]$Use_Microsoft_Windows_10_Entreprise_LTSC=$true}
 	}
 
-	Ask_YesOrNo "Question" "Would you like to install Microsoft Windows Server 2012?"
+Ask_YesOrNo "Question" "Would you like to install Microsoft Windows 10 multiple editions?"
 	switch($Ask_YesOrNo_Result)
 	{
-		1{[bool]$DoIuse_Microsoft_Windows_Server_2012=$false}
-		0{[bool]$DoIuse_Microsoft_Windows_Server_2012=$true}
+		1{[bool]$Use_Microsoft_Windows_10_multiple_editions=$false}
+		0{[bool]$Use_Microsoft_Windows_10_multiple_editions=$true}
 	}
 
-	Ask_YesOrNo "Question" "Would you like to install Microsoft Windows Server 2019?"
+Ask_YesOrNo "Question" "Would you like to install Microsoft Windows Server 2012?"
 	switch($Ask_YesOrNo_Result)
 	{
-		1{[bool]$DoIuse_Microsoft_Windows_Server_2019=$false}
-		0{[bool]$DoIuse_Microsoft_Windows_Server_2019=$true}
+		1{[bool]$Use_Microsoft_Windows_Server_2012=$false}
+		0{[bool]$Use_Microsoft_Windows_Server_2012=$true}
 	}
 
-	Ask_YesOrNo "Question" "Would you like to install Base for Microsoft Windows Server 2019?"
+Ask_YesOrNo "Question" "Would you like to install Microsoft Windows Server 2016?"
 	switch($Ask_YesOrNo_Result)
 	{
-		1{[bool]$DoIuse_Microsoft_Windows_Server_2019_Base=$false}
-		0{[bool]$DoIuse_Microsoft_Windows_Server_2019_Base=$true}
+		1{[bool]$Use_Microsoft_Windows_Server_2016=$false}
+		0{[bool]$Use_Microsoft_Windows_Server_2016=$true}
 	}
 
-	Ask_YesOrNo "Question" "Would you like to install Base for Microsoft Windows Entreprise?"
+Ask_YesOrNo "Question" "Would you like to install Microsoft Windows Server 2019?"
 	switch($Ask_YesOrNo_Result)
 	{
-		1{[bool]$DoIuse_Microsoft_Windows_Entreprise_Base=$false}
-		0{[bool]$DoIuse_Microsoft_Windows_Entreprise_Base=$true}
+		1{[bool]$Use_Microsoft_Windows_Server_2019=$false}
+		0{[bool]$Use_Microsoft_Windows_Server_2019=$true}
 	}
 
-	} 		### END: If Microsoft Windows is to be used.
-
-	default{Write-Host "`nInfo: " -NoNewLine;Write-Host "An unexpected error was caused. In most cases, it is an error made by the user, so take the time to answer the questions correctly." -ForegroundColor red;Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
-
-	}		### END: Switch Microsoft Windows.
-
-	Ask_YesOrNo "Question" "Would you like to install one or more GNU/Linux machine(s)?"
-	switch($Ask_YesOrNo_Result)
-	{		### BEGIN: Switch GNU/Linux.
-		1{[bool]$DoIuse_GNU_Linux=$false}	
-		0{[bool]$DoIuse_GNU_Linux=$true 	### BEGIN: If GNU/Linux is to be used.
-
-	Ask_YesOrNo "Question" "Would you like to install pfSense?"
+Ask_YesOrNo "Question" "Would you like to install Microsoft Windows Server 2022?"
 	switch($Ask_YesOrNo_Result)
 	{
-		1{[bool]$DoIuse_GNU_Linux_pfSense=$false}
-		0{[bool]$DoIuse_GNU_Linux_pfSense=$true}
+		1{[bool]$Use_Microsoft_Windows_Server_2022=$false}
+		0{[bool]$Use_Microsoft_Windows_Server_2022=$true}
 	}
 
-	Ask_YesOrNo "Question" "Would you like to install Debian?"
+Ask_YesOrNo "Question" "Would you like to install Base for Microsoft Windows 10 Entreprise LTSC?"
 	switch($Ask_YesOrNo_Result)
 	{
-		1{[bool]$DoIuse_GNU_Linux_Debian=$false}
-		0{[bool]$DoIuse_GNU_Linux_Debian=$true}
+		1{[bool]$Use_Base_Microsoft_Windows_10_Entreprise_LTSC=$false}
+		0{[bool]$Use_Base_Microsoft_Windows_10_Entreprise_LTSC=$true}
 	}
 
-	Ask_YesOrNo "Question" "Would you like to install Ubuntu?"
+Ask_YesOrNo "Question" "Would you like to install Base for Microsoft Windows 10 Pro?"
 	switch($Ask_YesOrNo_Result)
 	{
-		1{[bool]$DoIuse_GNU_Linux_Ubuntu=$false}
-		0{[bool]$DoIuse_GNU_Linux_Ubuntu=$true}
+		1{[bool]$Use_Base_Microsoft_Windows_10_Pro=$false}
+		0{[bool]$Use_Base_Microsoft_Windows_10_Pro=$true}
 	}
 
-	Ask_YesOrNo "Question" "Would you like to install Rocky Linux (Full)?"
+Ask_YesOrNo "Question" "Would you like to install Base for Microsoft Windows Server 2016?"
 	switch($Ask_YesOrNo_Result)
 	{
-		1{[bool]$DoIuse_GNU_Linux_Rocky_Linux_Full=$false}
-		0{[bool]$DoIuse_GNU_Linux_Rocky_Linux_Full=$true}
+		1{[bool]$Use_Base_Microsoft_Windows_Server_2016=$false}
+		0{[bool]$Use_Base_Microsoft_Windows_Server_2016=$true}
 	}
 
-	Ask_YesOrNo "Question" "Would you like to install Rocky Linux (Minimal)?"
+Ask_YesOrNo "Question" "Would you like to install Base for Microsoft Windows Server 2019?"
 	switch($Ask_YesOrNo_Result)
 	{
-		1{[bool]$DoIuse_GNU_Linux_Rocky_Linux_Minimal=$false}
-		0{[bool]$DoIuse_GNU_Linux_Rocky_Linux_Minimal=$true}
+		1{[bool]$Use_Base_Microsoft_Windows_Server_2019=$false}
+		0{[bool]$Use_Base_Microsoft_Windows_Server_2019=$true}
 	}
 
-	Ask_YesOrNo "Question" "Would you like to install Parrot Security?"
+Ask_YesOrNo "Question" "Would you like to install Base for Microsoft Windows Server 2022?"
 	switch($Ask_YesOrNo_Result)
 	{
-		1{[bool]$DoIuse_GNU_Linux_Parrot_Security=$false}
-		0{[bool]$DoIuse_GNU_Linux_Parrot_Security=$true}
+		1{[bool]$Use_Base_Microsoft_Windows_Server_2022=$false}
+		0{[bool]$Use_Base_Microsoft_Windows_Server_2022=$true}
 	}
+}		## End if Microsoft Windows is True
+	default{Write-Host "`nInfo: " -NoNewLine;Write-Host "An unexpected error was caused."-ForegroundColor red;Write-Host "Ongoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
+}		## End Microsoft Windows block
 
-	Ask_YesOrNo "Question" "Would you like to install Kali Linux (Live)?"
+Ask_YesOrNo "Question" "Would you like to install one or more GNU/Linux machines?"
+	switch($Ask_YesOrNo_Result)		## Begin GNU/Linux block
+	{
+		1{[bool]$Use_GNU_Linux=$false}	
+		0{[bool]$Use_GNU_Linux=$true		## Begin if GNU/Linux is True
+
+Ask_YesOrNo "Question" "Would you like to install GNU/Linux pfSense?"
 	switch($Ask_YesOrNo_Result)
 	{
-		1{[bool]$DoIuse_GNU_Linux_Kali_Linux_Live=$false}
-		0{[bool]$DoIuse_GNU_Linux_Kali_Linux_Live=$true}
+		1{[bool]$Use_GNU_Linux_pfSense=$false}
+		0{[bool]$Use_GNU_Linux_pfSense=$true}
 	}
 
-	Ask_YesOrNo "Question" "Would you like to install Kali Linux (Installer)?"
+Ask_YesOrNo "Question" "Would you like to install GNU/Linux Debian?"
 	switch($Ask_YesOrNo_Result)
 	{
-		1{[bool]$DoIuse_GNU_Linux_Kali_Linux_Installer=$false}
-		0{[bool]$DoIuse_GNU_Linux_Kali_Linux_Installer=$true}
+		1{[bool]$Use_GNU_Linux_Debian=$false}
+		0{[bool]$Use_GNU_Linux_Debian=$true}
 	}
-	
-	}		### BEGIN: If GNU/Linux is to be used.
 
-	default{Write-Host "`nInfo: " -NoNewLine;Write-Host "An unexpected error was caused. In most cases, it is an error made by the user, so take the time to answer the questions correctly." -ForegroundColor red;Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
-
-	}		### END: Switch GNU/Linux.
-
-		### END: Customization/choice process.
-
-		### BEGIN: Resource download process.
-
-if($DoIuse_Microsoft_Windows_Entreprise -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Microsoft Windows Entreprise ISO download process.";Write-Host "";Download_Image ".\src\Microsoft_Windows\clients\iso\client-windows10-entreprise-ltsc.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "https://depository.fra1.digitaloceanspaces.com/ISO_images/Microsoft_Windows/client-windows10-entreprise-ltsc.iso"}else{$null}
-
-if($DoIuse_Microsoft_Windows_Pro -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Microsoft Windows Pro ISO download process.";Write-Host "";Download_Image ".\src\Microsoft_Windows\clients\iso\client-windows10.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "https://depository.fra1.digitaloceanspaces.com/ISO_images/Microsoft_Windows/client-windows10.iso"}else{$null}
-
-if($DoIuse_Microsoft_Windows_Server_2012 -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Microsoft Windows Server 2012 ISO download process.";Write-Host "";Download_Image ".\src\Microsoft_Windows\servers\iso\win_srv-2012.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "https://depository.fra1.digitaloceanspaces.com/ISO_images/Microsoft_Windows/win_srv-2012.iso"}else{$null}
-
-if($DoIuse_Microsoft_Windows_Server_2019 -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Microsoft Windows Server 2019 ISO download process.";Write-Host "";Download_Image ".\src\Microsoft_Windows\servers\iso\win_srv-2019.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "https://depository.fra1.digitaloceanspaces.com/ISO_images/Microsoft_Windows/win_srv-2019.iso"}else{$null}
-
-if($DoIuse_Microsoft_Windows_Server_2019_Base -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Base for Microsoft Windows Server 2019 download process.";Write-Host "";Download_Image ".\src\Microsoft_Windows\servers\vhds\base\base-windows_server_2019-sysprep.vhdx" ".\src\Microsoft_Windows\servers\vhds\base" ".\src\Microsoft_Windows\servers\vhds\base" "https://depository.fra1.digitaloceanspaces.com/bases/Microsoft_Windows/base-windows_server_2019-sysprep.vhdx"}else{$null}
-
-if($DoIuse_Microsoft_Windows_Entreprise_Base -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Base for Microsoft Windows Server 2019 download process.";Write-Host "";Download_Image ".\src\Microsoft_Windows\clients\vhds\base\base-client-windows10-entreprise-ltsc-sysprep-autounattend.vhdx" ".\src\Microsoft_Windows\clients\vhds\base" ".\src\Microsoft_Windows\clients\vhds\base" "https://depository.fra1.digitaloceanspaces.com/bases/Microsoft_Windows/base-client-windows10-entreprise-ltsc-sysprep-autounattend.vhdx"}else{$null}
-
-if($DoIuse_GNU_Linux_pfSense -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the pfSense ISO download process.";Write-Host "";Download_Image ".\src\GNU_Linux\iso\pfSense-CE-2.5.1-RELEASE-amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://depository.fra1.digitaloceanspaces.com/ISO_images/GNU_Linux/pfSense-CE-2.5.1-RELEASE-amd64.iso"}else{$null}
-
-if($DoIuse_GNU_Linux_Debian -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Debian ISO download process.";Write-Host "";Download_Image ".\src\GNU_Linux\iso\debian-11.3.0-amd64-netinst.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-11.3.0-amd64-netinst.iso"}else{$null}
-
-if($DoIuse_GNU_Linux_Ubuntu -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Ubuntu ISO download process.";Write-Host "";Download_Image ".\src\GNU_Linux\iso\ubuntu-22.04-desktop-amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://releases.ubuntu.com/22.04/ubuntu-22.04-desktop-amd64.iso"}else{$null}
-
-if($DoIuse_GNU_Linux_Rocky_Linux_Full -eq $true){HWrite-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Rocky Linux (Full) ISO download process.";Write-Host "";PV-Download_Base ".\src\GNU_Linux\iso\Rocky-8.5-x86_64-dvd1.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.5-x86_64-dvd1.iso"}else{$null}
-
-if($DoIuse_GNU_Linux_Rocky_Linux_Minimal -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Rocky Linux (Minimal) ISO download process.";Write-Host "";Download_Image ".\src\GNU_Linux\iso\Rocky-8.5-x86_64-minimal.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.5-x86_64-minimal.iso"}else{$null}
-
-if($DoIuse_GNU_Linux_Parrot_Security -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Parrot Security ISO download process.";Write-Host "";Download_Image ".\src\GNU_Linux\iso\Parrot-security-5.0_amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://bunny.deb.parrot.sh/parrot/iso/5.0/Parrot-security-5.0_amd64.iso"}else{$null}
-
-if($DoIuse_GNU_Linux_Kali_Linux_Live -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Kali Linux Live ISO download process.";Write-Host "";Download_Image ".\src\GNU_Linux\iso\kali-linux-2022.1-live-amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://cdimage.kali.org/kali-images/current/kali-linux-2022.1-live-amd64.iso"}else{$null}
-
-if($DoIuse_GNU_Linux_Kali_Linux_Installer -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Kali Linux Installer ISO download process.";Write-Host "";Download_Image ".\src\GNU_Linux\iso\kali-linux-2022.1-installer-amd64.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "https://cdimage.kali.org/kali-images/current/kali-linux-2022.1-installer-amd64.iso"}else{$null}
-
-		### END: Resource download process.
-
-Write-Host ""
-pause
-Write-Host ""
-Write-Host "7 - Return to the resource management menu."
-Write-Host "8 - Return to main menu." -ForegroundColor red
-Write-Host "9 - Quit the program." -ForegroundColor darkred
-Write-Host ""
-
-[int]$userChoice=Read-Host "Your choice"
-	switch($userChoice)
+Ask_YesOrNo "Question" "Would you like to install GNU/Linux CentOS?"
+	switch($Ask_YesOrNo_Result)
 	{
-    	7{LocalRessources_management}
-    	8{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
-    	9{Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Exit of the program in progress.`n" -ForegroundColor darkred;pause;$host.ui.RawUI.WindowTitle=$DefaultWindowTitle;exit}
-    	default{Write-Host "`nInfo: " -NoNewLine;Write-Host "An unexpected error was caused. In most cases, it is an error made by the user, so take the time to answer the questions correctly." -ForegroundColor red;Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
+		1{[bool]$Use_GNU_Linux_CentOS=$false}
+		0{[bool]$Use_GNU_Linux_CentOS=$true}
+	}
+
+Ask_YesOrNo "Question" "Would you like to install GNU/Linux Rocky_Linux?"
+	switch($Ask_YesOrNo_Result)
+	{
+		1{[bool]$Use_GNU_Linux_Rocky_Linux=$false}
+		0{[bool]$Use_GNU_Linux_Rocky_Linux=$true}
+	}
+
+Ask_YesOrNo "Question" "Would you like to install GNU/Linux Ubuntu?"
+	switch($Ask_YesOrNo_Result)
+	{
+		1{[bool]$Use_GNU_Linux_Ubuntu=$false}
+		0{[bool]$Use_GNU_Linux_Ubuntu=$true}
+	}
+
+Ask_YesOrNo "Question" "Would you like to install GNU/Linux Parrot_Security?"
+	switch($Ask_YesOrNo_Result)
+	{
+		1{[bool]$Use_GNU_Linux_Parrot_Security=$false}
+		0{[bool]$Use_GNU_Linux_Parrot_Security=$true}
+	}
+
+Ask_YesOrNo "Question" "Would you like to install GNU/Linux Kali_Linux?"
+	switch($Ask_YesOrNo_Result)
+	{
+		1{[bool]$Use_GNU_Linux_Kali_Linux=$false}
+		0{[bool]$Use_GNU_Linux_Kali_Linux=$true}
+	}
+
+Ask_YesOrNo "Question" "Would you like to install GNU/Linux Tails?"
+	switch($Ask_YesOrNo_Result)
+	{
+		1{[bool]$Use_GNU_Linux_Tails=$false}
+		0{[bool]$Use_GNU_Linux_Tails=$true}
+	}
+
+Ask_YesOrNo "Question" "Would you like to install Base for GNU/Linux Debian?"
+	switch($Ask_YesOrNo_Result)
+	{
+		1{[bool]$Use_GNU_Linux_Debian=$false}
+		0{[bool]$Use_GNU_Linux_Debian=$true}
+	}
+
+Ask_YesOrNo "Question" "Would you like to install Base for GNU/Linux Rocky Linux?"
+	switch($Ask_YesOrNo_Result)
+	{
+		1{[bool]$Use_GNU_Linux_Rocky_Linux=$false}
+		0{[bool]$Use_GNU_Linux_Rocky_Linux=$true}
+	}
+
+Ask_YesOrNo "Question" "Would you like to install Base for GNU/Linux Ubuntu?"
+	switch($Ask_YesOrNo_Result)
+	{
+		1{[bool]$Use_GNU_Linux_Ubuntu=$false}
+		0{[bool]$Use_GNU_Linux_Ubuntu=$true}
+	}
+
+Ask_YesOrNo "Question" "Would you like to install Base for GNU/Linux Parrot Security?"
+	switch($Ask_YesOrNo_Result)
+	{
+		1{[bool]$Use_GNU_Linux_Parrot_Security=$false}
+		0{[bool]$Use_GNU_Linux_Parrot_Security=$true}
+	}
+}		## End if GNU/Linux is True
+	default{Write-Host "`nInfo: " -NoNewLine;Write-Host "An unexpected error was caused."-ForegroundColor red;Write-Host "Ongoing action: " -NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
+}		## End GNU/Linux block
+
+if($Use_Microsoft_Windows_11_multiple_editions -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Microsoft Windows Entreprise ISO download process.`n";Download_Image ".\src\Microsoft_Windows\clients\iso\Microsoft_Windows_11_multiple_editions.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "$isoSrc_Microsoft_Windows_11_multiple_editions"}else{$null}
+
+if($Use_Microsoft_Windows_10_Entreprise_LTSC -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Microsoft Windows 10 Entreprise LTSC download process.`n";Download_Image ".\src\Microsoft_Windows\clients\iso\Microsoft_Windows_10_Entreprise_LTSC.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "$isoSrc_Microsoft_Windows_10_Entreprise_LTSC"}else{$null}
+
+if($Use_Microsoft_Windows_10_multiple_editions -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Microsoft Windows 10 multiple editions download process.`n";Download_Image ".\src\Microsoft_Windows\clients\iso\Microsoft_Windows_10_multiple_editions.iso" ".\src\Microsoft_Windows\clients\iso" ".\src\Microsoft_Windows\clients\iso" "$isoSrc_Microsoft_Windows_10_multiple_editions"}else{$null}
+
+if($Use_Microsoft_Windows_Server_2012 -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Microsoft Windows Server 2012 download process.`n";Download_Image ".\src\Microsoft_Windows\servers\iso\Microsoft_Windows_Server_2012.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "$isoSrc_Microsoft_Windows_Server_2012"}else{$null}
+
+if($Use_Microsoft_Windows_Server_2016 -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Microsoft Windows Server 2016 download process.`n";Download_Image ".\src\Microsoft_Windows\servers\iso\Microsoft_Windows_Server_2016.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "$isoSrc_Microsoft_Windows_Server_2016"}else{$null}
+
+if($Use_Microsoft_Windows_Server_2019 -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Microsoft Windows Server 2019 download process.`n";Download_Image ".\src\Microsoft_Windows\servers\iso\Microsoft_Windows_Server_2019.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "$isoSrc_Microsoft_Windows_Server_2019"}else{$null}
+
+if($Use_Microsoft_Windows_Server_2022 -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the Microsoft Windows Server 2022 download process.`n";Download_Image ".\src\Microsoft_Windows\servers\iso\Microsoft_Windows_Server_2022.iso" ".\src\Microsoft_Windows\servers\iso" ".\src\Microsoft_Windows\servers\iso" "$isoSrc_Microsoft_Windows_Server_2022"}else{$null}
+
+if($Use_GNU_Linux_pfSense -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the GNU/Linux pfSense download process.`n";Download_Image ".\src\GNU_Linux\iso\GNU_Linux_pfSense.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "$isoSrc_GNU_Linux_pfSense"}else{$null}
+
+if($Use_GNU_Linux_Debian -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the GNU/Linux Debian download process.`n";Download_Image ".\src\GNU_Linux\iso\GNU_Linux_Debian.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "$isoSrc_GNU_Linux_Debian"}else{$null}
+
+if($Use_GNU_Linux_CentOS -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the GNU/Linux CentOS download process.`n";Download_Image ".\src\GNU_Linux\iso\GNU_Linux_CentOS.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "$isoSrc_GNU_Linux_CentOS"}else{$null}
+
+if($Use_GNU_Linux_Rocky_Linux -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the GNU/Linux Rocky_Linux download process.`n";Download_Image ".\src\GNU_Linux\iso\GNU_Linux_Rocky_Linux.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "$isoSrc_GNU_Linux_Rocky_Linux"}else{$null}
+
+if($Use_GNU_Linux_Ubuntu -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the GNU/Linux Ubuntu download process.`n";Download_Image ".\src\GNU_Linux\iso\GNU_Linux_Ubuntu.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "$isoSrc_GNU_Linux_Ubuntu"}else{$null}
+
+if($Use_GNU_Linux_Parrot_Security -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the GNU/Linux Parrot_Security download process.`n";Download_Image ".\src\GNU_Linux\iso\GNU_Linux_Parrot_Security.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "$isoSrc_GNU_Linux_Parrot_Security"}else{$null}
+
+if($Use_GNU_Linux_Kali_Linux -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the GNU/Linux Kali_Linux download process.`n";Download_Image ".\src\GNU_Linux\iso\GNU_Linux_Kali_Linux.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "$isoSrc_GNU_Linux_Kali_Linux"}else{$null}
+
+if($Use_GNU_Linux_Tails -eq $true){Write-Host "`nOngoing action: " -NoNewLine;Write-Host "Launching the GNU/Linux Tails download process.`n";Download_Image ".\src\GNU_Linux\iso\GNU_Linux_Tails.iso" ".\src\GNU_Linux\iso" ".\src\GNU_Linux\iso" "$isoSrc_GNU_Linux_Tails"}else{$null}
+
+Write-Host "`n9 - Back to the local ressources management menu"-ForegroundColor red
+Write-Host "0 - Back to the main menu`n"-ForegroundColor darkred
+
+[int]$userchoice=Read-Host "Your choice"
+	switch($userchoice)
+	{   
+    	9{LocalRessources_management}
+    	0{Write-Host "`nOngoing action: "-NoNewLine;Write-Host "Go back to the main menu.`n" -ForegroundColor red;pause;main}
+    	default{Write-Host "`nInfo: "-NoNewLine;Write-Host "An unexpected error was caused"-NoNewLine -ForegroundColor red;Write-Host ".";Write-Host "Ongoing action: " -NoNewLine;Write-Host "Go back to the main menu"-NoNewLine -ForegroundColor red;Write-Host ".`n";pause;main}
 	}
 }
 
@@ -1090,17 +1141,12 @@ Beginning of the New_preconfigured_VM block
 
 function New_preconfigured_VM-GNU_Linux{
 Clear-Host
-Write-Host "1 - pfSense`n"
+Write-Host "1 - Debian"
+Write-Host "2 - Rocky Linux"
+Write-Host "3 - Ubuntu`n"
 
-Write-Host "2 - Debian"
-Write-Host "3 - CentOS"
-Write-Host "4 - Rocky Linux"
-Write-Host "5 - Ubuntu`n"
+Write-Host "4 - Parrot Security`n"
 
-Write-Host "6 - Parrot Security"
-Write-Host "7 - Kali Linux`n"
-
-Write-Host "8 - Tails`n"
 Write-Host "0 - Back to the main menu`n" -ForegroundColor darkred
 
 [int]$userchoice=Read-Host "Your choice"
