@@ -14,7 +14,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/franckferman/hyper-v_toolbox">
-    <img src="https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/assets/pictures/logos/Hyper-V_Toolbox-Logo_Transparent.png" alt="Logo" width="80" height="80">
+    <img src="https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/assets/pictures/logos/Hyper-V_Toolbox-Logo_Transparent.png" alt="Logo" width="500" height="500">
   </a>
 
 <h3 align="center">Hyper-V_Toolbox</h3>
