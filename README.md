@@ -12,7 +12,7 @@
 
 <div align="center">
   <a href="https://github.com/franckferman/hyper-v_toolbox">
-    <img src="https://raw.githubusercontent.com/franckferman/hyper-v_toolbox/main/.gitfront/graphic_resources/logos/transparent_logo-Hyper-V_Toolbox.png" alt="Logo" width="auto" height="auto">
+    <img src="https://raw.githubusercontent.com/franckferman/Hyper-V_Toolbox/main/gitfront/graphic_resources/logos/transparent_logo-hyper-v_toolbox.png" alt="transparent_logo-hyper-v_toolbox" width="auto" height="auto">
   </a>
   
 <p align="right">(<a href="#top">back to top</a>)</p>
