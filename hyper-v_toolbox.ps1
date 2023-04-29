@@ -79,7 +79,7 @@ $repoUrl = 'https://raw.githubusercontent.com/franckferman/Hyper-V_Toolbox/main/
 # [string]$script:BlankWindowsJsonLinksFile = 'https://drive.google.com/file/d/1dBFadZXRnhb2fPIU9LJxdcdlBQky9eR5/view?usp=share_link'
 
 # JSON file containing the link to the official Windows ISO.
-[string]$script:BlankWindowsJsonLinksFile = 'https://pastebin.com/raw/KuzKLhVz'
+[string]$script:BlankWindowsJsonLinksFile = 'https://raw.githubusercontent.com/franckferman/Hyper-V_Toolbox/main/assets/links/blank_windows.json'
 
 # Declaration of banners (ASCII art) and random selection function (Select-RandomBanner).
 
@@ -842,7 +842,7 @@ function Show-Downloadable_VM {
             }
         
         } else {
-        Invalid_Input
+        Show-Invalid_Input
         Show-Downloadable_VM
         }
     
@@ -925,9 +925,9 @@ function SelectionMenuAfterVMCreation {
             '1' { Read-Host 'Press enter to continue...'; Blank_VM}
             '2' { Write-Host 'Function under development.'; Read-Host 'Press enter to continue...'; main }
             'r' { if ((Get-VM -Name $VMName).State -eq 'Off') { Start-VM -Name $VMName } else { Write-Host ''; Read-Host "VM $VMName is already running..."; } Clear-Host; Show-CreatedVMStatus }
-            'b' { Write-Host ''; Write-Warning 'Back to main menu'; Read-Host 'Press enter to continue...'; main }
+            'b' { Write-Host ''; Write-Warning 'Return to main menu'; Read-Host 'Press enter to continue...'; main }
             'q' { Write-Host ''; ScriptExit -ExitCode 0 }
-            default { Invalid_Input }
+            default { Show-Invalid_Input }
         }
     }
 }
@@ -942,7 +942,7 @@ function Show-SelectionMenuAfterVMCreation {
 
 r - Run the machine in the background
 b - Return to main menu
-q - Quit
+q - Quit the program
 
 "@
 }
@@ -978,7 +978,7 @@ function Blank_VM-Windows {
     Show-CreatedVMStatus
 }
 
-# Main VM creation menu, choice between Windows and Linux.
+# Main menu for the creation of a blank virtual machine.
 
 function Blank_VM {
     while ($true) {
@@ -986,13 +986,12 @@ function Blank_VM {
         Write-Host (Show-OSMenu)
 
             $choice = Read-Host "Enter your choice"
-
             switch ($choice) {
             '1' { Blank_VM-Windows }
-            '2' { Show_Linux_Blank_VM_Menu }
-            'b' { Write-Host ""; Write-Warning "Back to main menu"; Read-Host "Press enter to continue..."; main }
-            'q' { Write-Host ""; ScriptExit -ExitCode 0 }
-            default { Invalid_Input }
+            '2' { Blank_VM-Linux }
+            'b' { main }
+            'q' { Write-Host ''; ScriptExit -ExitCode 0 }
+            default { Show-Invalid_Input }
         }
     }
 }
@@ -1000,22 +999,22 @@ function Blank_VM {
 # Visual representation of the operating system type selection menu.
 
 function Show-OSMenu {
-    $Banners = @('Show-Window_Banner', 'Show-Window_Banner-Two', 'Show-Window_Banner-Three', 'Show-Window_Banner-Four')
-    Write-Host (Select-RandomBanner -BannerFunctions $Banners)
-    @"
+$Banners = @('Show-Window_Banner', 'Show-Window_Banner-Two', 'Show-Window_Banner-Three', 'Show-Window_Banner-Four')
+Write-Host (Select-RandomBanner -BannerFunctions $Banners)
+@"
 
-Hyper-V Toolbox
+Hyper-V Toolbox - OS selection
 --------------------
   1 - Windows
   2 - Linux
 
-b - Return to main menu
-q - Quit
+b - Back
+q - Quit the program
 
 "@
 }
 
-# Confirmation function (yes or no query).
+# Interactive confirmation function.
 
 function AskYesOrNo {
     param (
@@ -1046,10 +1045,9 @@ function AskYesOrNo {
     }
 }
 
-# Help menu.
+# Help Menu. More graphic than informative.
 
-
-function Show_Help {
+function Show-Help {
 Clear-Host
     @"
                                              _______________________
@@ -1058,88 +1056,89 @@ Clear-Host
 ||< > |                                   ___________________________/
 | \__/_________________-------------------                         |
 |                                                                  |
- |      Hello $env:UserName, and welcome to Hyper-V Toolbox.             |
- |                                                                 |
- |    Inspired by Docker and Vagrant, this project is aimed         |
-  |     at providing users with a more efficient and user-friendly  |
-  |       tool for virtual machine management.                      |
+ |                       HYPER-V_TOOLBOX                            |
+ |                                                                  |
+ |      "Inspired by Vagrant and Docker,                            |
+  |        This project is aimed at providing users                  |
+  |      with a more efficient and user-friendly tool                |
+  |        for virtual machine management."                          |
+   |                                                                 |
   |                                              ____________________|_
   |  ___________________-------------------------                      '\
   |/'--_                                                                 |
   ||[ ]||                                            ___________________/
    \===/___________________--------------------------
+
 "@
 }
 
-# main
+# Logical (functional) part of the main menu.
 
 function main {
     while ($true) {
         Clear-Host
         Write-Host (Show_Menu)
 
-        $choice = Read-Host "Enter your choice"
-
+        $choice = Read-Host 'Enter your choice'
         switch ($choice) {
             '1' { Blank_VM }
-            '2' { Write-Host ''; Write-Warning 'Functionality under development.'; pause; main }
-            '3' { Write-Host ''; Write-Warning 'Functionality under development.'; pause; main }
-            '4' { Write-Host ''; Write-Warning 'Functionality under development.'; pause; main }
-            '5' { Write-Host ''; Write-Warning 'Functionality under development.'; pause; main }
-            '6' { Write-Host ''; Write-Warning 'Functionality under development.'; pause; main }
-            'h' { Write-Host (Show_Help); Write-Host ""; Read-Host "Press enter to continue..." }
-            'q' { Write-Host ""; ScriptExit -ExitCode 0 }
-            default { Invalid_Input }
+            '2' { Write-Host ''; Write-Warning 'Feature under development'; pause; main }
+            '3' { Write-Host ''; Write-Warning 'Feature under development'; pause; main }
+            '4' { Write-Host ''; Write-Warning 'Feature under development'; pause; main }
+            '5' { Write-Host ''; Write-Warning 'Feature under development'; pause; main }
+            '6' { Write-Host ''; Write-Warning 'Feature under development'; pause; main }
+            'h' { Write-Host (Show-Help); Write-Host ''; Read-Host 'Press enter to continue...' }
+            'q' { Write-Host ''; ScriptExit -ExitCode 0 }
+            default { Show-Invalid_Input }
         }
     }
 }
 
-# Visual representation of the main menu.
-# TODO: tags like [HOT] and [NEW]...
+# Graphical representation of the main menu.
 
 function Show_Menu {
 Write-Host (Show-Buddha_Banner)
-    @"
+@"
 
-Hyper-V Toolbox
---------------------
-  1 - Create a blank virtual machine
-  2 - Create a virtual machine from a template [Under development]
+Hyper-V Toolbox - Main menu
+-------------------
+  1 - Create a virtual machine
+  2 - Create a preconfigured virtual machine from a template [Under development]
 
   3 - Creation of laboratories [Under development]
 
-  4 - Management of virtual machines
-  5 - Management of virtual switche
+  4 - Management of virtual machines [Under development]
+  5 - Management of virtual switches [Under development]
 
-  6 - Management of local resources
+  6 - Management of local resources [Under development]
   
-h - Display help
-q - Quit
+h - Show help
+q - Quit the program
 
 "@
 }
 
-# Handling of invalid inputs
+# Handling of invalid entries.
 
-function Invalid_Input {
-    Write-Host ""
-    Write-Warning "Invalid choice."
-    Read-Host "Press enter to continue..."
+function Show-Invalid_Input {
+    Write-Host ''
+    Write-Warning 'Invalid entry detected.'
+    Read-Host 'Press enter to continue...'
 }
 
-# Logging function (useful for debugging)
+# Logging function. Useful for debugging. Takes into account many parameters, including logging to Windows Event Viewer, logging to a file (LogFile), log category (Level)...
 
-function Write_LogEx {
+function Write-Log {
     param (
         [Parameter(Mandatory = $true)][string]$Message,
-        [Parameter(Mandatory = $false)][ValidateSet("INFO", "WARNING", "ERROR")][string]$Level = "INFO",
-        [Parameter(Mandatory = $false)][string]$LogFile = "hyper-v-toolbox.log",
+        [Parameter(Mandatory = $false)][ValidateSet('INFO', 'WARNING', 'ERROR')][string]$Level = 'INFO',
+        [Parameter(Mandatory = $false)][string]$LogFile = 'hyper-v-toolbox.log',
         [Parameter(Mandatory = $false)][bool]$UseEventLog = $false,
-        [Parameter(Mandatory = $false)][string]$EventLogSource = "Hyper-V_Toolbox"
+        [Parameter(Mandatory = $false)][string]$EventLogSource = 'Hyper-V_Toolbox'
     )
 
     if ($Verbose) {
-        $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+        $timestamp = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
         $logMessage = "[$timestamp] [$Level] $Message"
 
         try {
@@ -1150,9 +1149,9 @@ function Write_LogEx {
 
         if ($UseEventLog) {
             $entryType = @{
-                "INFO" = "Information"
-                "WARNING" = "Warning"
-                "ERROR" = "Error"
+                'INFO' = 'Information'
+                'WARNING' = 'Warning'
+                'ERROR' = 'Error'
             }[$Level]
 
             if (-not (Get-EventLog -LogName Application -Source $EventLogSource -ErrorAction SilentlyContinue)) {
@@ -1164,7 +1163,7 @@ function Write_LogEx {
     }
 }
 
-# Exit function
+# Exit function.
 
 function ScriptExit {
     [CmdletBinding()]
@@ -1173,13 +1172,13 @@ function ScriptExit {
         [int]$ExitCode = 0
     )
 
-    Write-Warning "Exiting script with exit code: $ExitCode"
+    Write-Warning "Exiting script with exit code $ExitCode"
     exit $ExitCode
 }
 
-# Checking permissions
+# Administrator rights verification function.
 
-function CheckAdmin {
+function Get-AdminRights {
     [CmdletBinding()]
     [OutputType([bool])]
     param()
@@ -1187,26 +1186,26 @@ function CheckAdmin {
     $identity = [System.Security.Principal.WindowsIdentity]::GetCurrent()
     $principal = New-Object System.Security.Principal.WindowsPrincipal($identity)
     $adminRole = [System.Security.Principal.WindowsBuiltInRole]::Administrator
-
     return $principal.IsInRole($adminRole)
 }
 
-# Entry point
+# Entry point.
 
-$Verbose = $False
+# Enable or disable the logging function.
+$Verbose = $false
 
-if (CheckAdmin) {
-    Write_LogEx -Message "Lancement du script avec les droits d'administration" -Level "INFO" -UseEventLog $true
+# Verification of the administration rights as well as the state of the Hyper-V module, on which the script depends.
 
-    if (Get-WindowsOptionalFeature -FeatureName Microsoft-Hyper-V-All -Online | Where-Object {$_.State -eq "Enabled"}) {
+if (Get-AdminRights) {
+    Write-Log -Message 'The script launch operation has been successfully executed.' -Level 'INFO' -UseEventLog $true
+
+    if (Get-WindowsOptionalFeature -FeatureName Microsoft-Hyper-V-All -Online | Where-Object {$_.State -eq 'Enabled'}) {
         Import-Module Hyper-V
     } else {
         Write-Warning 'The Hyper-V module is required to operate.'
-        ScriptExit -ExitCode 1
     }
-
+    
     main
 } else {
-    Write-Warning "You must have administrator rights to run this program."
-    ScriptExit -ExitCode 1
+    Write-Warning 'You must have administrator rights to run this program.'
 }
