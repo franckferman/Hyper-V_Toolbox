@@ -621,6 +621,8 @@ function Ensure-BasicResource {
     }
 }
 
+# Verification and creation of a directory.
+
 function Ensure-Directory {
     param (
         [Parameter(Mandatory = $true)][string]$Path
@@ -630,6 +632,8 @@ function Ensure-Directory {
         New-Item -Path $Path -ItemType Directory -Force | Out-Null
     }
 }
+
+# Download the JSON file.
 
 function Ensure-JSONDirectory {
     [CmdletBinding()]
@@ -703,6 +707,8 @@ function Get-GDriveGFileID {
     }
 }
 
+# Recovering JSON content.
+
 function Read-FromJSON {
     param (
         [Parameter(Mandatory = $true)][string]$JSONFilePathDestination
@@ -767,6 +773,8 @@ function Download_File {
  Check Windows Blank VM Links
 ======================
 #>
+
+# Resource check for the file containing the links to the Windows images.
 
 function Check-Blank_VMLinks-Windows {
 $BlankWindowsJSONFile = '.\assets\links\blank_windows.json'
@@ -880,19 +888,19 @@ Set-VM -Name $VMName -AutomaticCheckpointsEnabled $false
 
 Add-VMDvdDrive -VMName $VMName -Path $OutputPath
 
-# More difficult than it looks. Sorts the elements of the boot order according to their type of boot device and stores them in separate variables according to their type (HDD, Network, DVD).
+# Sorts the elements of the boot order according to their type of boot device and stores them in separate variables according to their type (HDD, Network, DVD).
 
 $VM = Get-VMFirmware $VMName
 $BootOrder = $VM.BootOrder
 
 for ($i = 0; $i -lt $BootOrder.Count; $i++) {
-    if ($BootOrder[$i].Device.Name -match "Network Adapter") {
+    if ($BootOrder[$i].Device.Name -match 'Network Adapter') {
         $Network += $BootOrder[$i]
     }
-    elseif ($BootOrder[$i].Device.Name -match "Hard Drive") {
+    elseif ($BootOrder[$i].Device.Name -match 'Hard Drive') {
         $HDD += $BootOrder[$i]
     }
-    elseif ($BootOrder[$i].Device.Name -match "DVD Drive") {
+    elseif ($BootOrder[$i].Device.Name -match 'DVD Drive') {
         $DVD += $BootOrder[$i]
     }
 }
