@@ -5,7 +5,6 @@
 [![Stargazers][stars-shield]](https://github.com/franckferman/hyper-v_toolbox/stargazers)
 [![Issues][issues-shield]](https://github.com/franckferman/hyper-v_toolbox/issues)
 [![MIT License][license-shield]](https://github.com/franckferman/hyper-v_toolbox/blob/main/LICENSE)
-[![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/franckferman)
 
 </div>
 <br/>
@@ -29,6 +28,4 @@
 [issues-url]: https://github.com/franckferman/hyper-v_toolbox/issues
 [license-shield]: https://img.shields.io/github/license/franckferman/hyper-v_toolbox.svg?style=for-the-badge
 [license-url]: https://github.com/franckferman/hyper-v_toolbox/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/franckferman
 [product-screenshot]: images/screenshot.png
