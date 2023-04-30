@@ -318,7 +318,7 @@ function Show-Space_Banner-Three
 "@
 }
 
-function Show-HPV_TBX {
+function Show-HPV_TBX_Banner {
 @"
  _     ___   _         _____  ___   _ 
 | |_| | |_) \ \  /      | |  | |_) \ \_/
@@ -551,6 +551,23 @@ function Ask-Name {
         }
 }
 
+# CLONE : Definition of parameters and variables for the creation of the virtual machine.
+
+function Ask-Clone-Blank_VM-Windows {
+    Clear-Host
+    $Banners = @('Show_Windows_Logo', 'Show-Window_Banner-Two', 'Show-Window_Banner-Three')
+    Write-Host (Select-RandomBanner -BannerFunctions $Banners)
+
+    Write-Host ''
+    Write-Host 'Hyper-V Toolbox'
+    Write-Host '--------------------'
+    Write-Host ''
+
+    Ask-Name -Prefix 'VM-Win'
+    Ask-VirtualSwitch
+    Write-Host ''
+}
+
 # Definition of parameters and variables for the creation of the virtual machine.
 
 function Ask-Blank_VM-Windows {
@@ -622,8 +639,9 @@ function Ensure-JSONDirectory {
     )
 
     if (-not (Test-Path $JSONFilePathDestination)) {
+        # Is a confirmation request really useful? Maybe, to be discussed.
         Write-Host ''
-        Write-Host 'JSON configuration file containing links to resources not found within the program tree. Starting an attempt to download.'
+        Write-Warning 'JSON configuration file not found. Attempting to download.'
         try {
             # Information to check: Start-BitsTransfer seems to be more efficient for downloading heavy files. For smaller files, as it is the case here, Invoke-WebRequest is preferred.
             # Start-BitsTransfer -Source "$JSONFileDownloadSource" -Destination "$JSONFilePathDestination" -DisplayName 'Hyper-V Toolbox' -Description "Downloading from $JSONFileDownloadSource to $JSONFilePathDestination" -TransferType Download -Priority High -TransferPolicy Unrestricted -ErrorAction Stop
@@ -649,7 +667,6 @@ function Ensure-JSONDirectory {
             Write-Host ''
             Read-Host 'Press enter to continue...'
         } catch {
-            Write-Host ''
             Write-Warning 'Download was not successful.'
             ScriptExit -ExitCode 1
             return $null
@@ -817,7 +834,12 @@ function Show-Downloadable_VM {
                 $retryCount = 0
                 do {
                     try {
+                    Write-Host ''
+                    Write-Warning "$Title in $OutputPath not found. Attempting to download."
                     Start-BitsTransfer -Source $Url -Destination $OutputPath -DisplayName 'Hyper-V Toolbox' -Description "Downloading of $Title from $Url to $OutputPath" -TransferType Download -TransferPolicy Unrestricted
+                    # Is a confirmation request really useful? Maybe, especially if the person is absent, to be discussed.
+                    Write-Warning 'Successfully downloaded.'
+                    Write-Host ''
                     Read-Host 'Press enter to continue...'
                     break
                     } catch {
@@ -836,9 +858,8 @@ function Show-Downloadable_VM {
                 }
 
             } else {
-            Write-Host ''
-            Write-Warning "Existing $Filename file. No download required."
-            Read-Host 'Press enter to continue...'
+            $null
+            # Existing image file. No download required.
             }
         
         } else {
@@ -907,7 +928,7 @@ $HDDSize = [System.Convert]::ToInt64($HDDSize.Replace("GB", "")) * 1GB
         [void](New-VM -Name $VMName -MemoryStartupBytes $RAMSize -Generation 2 -NewVHDPath "$VHDPath\$VMName.vhdx" -NewVHDSizeBytes $HDDSize -Path $VMsPath -SwitchName $VSwitchName)
         }
     else {
-        Write-Warning "Error during the creation of the virtual machine."
+        Write-Warning 'Error during the creation of the virtual machine.'
         ScriptExit -ExitCode 1
     }
 }
@@ -915,66 +936,112 @@ $HDDSize = [System.Convert]::ToInt64($HDDSize.Replace("GB", "")) * 1GB
 # Selection menu, after the creation of the virtual machine (clone, return to the main menu, quit...).
 # TODO: Find a better function name.
 
-function SelectionMenuAfterVMCreation {
+function SelectionMenuAfterBlankVMCreation {
     while ($true) {
-        Write-Host (Show-SelectionMenuAfterVMCreation)
+        Write-Host (Show-SelectionMenuAfterBlankVMCreation)
 
-            $choice = Read-Host "Enter your choice"
-
+            $choice = Read-Host 'Enter your choice'
             switch ($choice) {
-            '1' { Read-Host 'Press enter to continue...'; Blank_VM}
-            '2' { Write-Host 'Function under development.'; Read-Host 'Press enter to continue...'; main }
+            '1' { Blank_VM }
+
+            '2' { Blank_VM-Windows-Clone }
+            '3' { Blank_VM-Windows-Similar }
+
             'r' { if ((Get-VM -Name $VMName).State -eq 'Off') { Start-VM -Name $VMName } else { Write-Host ''; Read-Host "VM $VMName is already running..."; } Clear-Host; Show-CreatedVMStatus }
-            'b' { Write-Host ''; Write-Warning 'Return to main menu'; Read-Host 'Press enter to continue...'; main }
+            's' { if ((Get-VM -Name $VMName).State -eq 'Running') { Stop-VM -Name $VMName -Force } else { Write-Host ''; Read-Host "VM $VMName is already stopped..."; } Clear-Host; Show-CreatedVMStatus }
+            'b' { main }
             'q' { Write-Host ''; ScriptExit -ExitCode 0 }
-            default { Show-Invalid_Input }
+            default { Show-Invalid_Input; Clear-Host }
         }
     }
 }
 
-function Show-SelectionMenuAfterVMCreation {
-@"
-  1 - Return to the menu for creating blank virtual machines.
-  2 - Return to the menu for creating preconfigured virtual machines.
-  
-  3 - Clone the virtual machine with strictly the same configuration.
-  4 - Clone the virtual machine with a different configuration.
+# Graphical representation of the menu after the creation of the blank VM.
 
-r - Run the machine in the background
-b - Return to main menu
-q - Quit the program
+function Show-SelectionMenuAfterBlankVMCreation {
+@"
+  1 - Create a new blank virtual machine.
+
+  2 - Clone (create) a new blank virtual machine with strictly the same configuration.
+  3 - Create a new blank virtual machine similar but with a different configuration.
+
+r - Run the machine in the background.
+s - Turn the machine off.
+
+b - Back to main menu.
+q - Quit the program.
 
 "@
 }
 
+# Display the status of the created VM.
+
 function Show-CreatedVMStatus {
-    Write-Host (Show-HPV_TBX)
+    Write-Host (Show-HPV_TBX_Banner)
     Write-Host '----------------------------------------'
     if ( (Get-VM -Name $VMName).Name ) {
         Write-Host ''
-        Write-Host 'VM successfully created.'
+        Write-Host "Virtual machine $VMName created successfully."
 
         # I don't need so many elements for the moment but I'll keep them aside.
         # Get-VM -Name $VMName | Format-Table Name, State, CPUUsage, MemoryAssigned, Uptime, Status, Version -AutoSize -Wrap
         # Get-VM -Name $VMName | Format-Table Name, State, Status -AutoSize -Wrap
-        Get-VM -Name $VMName | Format-Table Name, State, Status, @{Name="RAM"; Expression={$RAMSize}}, @{Name="Storage"; Expression={$HDDSize}} -AutoSize -Wrap
+        Write-Host ''
+        Get-VM -Name $VMName | Format-Table Name, State, @{Name='RAM'; Expression={$RAMSize}}, @{Name='Storage'; Expression={$HDDSize}} -AutoSize -Wrap
 
-        SelectionMenuAfterVMCreation
+        if ( (Get-VM).Count -gt 2 ) {
+        Write-Host 'List of all virtual machines: '
+        Write-Host ''
+        Get-VM | Format-Table Name, State -AutoSize -Wrap
+        }
+        else {
+            $null
+        }
+
+        SelectionMenuAfterBlankVMCreation
+
     } else {
         Write-Host "Error when checking the status of the virtual machine $VMName."
     }
 }
 
-# Main function for creating a Windows blank virtual machine. Starts by checking dependencies, displaying the list of available base resources, gathering all this information to a function to create the VM from this last information.
+# Main function for creating a Windows blank virtual machine. Starts by checking dependencies, displaying the list of available base resources, gathering all this information to a function to create the VM from this last information, then displays the status and continuation options.
 
-function Blank_VM-Windows {
-    Show-Blank_VM-Windows
+function Blank_VM-Windows-Clone {
     Ensure-BasicResource
-    Ask-Blank_VM-Windows
-    # TODO: Implement a system (of jobs for example) allowing to launch the creation at the same time as the animation so as not to lose several seconds in a concern of optimization.
+    Ask-Clone-Blank_VM-Windows
     New-BlankVM-Windows
     Show-Animated_Pacman
     New-BlankVM-Windows-AdditionalTasks
+    Show-CreatedVMStatus
+}
+
+function Blank_VM-Windows-Similar {
+    Ask-Blank_VM-Windows
+    # Creation of the VM from the previously recovered parameters.
+    New-BlankVM-Windows
+    # Animation after creation of the VM.
+    Show-Animated_Pacman
+    # Performing additional tasks specific to the system of the VM in question.
+    New-BlankVM-Windows-AdditionalTasks
+    # Status of the VM.
+    Show-CreatedVMStatus
+}
+
+function Blank_VM-Windows {
+    # Show-Blank_VM-Windows calls Check-Blank_VMLinks-Windows, which defines and checks the state of the resources that allow access to the list of blank virtual machines (checking directories, files, download potential...). Then, once the essential has been checked, it displays the list of available machines, from the json file previously checked and potentially downloaded if none exists.
+    Show-Blank_VM-Windows
+    # Verification of the tree structure containing the basic directories, especially for storing the contents of hard disks and virtual machines.
+    Ensure-BasicResource
+    # Recovery of the variables corresponding to the parameters, allowing to create the virtual machine (name of the machine, RAM, size of the hard disk, etc).
+    Ask-Blank_VM-Windows
+    # Creation of the VM from the previously recovered parameters.
+    New-BlankVM-Windows
+    # Animation after creation of the VM.
+    Show-Animated_Pacman
+    # Performing additional tasks specific to the system of the VM in question.
+    New-BlankVM-Windows-AdditionalTasks
+    # Status of the VM.
     Show-CreatedVMStatus
 }
 
@@ -1009,7 +1076,7 @@ Hyper-V Toolbox - OS selection
   2 - Linux
 
 b - Back
-q - Quit the program
+q - Quit the program.
 
 "@
 }
@@ -1113,7 +1180,7 @@ Hyper-V Toolbox - Main menu
   6 - Management of local resources [Under development]
   
 h - Show help
-q - Quit the program
+q - Quit the program.
 
 "@
 }
