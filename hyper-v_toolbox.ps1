@@ -10,7 +10,7 @@ PS > Set-ExecutionPolicy -Scope Process -ExecutionPolicy Unrestricted; .\hyper-v
 
 .NOTES
 Author: Franck Ferman
-Version: 4.0.0
+Version: 4.0
 Date: 04/05/2023
 
 .LINK
