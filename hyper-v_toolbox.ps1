@@ -49,7 +49,7 @@ function Get-WANStatus {
 
 }
 
-[Single]$scriptVersion = 3.0
+[Single]$scriptVersion = 4.0
 
 function Get-Update {
     param (
@@ -636,8 +636,22 @@ function Set-CloneBlankVM {
     Write-Host '--------------------'
     Write-Host ''
 
-    Set-Name -Prefix "VM-$OperatingSystem"
+    Set-Name -Prefix $Prefix
+    # Set-Name -Prefix "VM-$OperatingSystem"
     Set-VSwitch
+}
+
+function Check-OSType {
+    [CmdletBinding()]
+    param()
+
+    if (($Title -match "(cli|client)") -or ($Filename -match "(cli|client)")) {
+        [String]$script:OperatingSystem = 'Client'
+    } elseif (($Title -match "(srv|serveur|server)") -or ($Filename -match "(srv|serveur|server)")) {
+        [String]$script:OperatingSystem = 'Server'
+    } else {
+        # Neither Title nor Filename contain the searched keywords.
+    }
 }
 
 function Set-BlankVM {
@@ -656,7 +670,17 @@ function Set-BlankVM {
     Write-Host 'Hyper-V Toolbox'
     Write-Host '--------------------'
 
-    Set-Name -Prefix "VM-$OperatingSystem"
+    Check-OSType
+
+    if ($OperatingSystem -eq 'Client') {
+        $Prefix = "VM-$OperatingSystem-Client"
+    } elseif ($OperatingSystem -eq 'Server') {
+        $Prefix = "VM-$OperatingSystem-Server"
+    } else {
+        $Prefix = "VM-$OperatingSystem"
+    }
+
+    Set-Name -Prefix $Prefix
     Set-VSwitch
     Write-Host ''
 
@@ -746,10 +770,12 @@ function Get-GDriveFileID {
 
     if ($DriveFileSource.Contains('download&id')) {
     # Do nothing if the link already contains the correct format. Let the function return $null by default.
+    
     } elseif ($DriveFileSource -match "drive\.google\.com") {
     $GFileID = ($DriveFileSource -split '/')[5]
     [String]$GDriveUrl = "https://drive.google.com/uc?export=download&id=$GFileID"
     return $GDriveUrl
+    
     } else {
         # Do nothing if the link is not in the right format. Let the function return $null by default
     }
@@ -785,7 +811,7 @@ function Invoke-GDriveFileRequest {
         [String]$Url,
         [Parameter(Mandatory=$true)]
         [String]$Destination,
-        [String]$DisplayName = "Hyper-V Toolbox",
+        [String]$DisplayName = 'Hyper-V Toolbox',
         [String]$Description = "Downloading from $url to $Destination"
     )
 
@@ -799,7 +825,7 @@ function Invoke-GDriveFileRequest {
     $downloadUrl = $match.Groups[1].Value
     Write-Host $downloadUrl
     } else {
-    Write-Host "URL de téléchargement introuvable"
+    Write-Warning 'Download URL not found.'
     }
 
     Add-Type -AssemblyName System.Web
@@ -807,21 +833,7 @@ function Invoke-GDriveFileRequest {
 
     Start-BitsTransfer -Source $DownloadLink -Destination $Destination -DisplayName $DisplayName -Description $Description
 
-    [String]$DownloadLink
     [String]$script:Url = $DownloadLink
-}
-
-function Download_File {
-    param(
-        [Parameter(Mandatory=$true)]
-        [String]$Url,
-        [Parameter(Mandatory=$true)]
-        [String]$Destination,
-        [String]$DisplayName = "Hyper-V Toolbox",
-        [String]$Description = "Downloading from $url to $Destination"
-    )
-
-    Start-BitsTransfer -Source $DownloadLink -Destination $Destination -DisplayName $DisplayName -Description $Description -TransferType Download -TransferPolicy Unrestricted
 }
 
 function Check-BlankVM_Links {
@@ -845,7 +857,7 @@ function Check-BlankVM_Links {
     }
     catch {
         Write-Warning "Error occurred during JSON file download: $_"
-        return
+        ScriptExit -ExitCode 1
     }
 
     [Array]$script:MenuItems = Read-FromJSON -JSONFilePathDestination $JSONFilePath
