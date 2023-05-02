@@ -38,6 +38,12 @@ This project is aimed at providing users with a more efficient and user-friendly
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
+
+## About
+
+This project is aimed at providing users with a more efficient and user-friendly tool for virtual machine management.
+
+Similar to Vagrant, it enables the quick creation and management of machines, but with a key difference: it deploys pre-installed machines that are sysprepped, with disks ready to install. This eliminates the need to send scripts to machines, which can be time-consuming, resulting in a process that is twice as fast as Vagrant.
   
 <p align="right">(<a href="#top">back to top</a>)</p>
 
