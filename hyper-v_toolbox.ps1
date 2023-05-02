@@ -596,7 +596,7 @@ function Set-Name {
         [String]$PrefixName = 'VM'
     )
 
-        if ( $VMName -eq $null ) { Write-Host '' }
+        Write-Host ''
 
         [String]$VMNameInput = Read-Host 'VM name'
         if (-not $VMNameInput) {
@@ -634,7 +634,6 @@ function Set-CloneBlankVM {
 
     Set-Name -Prefix "VM-$OperatingSystem"
     Set-VSwitch
-    Write-Host ''
 }
 
 function Set-BlankVM {
@@ -879,11 +878,12 @@ function Show-Downloadable_VM {
                 do {
                     try {
                     Write-Host ''
-                    Write-Warning "$Title in $OutputPath not found. Initiate a download attempt." 
+                    Write-Warning "$Title in $OutputPath not found. Initiate a download attempt."
                     Start-BitsTransfer -Source $Url -Destination $OutputPath -DisplayName 'Hyper-V Toolbox' -Description "Downloading of $Title from $Url to $OutputPath" -TransferType Download -TransferPolicy Unrestricted
                     Write-Warning "$Title successfully downloaded in $OutputPath."
                     Write-Host ''
                     Read-Host 'Press enter to continue...'
+                    break
                     } catch {
                     $retryCount++
                     if ($retryCount -lt $maxRetries) {
