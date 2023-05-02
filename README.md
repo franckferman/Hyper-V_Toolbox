@@ -17,9 +17,9 @@
 <p align="center">
 This project is aimed at providing users with a more efficient and user-friendly tool for virtual machine management.
 <br>
-<a href="https://github.com/franckferman/Hyper-V_Toolbox/blob/main/README.md"><strong>Explore the full documentation »</strong></a>
+<a href="#"><strong>Explore the full documentation »</strong></a>
 <br><br>
-<a href="https://asciinema.org/a/">View Demo</a>
+<a href="#">View Demo</a>
 .
 <a href="https://github.com/franckferman/Hyper-V_Toolbox/issues">Report Bug</a>
 ·
