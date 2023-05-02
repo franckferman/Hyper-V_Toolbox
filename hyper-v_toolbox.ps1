@@ -49,7 +49,7 @@ function Get-WANStatus {
 
 }
 
-[Single]$scriptVersion = 4.0
+[Single]$scriptVersion = 3.0
 
 function Get-Update {
     param (
@@ -60,20 +60,24 @@ function Get-Update {
     try {
         $ProgressPreference = 'SilentlyContinue'
         $Content = (Invoke-WebRequest -Uri $repositoryUrl -UseBasicParsing -TimeoutSec 5).Content
-        $headContent = $Content.Split("`n") | Select-Object -First 50
-        $versionLine = $headContent | Select-String 'Version: '
-        [Single]$Version = $versionLine.Line.Split(":")[1].Trim()
-        
-        if ($scriptVersion -lt $Version) {
-            return 0
-        
+
+        # 'Version:' represents the required string, '\s*' matches optional white spaces, '(\d+\.\d+)' captures the script version, where '\d+' matches one or more digits and '\.' matches a decimal point.        
+        $VersionMatch = [regex]::Match($Content, 'Version:\s*(\d+\.\d+)')
+        if ($VersionMatch.Success) {
+            [Single]$Version = $VersionMatch.Groups[1].Value
         } else {
-            return $null
+            [Single]$Version = $null
         }
 
+        if ($Version -ne $null -and $scriptVersion -lt $Version) {
+            return 0
+        } else {
+            # The script is up to date.
+            return 1
+        }
     }
     catch {
-        return $null
+        Write-Warning "An unexpected error was caused during the script update check : $($_.Exception.Message)"
     }
 
 }
@@ -737,14 +741,14 @@ function Get-GDriveFileID {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [System.Uri]$DriveFileSource
+        [String]$DriveFileSource
     )
 
     if ($DriveFileSource.Contains('download&id')) {
     # Do nothing if the link already contains the correct format. Let the function return $null by default.
     } elseif ($DriveFileSource -match "drive\.google\.com") {
     $GFileID = ($DriveFileSource -split '/')[5]
-    [System.Uri]$GDriveUrl = "https://drive.google.com/uc?export=download&id=$GFileID"
+    [String]$GDriveUrl = "https://drive.google.com/uc?export=download&id=$GFileID"
     return $GDriveUrl
     } else {
         # Do nothing if the link is not in the right format. Let the function return $null by default
@@ -775,9 +779,6 @@ function Read-FromJSON {
 
 }
 
-# The Invoke-GDriveFileRequest function must be debugged.
-
-<#
 function Invoke-GDriveFileRequest {
     param(
         [Parameter(Mandatory=$true)]
@@ -790,14 +791,23 @@ function Invoke-GDriveFileRequest {
 
     $WebClient = New-Object System.Net.WebClient
     $DownloadPageContent = $WebClient.DownloadString($Url)
-    $DownloadLink = $DownloadPageContent | Select-String -Pattern 'action="([^"]+)"' | ForEach-Object { $_.Matches.Groups[1].Value }
-    # missing "&amp;at=ANzk5s4hvM91yEKvCBmMV_PvVvI_:1682070713695" at the end. That's why it doesn't work. Problem to solve.
+
+    $regex = 'action="([^"]*)"'
+    $match = [regex]::Match($DownloadPageContent, $regex)
+
+    if ($match.Success) {
+    $downloadUrl = $match.Groups[1].Value
+    Write-Host $downloadUrl
+    } else {
+    Write-Host "URL de téléchargement introuvable"
+    }
 
     Add-Type -AssemblyName System.Web
-    $DownloadLink = [System.Web.HttpUtility]::HtmlDecode($DownloadLink)
+    $DownloadLink = [System.Web.HttpUtility]::HtmlDecode($downloadUrl)
 
-    Start-BitsTransfer -Source $DownloadLink -Destination $Destination -DisplayName $DisplayName -Description $Description -TransferType Download -TransferPolicy Unrestricted
-    [String]$script:DownloadLink
+    Start-BitsTransfer -Source $DownloadLink -Destination $Destination -DisplayName $DisplayName -Description $Description
+
+    [String]$DownloadLink
     [String]$script:Url = $DownloadLink
 }
 
@@ -813,7 +823,6 @@ function Download_File {
 
     Start-BitsTransfer -Source $DownloadLink -Destination $Destination -DisplayName $DisplayName -Description $Description -TransferType Download -TransferPolicy Unrestricted
 }
-#>
 
 function Check-BlankVM_Links {
     [CmdletBinding()]
@@ -868,8 +877,7 @@ function Show-Downloadable_VM {
             if (-not (Test-Path $OutputPath)) {
                 if ($Url -match "drive\.google\.com") {
                     $Url = Get-GDriveFileID -DriveFileSource $Url
-                    # To debug.
-                    # Invoke-GDriveFileRequest -Url "$url" -DisplayName "Hyper-V Toolbox" -Destination "$OutputPath" -Description "Downloading of $title from $Url to $outputPath"; [console]::Clear()
+                    Invoke-GDriveFileRequest -Url $Url -DisplayName 'Hyper-V Toolbox' -Destination $OutputPath -Description "Downloading of $title from $Url to $outputPath"
                     # Start-BitsTransfer -Source "$Url" -Destination "$OutputPath" -DisplayName "Hyper-V Toolbox" -Description "Downloading of $Title from $Url to $OutputPath" -TransferType Download -Priority High -TransferPolicy Unrestricted; [console]::Clear()
                 } else {
                 [Byte]$maxRetries = 2
@@ -901,7 +909,7 @@ function Show-Downloadable_VM {
                 }
 
             } else {
-                # Do nothing if the . Let the function return $null by default
+                # Do nothing. Let the function return $null by default
             }
         
         } else {
@@ -1336,13 +1344,21 @@ if (Get-AdminRights) {
         Write-Warning 'The Hyper-V module is required to operate.'
     }
 
-    # Internet check and update.
-    Get-WANStatus | Out-Null
-    if ($? -eq $true) {
-        Get-Update
-    } else {
-        $null
-    }
+[Byte]$WANStatus = Get-WANStatus
+if ($WANStatus -eq 0) {
+    # The web request returned a status code of 200 (OK)
+    [Byte]$UpdateStatus = Get-Update
+    if ($UpdateStatus -eq 0) {
+        Write-Warning 'An update of the script is available. Download the latest version from https://github.com/franckferman/Hyper-V_Toolbox/releases'
+        Write-Host ''
+        Read-Host 'Press enter to continue...'
+
+    } elseif ($UpdateStatus -eq 1) {
+        # The script is up to date.
+    } else { }
+} else {
+    # Internet connection is not available.
+}
 
     main
 } else {
