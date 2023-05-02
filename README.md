@@ -28,6 +28,16 @@ This project is aimed at providing users with a more efficient and user-friendly
 <a href="https://github.com/franckferman/Hyper-V_Toolbox/blob/main/TODO.md">To Do List</a>
 </p>
 </div>
+
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
   
 <p align="right">(<a href="#top">back to top</a>)</p>
 
