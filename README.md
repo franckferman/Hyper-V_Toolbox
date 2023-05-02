@@ -65,7 +65,8 @@ Distributed under the GNU Affero General Public License v3.0. See `LICENSE` for 
 
 ## Contact
 
-[![ProtonMail][protonmail-shield]](mailto:fferman@protonmail.ch) [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/franckferman)
+[![ProtonMail][protonmail-shield]](mailto:fferman@protonmail.ch) 
+[![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/franckferman)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
