@@ -83,3 +83,5 @@ Distributed under the GNU Affero General Public License v3.0. See `LICENSE` for 
 [license-shield]: https://img.shields.io/github/license/franckferman/hyper-v_toolbox.svg?style=for-the-badge
 [license-url]: https://github.com/franckferman/hyper-v_toolbox/blob/master/LICENSE.txt
 [product-screenshot]: images/screenshot.png
+[protonmail-shield]: https://img.shields.io/badge/ProtonMail-8B89CC?style=for-the-badge&logo=protonmail&logoColor=white
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=blue
