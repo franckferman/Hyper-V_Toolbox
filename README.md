@@ -24,6 +24,8 @@ This project is aimed at providing users with a more efficient and user-friendly
 <a href="https://github.com/franckferman/Hyper-V_Toolbox/issues">Report Bug</a>
 ·
 <a href="https://github.com/franckferman/Hyper-V_Toolbox/issues">Request Feature</a>
+.
+<a href="https://github.com/franckferman/Hyper-V_Toolbox/blob/main/TODO.md">To Do List</a>
 </p>
 </div>
   
