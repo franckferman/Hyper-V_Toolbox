@@ -17,8 +17,6 @@
 <p align="center">
 This project is aimed at providing users with a more efficient and user-friendly tool for virtual machine management.
 <br><br>
-<a href="#">View Demo</a>
-.
 <a href="https://github.com/franckferman/Hyper-V_Toolbox/issues">Report Bug</a>
 ·
 <a href="https://github.com/franckferman/Hyper-V_Toolbox/issues">Request Feature</a>
