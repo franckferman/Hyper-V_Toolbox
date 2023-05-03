@@ -41,7 +41,7 @@ This project is aimed at providing users with a more efficient and user-friendly
   </ol>
 </details>
 
-<div/>
+</div>
 
 ## About
 
