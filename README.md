@@ -16,8 +16,6 @@
 
 <p align="center">
 This project is aimed at providing users with a more efficient and user-friendly tool for virtual machine management.
-<br>
-<a href="#"><strong>Explore the full documentation »</strong></a>
 <br><br>
 <a href="#">View Demo</a>
 .
