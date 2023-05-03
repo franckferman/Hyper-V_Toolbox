@@ -29,6 +29,8 @@ This project is aimed at providing users with a more efficient and user-friendly
 </p>
 </div>
 
+<div align="center">
+
 <details>
   <summary>Table of Contents</summary>
   <ol>
@@ -38,6 +40,8 @@ This project is aimed at providing users with a more efficient and user-friendly
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
+
+<div/>
 
 ## About
 
