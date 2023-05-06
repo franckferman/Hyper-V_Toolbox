@@ -16,6 +16,16 @@ Version: 4.0
 https://github.com/franckferman/Hyper-V_Toolbox
 #>
 
+# Declaration of global variables containing download links to JSON files allowing access to downloadable resources (images and virtual hard drives).
+
+# [System.Uri]$Blank_Windows_JSON_LinksFile = 'https://drive.google.com/file/d/1dBFadZXRnhb2fPIU9LJxdcdlBQky9eR5/view?usp=sharing'
+# [System.Uri]$Blank_Linux_JSON_LinksFile = 'https://drive.google.com/file/d/1V7mk8zJS6qIJIQ4U4G9Nw0b6MhstQ5OZ/view?usp=sharing'
+
+[String]$Blank_Windows_JSON_LinksFile = 'https://raw.githubusercontent.com/franckferman/Hyper-V_Toolbox/main/assets/links/blank_windows.json'
+[String]$Blank_Linux_JSON_LinksFile = 'https://raw.githubusercontent.com/franckferman/Hyper-V_Toolbox/main/assets/links/blank_linux.json'
+[String]$preconfiguredWindowsJSONLinksFile = ''
+[String]$preconfiguredLinuxJSONLinksFile = ''
+
 # Retrieve the WAN access status through a randomly chosen URL from a list defined in parameter. Returns 0 if the connection is successful, otherwise 1.
 
 function Get-WANStatus {
@@ -81,14 +91,6 @@ function Get-Update {
     }
 
 }
-
-# Declaration of global variables containing download links to JSON files allowing access to downloadable resources (images and virtual hard drives).
-
-# [System.Uri]$Blank_Windows_JSON_LinksFile = 'https://drive.google.com/file/d/1dBFadZXRnhb2fPIU9LJxdcdlBQky9eR5/view?usp=sharing'
-# [System.Uri]$Blank_Linux_JSON_LinksFile = 'https://drive.google.com/file/d/1V7mk8zJS6qIJIQ4U4G9Nw0b6MhstQ5OZ/view?usp=sharing'
-
-[System.Uri]$Blank_Windows_JSON_LinksFile = 'https://raw.githubusercontent.com/franckferman/Hyper-V_Toolbox/main/assets/links/blank_windows.json'
-[System.Uri]$Blank_Linux_JSON_LinksFile = 'https://raw.githubusercontent.com/franckferman/Hyper-V_Toolbox/main/assets/links/blank_linux.json'
 
 # Representation of the graphical banners.
 
@@ -473,6 +475,407 @@ function Get-RandomBanner {
     & $Banners[$randomNumber]
 }
 
+function DownloadingLocalResources {
+    param (
+        [Parameter(Mandatory=$true)]
+        [ValidateSet(
+            'allBlank', 
+            'BlankWinOnly', 
+            'BlankLinuxOnly', 
+            'allPreconfigured', 
+            'PreconfiguredWinOnly', 
+            'PreconfiguredLinuxOnly', 
+            'all',
+            'custom'
+        )]
+        [string]$choice
+    )
+
+    [String]$OutputDirectory = '.\assets\images'
+
+    $blankWindowsJSONFilePath = '.\assets\links\blank_windows.json'
+    $blankLinuxJSONFilePath = '.\assets\links\blank_linux.json'
+    $preconfiguredWindowsJSONFilePath = '.\assets\links\preconfigured_windows.json'
+    $preconfiguredLinuxJSONFilePath = '.\assets\links\preconfigured_linux.json'
+
+    $blankWindowsJSONLinksFile = $Blank_Windows_JSON_LinksFile
+    $blankLinuxJSONLinksFile = $Blank_Linux_JSON_LinksFile
+    $preconfiguredWindowsJSONLinksFile = $Preconfigured_Windows_JSON_LinksFile
+    $preconfiguredLinuxJSONLinksFile = $Preconfigured_Linux_JSON_LinksFile
+
+    switch ($choice) {
+        'allBlank' {
+            Ensure-Directory -Path $OutputDirectory
+            $JSONFilePath = @($blankWindowsJSONFilePath, $blankLinuxJSONFilePath)
+            $JSONFileURL = @($blankWindowsJSONLinksFile, $blankLinuxJSONLinksFile)
+
+            Check-Multiple_Links -JSONFilePath $JSONFilePath -JSONFileURL $JSONFileURL
+
+            Write-Host ''
+            Get-JSONFileContent -JSONFilePath $JSONFilePath
+
+            Read-Host 'Press enter to continue...'
+
+        }
+        'BlankWinOnly' {
+            Ensure-Directory -Path $OutputDirectory
+            $JSONFilePath = $blankWindowsJSONFilePath
+            $JSONFileURL = $blankWindowsJSONLinksFile
+
+            Check-Multiple_Links -JSONFilePath $JSONFilePath -JSONFileURL $JSONFileURL
+
+            Write-Host ''
+            Get-JSONFileContent -JSONFilePath $JSONFilePath
+
+            Read-Host 'Press enter to continue...'
+
+        }
+        'BlankLinuxOnly' {
+            Ensure-Directory -Path $OutputDirectory
+            $JSONFilePath = $blankLinuxJSONFilePath
+            $JSONFileURL = $blankLinuxJSONLinksFile
+
+            Check-Multiple_Links -JSONFilePath $JSONFilePath -JSONFileURL $JSONFileURL
+
+            Write-Host ''
+            Get-JSONFileContent -JSONFilePath $JSONFilePath
+
+            Read-Host 'Press enter to continue...'
+
+        }
+        'allPreconfigured' {
+            Ensure-Directory -Path $OutputDirectory
+            $JSONFilePath = @($preconfiguredWindowsJSONFilePath, $preconfiguredLinuxJSONFilePath)
+            $JSONFileURL = @($preconfiguredWindowsJSONLinksFile, $preconfiguredLinuxJSONLinksFile)
+
+            Check-Multiple_Links -JSONFilePath $JSONFilePath -JSONFileURL $JSONFileURL
+
+            Write-Host ''
+            Get-JSONFileContent -JSONFilePath $JSONFilePath
+
+            Read-Host 'Press enter to continue...'
+
+        }
+        'PreconfiguredWinOnly' {
+            Ensure-Directory -Path $OutputDirectory
+            $JSONFilePath = $preconfiguredWindowsJSONFilePath
+            $JSONFileURL = $preconfiguredWindowsJSONLinksFile
+
+            Check-Multiple_Links -JSONFilePath $JSONFilePath -JSONFileURL $JSONFileURL
+
+            Write-Host ''
+            Get-JSONFileContent -JSONFilePath $JSONFilePath
+
+            Read-Host 'Press enter to continue...'
+
+        }
+        'PreconfiguredLinuxOnly' {
+            Ensure-Directory -Path $OutputDirectory
+            $JSONFilePath = $preconfiguredLinuxJSONFilePath
+            $JSONFileURL = $preconfiguredLinuxJSONLinksFile
+
+            Check-Multiple_Links -JSONFilePath $JSONFilePath -JSONFileURL $JSONFileURL
+
+            Write-Host ''
+            Get-JSONFileContent -JSONFilePath $JSONFilePath
+
+            Read-Host 'Press enter to continue...'
+
+        }
+        'all' {
+            Ensure-Directory -Path $OutputDirectory
+            $JSONFilePath = @($preconfiguredWindowsJSONFilePath, $preconfiguredLinuxJSONFilePath)
+            $JSONFileURL = @($preconfiguredWindowsJSONLinksFile, $preconfiguredLinuxJSONLinksFile)
+
+            Check-Multiple_Links -JSONFilePath $JSONFilePath -JSONFileURL $JSONFileURL
+
+            Write-Host ''
+            Get-JSONFileContent -JSONFilePath $JSONFilePath
+
+            Read-Host 'Press enter to continue...'
+
+        }
+        'custom' {
+    $useBlank = AskYesOrNo -Title "Custom Configuration" -Message "Do you want to use blank machines?"
+    if ($useBlank) {
+        $useWindowsBlank = AskYesOrNo -Title "Custom Configuration" -Message "Do you want to use blank Windows machines?"
+        if ($useWindowsBlank) {
+            
+            Check-VMLinks -JSONFilePath $blankWindowsJSONFilePath -JSONFileURL $blankWindowsJSONLinksFile
+
+            $jsonContent = Get-Content -Path $blankWindowsJSONFilePath -Raw
+            $jsonObject = $jsonContent | ConvertFrom-Json
+
+            $FilesToDownload = @()
+
+            # Write-Host ''
+
+            foreach ($item in $jsonObject) {
+                $title = $item.Title
+                # Write-Host "Title: $title"
+
+                $addFileToDownload = AskYesOrNo -Title "$title - Confirmation" -Message 'Do you want to add this item to the download list?'
+                
+                # Write-Host ''
+
+                if ($addFileToDownload) {
+                    $FilesToDownload += $item
+                }
+
+                # Write-Host ''
+                }
+
+                }
+
+        $useLinuxBlank = AskYesOrNo -Title 'Custom Configuration' -Message 'Do you want to use blank Linux machines?'
+        if ($useLinuxBlank) {
+            
+            Check-VMLinks -JSONFilePath $blankLinuxJSONFilePath -JSONFileURL $blankLinuxJSONLinksFile
+
+            $jsonContent = Get-Content -Path $blankLinuxJSONFilePath -Raw
+            $jsonObject = $jsonContent | ConvertFrom-Json
+
+            # Write-Host ''
+
+            foreach ($item in $jsonObject) {
+                $title = $item.Title
+                # Write-Host "Title: $title"
+
+                $addFileToDownload = AskYesOrNo -Title "$title - Confirmation" -Message 'Do you want to add this item to the download list?'
+    
+                if ($addFileToDownload) {
+                    $FilesToDownload += $item
+                }
+
+                # Write-Host ''
+                }
+
+                }
+
+            }
+
+Ensure-Directory -Path $OutputDirectory
+
+foreach ($item in $FilesToDownload) {
+    $title = $item.Title
+    $url = $item.Url
+    $filename = $item.Filename
+    $OutputPath = Join-Path -Path $OutputDirectory -ChildPath $Filename
+
+    Write-Host ''
+    Write-Host 'Initiate the download sequence.'
+    Write-Host ''
+    Write-Host "Title: $title"
+    Write-Host "URL: $url"
+    Write-Host "Filename: $filename"
+    Write-Host "Output file path: $OutputPath"
+
+    # if (-not (Test-Path $OutputDirectory)) { [void](New-Item -Path $OutputDirectory -ItemType Directory -Force) }
+    if (-not (Test-Path $OutputPath)) {
+        if ($Url -match "drive\.google\.com") {
+            $Url = Get-GDriveFileID -DriveFileSource $Url
+            Invoke-GDriveFileRequest -Url $Url -DisplayName 'Hyper-V Toolbox' -Destination $OutputPath -Description "Downloading of $title from $Url to $outputPath"
+            # Start-BitsTransfer -Source "$Url" -Destination "$OutputPath" -DisplayName "Hyper-V Toolbox" -Description "Downloading of $Title from $Url to $OutputPath" -TransferType Download -Priority High -TransferPolicy Unrestricted; [console]::Clear()
+        } else {
+            [Byte]$maxRetries = 3
+            [Byte]$retryInterval = 10 # seconds
+            [Byte]$retryCount = 0
+            do {
+                try {
+                Write-Host ''
+                Write-Warning "$Title in $OutputPath not found. Initiate a download attempt."
+                Start-BitsTransfer -Source $Url -Destination $OutputPath -DisplayName 'Hyper-V Toolbox' -Description "Downloading of $Title from $Url to $OutputPath" -TransferType Download -TransferPolicy Unrestricted
+                Write-Warning "$Title successfully downloaded in $OutputPath."
+                # Read-Host 'Press enter to continue...'
+                break
+                } catch {
+                $retryCount++
+                if ($retryCount -lt $maxRetries) {
+                    Write-Host ''
+                    Write-Warning "An error was caused during the download of $Title. New attempt in $retryInterval seconds..."
+                    Start-Sleep -Seconds $retryInterval
+                } else {
+                    Write-Host ''
+                    Write-Error "An error was caused during the download of $Title after $maxRetries attempts."
+                    ScriptExit -ExitCode 1
+                }
+                }
+
+            } while ($retryCount -lt $maxRetries)
+            }
+
+        } else {
+            Write-Host ''
+            Write-Warning 'You already have this resource.'
+            # Do nothing. Let the function return $null by default
+        }
+
+} # end foreach
+    Write-Host ''
+    Read-Host 'Press enter to continue...'
+
+}
+
+}
+
+}
+
+function Get-JSONFileContent {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory = $true)]
+        [String[]]$JSONFilePath
+    )
+
+    if ($JSONFilePath.Count -gt 1) {
+        for ($i = 0; $i -lt $JSONFilePath.Count; $i++) {
+            $filePath = $JSONFilePath[$i]
+
+            $jsonObject = Read-FromJSON -JSONFilePathDestination $filePath
+
+            foreach ($item in $jsonObject) {
+                Write-Host "Title: $($item.Title)"
+                Write-Host "Url: $($item.Url)"
+                Write-Host "Filename: $($item.Filename)"
+                Write-Host ''
+                Download-Res -Url $item.Url -Title $item.Title -Filename $item.Filename -OutputDirectory '.\assets\images'
+            }
+
+            }
+
+        }
+    
+    else {
+        $jsonObject = Read-FromJSON -JSONFilePathDestination $JSONFilePath
+            foreach ($item in $jsonObject) {
+                Write-Host "Title: $($item.Title)"
+                Write-Host "Url: $($item.Url)"
+                Write-Host "Filename: $($item.Filename)"
+                Write-Host ''
+                Download-Res -Url $item.Url -Title $item.Title -Filename $item.Filename -OutputDirectory '.\assets\images'
+    }
+
+}
+}
+
+function Download-Res {
+    param (
+        [string]$Url,
+        [string]$Title,
+        [string]$Filename,
+        [string]$OutputDirectory = ".\assets\images"
+    )
+
+    $OutputPath = Join-Path -Path $OutputDirectory -ChildPath $Filename
+
+    if (-not (Test-Path $OutputDirectory)) {
+        [void](New-Item -Path $OutputDirectory -ItemType Directory -Force)
+    }
+
+    if (-not (Test-Path $OutputPath)) {
+        if ($Url -match "drive\.google\.com") {
+            $Url = Get-GDriveFileID -DriveFileSource $Url
+            Invoke-GDriveFileRequest -Url $Url -DisplayName 'Hyper-V Toolbox' -Destination $OutputPath -Description "Downloading of $title from $Url to $outputPath"
+            # Start-BitsTransfer -Source "$Url" -Destination "$OutputPath" -DisplayName "Hyper-V Toolbox" -Description "Downloading of $Title from $Url to $OutputPath" -TransferType Download -Priority High -TransferPolicy Unrestricted; [console]::Clear()
+        } else {
+            [Byte]$maxRetries = 3
+            [Byte]$retryInterval = 10 # seconds
+            [Byte]$retryCount = 0
+
+            do {
+                try {
+                    Write-Warning "$Title in $OutputPath not found. Initiate a download attempt."
+                    Start-BitsTransfer -Source $Url -Destination $OutputPath -DisplayName 'Hyper-V Toolbox' -Description "Downloading of $Title from $Url to $OutputPath" -TransferType Download -TransferPolicy Unrestricted
+                    Write-Warning "$Title successfully downloaded in $OutputPath."
+                    Write-Host ''
+                    # Read-Host 'Press enter to continue...'
+                    break
+                } catch {
+                    $retryCount++
+                    if ($retryCount -lt $maxRetries) {
+                        Write-Host ''
+                        Write-Warning "An error was caused during the download of $Title. New attempt in $retryInterval seconds..."
+                        Start-Sleep -Seconds $retryInterval
+                    } else {
+                        Write-Host ''
+                        Write-Error "An error was caused during the download of $Title after $maxRetries attempts."
+                        ScriptExit -ExitCode 1
+                    }
+                }
+            } while ($retryCount -lt $maxRetries)
+        }
+    } else {
+        if (Test-Path $OutputPath) { Write-Host 'The file already exists.'; Write-Host '' }
+        # Do nothing. Let the function return $null by default
+    }
+}
+
+function Check-Multiple_Links {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory=$true)]
+        [string[]]$JSONFilePath,
+        [Parameter(Mandatory=$true)]
+        [string[]]$JSONFileURL
+    )
+
+    if ($JSONFilePath.Count -gt 1) {
+        for ($i = 0; $i -lt $JSONFilePath.Count; $i++) {
+            $filePath = $JSONFilePath[$i]
+            $fileURL = $JSONFileURL[$i]
+
+            Check-VMLinks -JSONFilePath $filePath -JSONFileURL $fileURL
+        }
+    }
+    else {
+        Check-VMLinks -JSONFilePath $JSONFilePath -JSONFileURL $JSONFileURL
+    }
+}
+
+function LocalResourceManagement-Menu {
+    while ($true) {
+        [console]::Clear()
+        Write-Host (Show-LocalResourceManagementMenu)
+
+        $choice = Read-Host 'Enter your choice'
+        switch ($choice) {
+            '1' { DownloadingLocalResources -choice 'AllBlank' }
+            '2' { DownloadingLocalResources -choice 'BlankWinOnly' }
+            '3' { DownloadingLocalResources -choice 'BlankLinuxOnly' }
+            '4' { DownloadingLocalResources -choice 'allPreconfigured' }
+            '5' { DownloadingLocalResources -choice 'PreconfiguredWinOnly' }
+            '6' { DownloadingLocalResources -choice 'PreconfiguredLinuxOnly' }
+            '7' { DownloadingLocalResources -choice 'all' }
+            '8' { DownloadingLocalResources -choice 'custom' }
+            'b' { main }
+            'q' { Write-Host ''; ScriptExit -ExitCode 0 }
+            default { Show-Invalid_Input }
+        }
+    }
+}
+
+function Show-LocalResourceManagementMenu {
+@"
+Hyper-V Toolbox - Main menu
+-------------------
+  1 - Download all the resources to create blank virtual machines (from the JSON configuration file)
+  2 - Download all resources to create blank Windows virtual machines (from the JSON configuration file)
+  3 - Download all resources to create blank Linux virtual machines (from the JSON configuration file)
+
+  4 - Download all the resources to create pre-configured virtual machines (from the JSON configuration file)
+  5 - Download all resources to create pre-configured Windows virtual machines (from the JSON configuration file)
+  6 - Download all resources to create pre-configured Linux virtual machines (from the JSON configuration file)
+
+  7 - Download all resources
+
+  8 - Personalized download (customized choice)
+
+b - Back to the main menu.
+q - Quit the program.
+
+"@
+}
+
 Function Set-HDDSize {
   [CmdletBinding()]
   param (
@@ -634,7 +1037,6 @@ function Set-CloneBlankVM {
     Write-Host ''
     Write-Host 'Hyper-V Toolbox'
     Write-Host '--------------------'
-    Write-Host ''
 
     Set-Name -Prefix $Prefix
     # Set-Name -Prefix "VM-$OperatingSystem"
@@ -645,13 +1047,20 @@ function Check-OSType {
     [CmdletBinding()]
     param()
 
-    if (($Title -match "(cli|client)") -or ($Filename -match "(cli|client)")) {
-        [String]$script:OperatingSystem = 'Client'
-    } elseif (($Title -match "(srv|serveur|server)") -or ($Filename -match "(srv|serveur|server)")) {
-        [String]$script:OperatingSystem = 'Server'
+    if (($Title -like "*cli*" -or $Title -like "*client*" -or $Title -like "*ltsc*" -or $Title -like "*desk*" -or $Title -like "*desktop*") -or
+        ($Filename -like "*cli*" -or $Filename -like "*client*" -or $Filename -like "*ltsc*" -or $Filename -like "*desk*" -or $Filename -like "*desktop*"))
+    {
+        [String]$script:OperatingSystemType = 'Client'
+
+    } elseif (($Title -like "*srv*" -or $Title -like "*serveur*" -or $Title -like "*server*") -or
+        ($Filename -like "*srv*" -or $Filename -like "*serveur*" -or $Filename -like "*server*"))
+    {
+        [String]$script:OperatingSystemType = 'Server'
+
     } else {
         # Neither Title nor Filename contain the searched keywords.
     }
+
 }
 
 function Set-BlankVM {
@@ -672,15 +1081,17 @@ function Set-BlankVM {
 
     Check-OSType
 
-    if ($OperatingSystem -eq 'Client') {
-        $Prefix = "VM-$OperatingSystem-Client"
-    } elseif ($OperatingSystem -eq 'Server') {
-        $Prefix = "VM-$OperatingSystem-Server"
+    if ($OperatingSystemType -eq 'Client') {
+        $Prefix = "VM-$OperatingSystem-$OperatingSystemType"
+    } elseif ($OperatingSystemType -eq 'Server') {
+        $Prefix = "VM-$OperatingSystem-$OperatingSystemType"
     } else {
         $Prefix = "VM-$OperatingSystem"
     }
 
     Set-Name -Prefix $Prefix
+    $script:Prefix = $Prefix
+
     Set-VSwitch
     Write-Host ''
 
@@ -836,19 +1247,19 @@ function Invoke-GDriveFileRequest {
     [String]$script:Url = $DownloadLink
 }
 
-function Check-BlankVM_Links {
+function Check-VMLinks {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
         [String]$JSONFilePath,
         [Parameter(Mandatory = $true)]
-        [System.Uri]$JSONFileURL
+        [String]$JSONFileURL
     )
 
     $JSONDirectory = Split-Path -Path $JSONFilePath
     Ensure-Directory -Path $JSONDirectory
 
-    [System.Uri]$Url = $JSONFileURL
+    [String]$Url = $JSONFileURL
 
     if ($Url -match "drive\.google\.com") { $Url = Get-GDriveFileID -DriveFileSource $Url }
 
@@ -892,8 +1303,8 @@ function Show-Downloadable_VM {
                     Invoke-GDriveFileRequest -Url $Url -DisplayName 'Hyper-V Toolbox' -Destination $OutputPath -Description "Downloading of $title from $Url to $outputPath"
                     # Start-BitsTransfer -Source "$Url" -Destination "$OutputPath" -DisplayName "Hyper-V Toolbox" -Description "Downloading of $Title from $Url to $OutputPath" -TransferType Download -Priority High -TransferPolicy Unrestricted; [console]::Clear()
                 } else {
-                [Byte]$maxRetries = 2
-                [Byte]$retryInterval = 5 # seconds
+                [Byte]$maxRetries = 3
+                [Byte]$retryInterval = 10 # seconds
                 [Byte]$retryCount = 0
                 do {
                     try {
@@ -1117,7 +1528,7 @@ function BlankVM {
     $JSONFileURL = if ($OperatingSystem -eq 'Windows') { $Blank_Windows_JSON_LinksFile } else { $Blank_Linux_JSON_LinksFile }
 
     # Check for links and show downloadable VM.
-    Check-BlankVM_Links -JSONFilePath $JSONFilePath -JSONFileURL $JSONFileURL
+    Check-VMLinks -JSONFilePath $JSONFilePath -JSONFileURL $JSONFileURL
     Show-Downloadable_VM
 
     # Ensure basic resources and set blank VM parameters.
@@ -1227,7 +1638,7 @@ function Show-Help {
 function main {
     while ($true) {
         [console]::Clear()
-        Write-Host (Show_Menu)
+        Write-Host (Show-Menu)
 
         $choice = Read-Host 'Enter your choice'
         switch ($choice) {
@@ -1236,7 +1647,7 @@ function main {
             '3' { Write-Host ''; Write-Warning 'Feature under development'; pause; main }
             '4' { Write-Host ''; Write-Warning 'Feature under development'; pause; main }
             '5' { Write-Host ''; Write-Warning 'Feature under development'; pause; main }
-            '6' { Write-Host ''; Write-Warning 'Feature under development'; pause; main }
+            '6' { LocalResourceManagement-Menu }
             'h' { Write-Host (Show-Help); Write-Host ''; Read-Host 'Press enter to continue...' }
             'q' { Write-Host ''; ScriptExit -ExitCode 0 }
             default { Show-Invalid_Input }
@@ -1246,7 +1657,7 @@ function main {
 
 # Graphical representation of the main menu.
 
-function Show_Menu {
+function Show-Menu {
 Write-Host (Show-Buddha_Banner)
 @"
 
