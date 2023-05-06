@@ -37,7 +37,9 @@ This project is aimed at providing users with a more efficient and user-friendly
 
 ## About
 
-Similar to Vagrant, it enables the quick creation and management of machines, but with a key difference: it deploys pre-installed machines that are sysprepped, with disks ready to install. This eliminates the need to send scripts to machines, which can be time-consuming, resulting in a process that is twice as fast as Vagrant.
+Hyper-V Toolbox is a free and open-source software that simplifies the process of creating and configuring virtual environments. Acting as a wrapper around Hyper-V virtualization software, it offers an intuitive graphical user interface within a terminal. Hyper-V Toolbox caters to a wide range of users, including students studying cybersecurity, development, and network administration, as well as professionals seeking to streamline their virtualization workflow. With its comprehensive set of integrated features and options, Hyper-V Toolbox is the ideal tool for both educational and professional use.
+
+While drawing inspiration from Docker and Vagrant, Hyper-V Toolbox doesn't intend to supplant these solutions. Instead, it provides a simplified and streamlined approach for those who prioritize a more user-friendly interface. Whether you're a novice or an expert in virtualization, Hyper-V Toolbox is tailored to make your virtual environment setup and configuration a breeze.
   
 <p align="right">(<a href="#top">back to top</a>)</p>
 
