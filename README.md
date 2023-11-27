@@ -17,9 +17,9 @@
 <p align="center">
     <em>Hyper-V_Toolbox: Streamlining Virtual Machine Management.</em>
     <br>
-    Inspired by Vagrant and Docker.
-    <br>
     Providing users with a more efficient and user-friendly tool for virtual machine management.
+    <em>Inspired by Vagrant and Docker.</em>
+    <br>
 </p>
 
 <!-- Links & Demo -->
